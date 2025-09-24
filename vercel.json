@@ -1,17 +1,7 @@
 {
   "version": 2,
   "name": "nerdle-math-game",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "functions": {
-    "pages/api/**/*.ts": {
-      "runtime": "nodejs18.x"
-    }
-  },
+  // Next.js projects do not need explicit builds/functions config in vercel.json
   "headers": [
     {
       "source": "/(.*)",
