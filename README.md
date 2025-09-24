@@ -17,11 +17,11 @@ Nerdle is an addictive daily math puzzle game where players guess a hidden mathe
 
 ## 🚀 Live Demo
 
-Play the game at: [https://nerdle-math-game.vercel.app](https://nerdle-math-game.vercel.app)
+Play the game at: [https://chimii.com](https://chimii.com)
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: Next.js 14, React 18, TypeScript
+- **Frontend**: Next.js 15, React 19, TypeScript
 - **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
 - **State Management**: Zustand
