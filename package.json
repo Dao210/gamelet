@@ -14,8 +14,7 @@
   "private": true,
   "engines": {
     "node": ">=22.x",
-    "npm": ">=10.x",
-    "pnpm": ">=10.15.0"
+    "npm": ">=10.x"
   },
   "packageManager": "pnpm@10.15.0",
   "scripts": {
