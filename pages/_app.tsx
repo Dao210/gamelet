@@ -4,11 +4,17 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { DefaultSeo } from 'next-seo';
 import { defaultSEO } from '../lib/seo';
+import GoogleAnalytics from '../components/GoogleAnalytics';
+import { usePageTracking } from '../lib/usePageTracking';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  // Track page views
+  usePageTracking()
+
   return (
     <>
       <DefaultSeo {...defaultSEO} />
+      <GoogleAnalytics />
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

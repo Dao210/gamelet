@@ -4,6 +4,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { useGameStore } from '../lib/store'
 import { GameMode } from '../lib/game-engine'
+import { trackShare } from '../lib/analytics'
 
 interface GameResultProps {
   className?: string
@@ -59,6 +60,9 @@ export default function GameResult({ className = '' }: GameResultProps) {
   const handleShare = async (platform: 'twitter' | 'facebook' | 'linkedin' | 'native') => {
     const url = getShareUrl()
     const text = getShareText()
+    
+    // Track share event
+    trackShare(platform, mode, isWon ? 'won' : 'lost')
     
     if (platform === 'native' && navigator.share) {
       try {

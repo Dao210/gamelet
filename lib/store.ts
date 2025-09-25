@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { GameState, GameMode, initializeGame, makeAttempt, getGameStats } from './game-engine'
+import { trackGameStart, trackGameCompletion, trackModeSwitch } from './analytics'
 
 interface GameStore {
   // Game state
@@ -69,11 +70,21 @@ export const useGameStore = create<GameStore>()(
       
       // Game actions
       startNewGame: (mode: GameMode) => {
+        const { gameState: currentGameState } = get()
+        
+        // Track mode switch if changing modes
+        if (currentGameState && currentGameState.mode !== mode) {
+          trackModeSwitch(currentGameState.mode, mode)
+        }
+        
         const gameState = initializeGame(mode)
         set({ 
           gameState,
           currentAttempt: ''
         })
+        
+        // Track game start
+        trackGameStart(mode)
       },
       
       addCharToAttempt: (char: string) => {
@@ -111,6 +122,20 @@ export const useGameStore = create<GameStore>()(
           newStats.modeStats[gameState.mode].gamesWon++
         } else if (newGameState.status === 'lost') {
           newStats.currentStreak = 0
+        }
+        
+        // Track game completion
+        if (newGameState.status === 'won' || newGameState.status === 'lost') {
+          const duration = newGameState.endTime 
+            ? Math.floor((newGameState.endTime.getTime() - newGameState.startTime.getTime()) / 1000)
+            : undefined
+          
+          trackGameCompletion(
+            gameState.mode,
+            newGameState.attempts.length,
+            newGameState.status,
+            duration
+          )
         }
         
         // Update average attempts
