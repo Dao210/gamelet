@@ -3,17 +3,17 @@ import { NextSeoProps } from 'next-seo'
 export const defaultSEO: NextSeoProps = {
   title: 'Nerdle - Daily Math Equation Puzzle Game | Play Free Online',
   description: 'Play Nerdle, the addictive daily math equation guessing game! Challenge your mathematical skills with our free online puzzle game. Guess the hidden equation in 6 tries or less.',
-  canonical: 'https://nerdle-math-game.vercel.app',
+  canonical: 'https://chimii.com',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://nerdle-math-game.vercel.app',
+    url: 'https://chimii.com',
     siteName: 'Nerdle Math Game',
     title: 'Nerdle - Daily Math Equation Puzzle Game',
     description: 'Play Nerdle, the addictive daily math equation guessing game! Challenge your mathematical skills with our free online puzzle game.',
     images: [
       {
-        url: 'https://nerdle-math-game.vercel.app/og-image.png',
+        url: 'https://chimii.com/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Nerdle Math Game - Daily Equation Puzzle',
@@ -32,7 +32,7 @@ export const defaultSEO: NextSeoProps = {
     },
     {
       name: 'author',
-      content: 'Nerdle Math Game',
+      content: 'Chimii.com',
     },
     {
       name: 'robots',
@@ -48,17 +48,17 @@ export const defaultSEO: NextSeoProps = {
 export const gameSEO: NextSeoProps = {
   title: 'Play Nerdle Game - Daily Math Equation Challenge',
   description: 'Play the daily Nerdle game! Guess the hidden mathematical equation in 6 tries. Features multiple difficulty levels, instant feedback, and brain-training puzzles.',
-  canonical: 'https://nerdle-math-game.vercel.app/game',
+  canonical: 'https://chimii.com/game',
   openGraph: {
     type: 'game',
     locale: 'en_US',
-    url: 'https://nerdle-math-game.vercel.app/game',
+    url: 'https://chimii.com/game',
     siteName: 'Nerdle Math Game',
     title: 'Play Nerdle Game - Daily Math Equation Challenge',
     description: 'Play the daily Nerdle game! Guess the hidden mathematical equation in 6 tries. Features multiple difficulty levels, instant feedback, and brain-training puzzles.',
     images: [
       {
-        url: 'https://nerdle-math-game.vercel.app/og-game.png',
+        url: 'https://chimii.com/og-game.png',
         width: 1200,
         height: 630,
         alt: 'Nerdle Game Interface - Math Equation Puzzle',
@@ -70,7 +70,7 @@ export const gameSEO: NextSeoProps = {
 export const aboutSEO: NextSeoProps = {
   title: 'About Nerdle - The Math Equation Guessing Game',
   description: 'Learn about Nerdle, the popular math equation guessing game. Discover how to play, game rules, tips and strategies for solving daily math puzzles.',
-  canonical: 'https://nerdle-math-game.vercel.app/about',
+  canonical: 'https://chimii.com/about',
 }
 
 export const structuredData = {
