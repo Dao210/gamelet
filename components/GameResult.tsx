@@ -37,7 +37,7 @@ export default function GameResult({ className = '' }: GameResultProps) {
   }
   
   const getShareUrl = (): string => {
-    return typeof window !== 'undefined' ? window.location.origin : 'https://nerdle-math-game.vercel.app'
+    return typeof window !== 'undefined' ? window.location.origin : 'https://chimii.com'
   }
   
   const getShareImageUrl = (): string => {

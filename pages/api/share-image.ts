@@ -108,7 +108,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               <div class="stat-label">Game Mode</div>
             </div>
           </div>
-          <div class="url">nerdle-math-game.vercel.app</div>
+          <div class="url">chimii.com</div>
         </div>
       </body>
     </html>

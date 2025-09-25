@@ -23,6 +23,12 @@ function generateSiteMap() {
        <changefreq>weekly</changefreq>
        <priority>0.8</priority>
      </url>
+     <url>
+       <loc>${baseUrl}/nerdle-answer-today</loc>
+       <lastmod>${new Date().toISOString()}</lastmod>
+       <changefreq>weekly</changefreq>
+       <priority>0.9</priority>
+     </url>
    </urlset>
  `
 }
