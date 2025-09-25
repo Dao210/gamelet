@@ -166,7 +166,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you have any questions or need help, please:
 - Open an [Issue](https://github.com/your-username/nerdle-math-game/issues)
-- Check our [FAQ](https://nerdle-math-game.vercel.app/faq)
+- Check our [FAQ](https://chimii.com/faq)
 - Contact us at support@nerdle-math-game.com
 
 ---
