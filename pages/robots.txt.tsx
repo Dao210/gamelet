@@ -4,7 +4,7 @@ function generateRobotsTxt() {
   return `User-agent: *
 Allow: /
 
-Sitemap: https://nerdle-math-game.vercel.app/sitemap.xml
+Sitemap: https://chimii.com/sitemap.xml
 
 # Crawl-delay for polite crawling
 Crawl-delay: 1
