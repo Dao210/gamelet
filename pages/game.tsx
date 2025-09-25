@@ -6,6 +6,7 @@ import { gameSEO } from '../lib/seo'
 import GameHeader from '../components/GameHeader'
 import GameBoard from '../components/GameBoard'
 import GameKeyboard from '../components/GameKeyboard'
+import GameResult from '../components/GameResult'
 
 export default function GamePage() {
   const { gameState, startNewGame } = useGameStore()
@@ -36,6 +37,9 @@ export default function GamePage() {
               <GameKeyboard />
             </div>
           </motion.div>
+          
+          {/* Game Result Modal */}
+          <GameResult className="mt-8" />
           
           {/* Game Instructions */}
           <motion.div 

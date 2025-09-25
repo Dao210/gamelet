@@ -49,45 +49,37 @@ export const VALID_CHARS = '0123456789+-*/='
 
 // Generate a random valid equation
 export function generateEquation(mode: GameMode): string {
-  const length = GAME_CONFIG[mode].length
-  
-  // For now, return some example equations
-  // In a real implementation, you'd have a more sophisticated generator
-  const examples = {
+  // For now, use curated examples that fit the target length exactly
+  const examples: Record<GameMode, string[]> = {
     classic: [
       '12+34=46',
-      '56-23=33',
-      '7*8=56',
-      '84/4=21',
+      '23+45=68',
+      '56-12=44',
+      '78-12=66',
       '15+25=40',
-      '90-45=45',
-      '6*7=42',
-      '72/8=9'
+      '63-21=42',
+      '27+15=42',
+      '50-12=38'
     ],
     mini: [
-      '5+3=8',
-      '9-4=5',
-      '2*3=6',
-      '8/2=4',
-      '7+1=8',
-      '6-2=4',
-      '3*2=6',
-      '9/3=3'
+      '10-2=8',
+      '5+7=12',
+      '6*2=12',
+      '16/2=8',
+      '14-6=8',
+      '9+3=12'
     ],
     expert: [
       '123+45=168',
-      '789-123=666',
-      '12*34=408',
-      '456/12=38',
       '234+56=290',
-      '567-89=478',
+      '345+67=412',
       '23*45=1035',
-      '678/23=29'
+      '672/24=28',
+      '789-45=744'
     ]
   }
-  
-  const modeExamples = examples[mode]
-  return modeExamples[Math.floor(Math.random() * modeExamples.length)]
+  const list = examples[mode]
+  return list[Math.floor(Math.random() * list.length)]
 }
 
 // Validate if an equation is mathematically correct
@@ -101,9 +93,14 @@ export function isValidEquation(equation: string): boolean {
     
     // Check if right side is a number
     if (!/^\d+$/.test(rightSide.trim())) return false
+    // Disallow leading zeros on the right side unless the number is exactly "0"
+    if (rightSide.length > 1 && rightSide.trim().startsWith('0')) return false
     
     // Check if left side is a valid mathematical expression
     if (!/^[\d+\-*/]+$/.test(leftSide.trim())) return false
+    // Tokenize and validate structure (no consecutive operators, no leading/trailing operator)
+    const tokens = tokenize(leftSide.trim())
+    if (!validateTokens(tokens)) return false
     
     // Evaluate the left side and compare with right side
     const result = evaluateExpression(leftSide.trim())
@@ -115,20 +112,75 @@ export function isValidEquation(equation: string): boolean {
   }
 }
 
-// Simple expression evaluator (handles basic arithmetic)
+// Tokenize expression into numbers and operators
+function tokenize(expr: string): string[] {
+  const cleaned = expr.replace(/\s/g, '')
+  const tokens = cleaned.match(/\d+|[+\-*/]/g)
+  if (!tokens) return []
+  return tokens
+}
+
+function validateTokens(tokens: string[]): boolean {
+  if (tokens.length === 0) return false
+  // Must start and end with number
+  if (!/^\d+$/.test(tokens[0])) return false
+  if (!/^\d+$/.test(tokens[tokens.length - 1])) return false
+  
+  for (let i = 0; i < tokens.length; i++) {
+    const t = tokens[i]
+    if (/^\d+$/.test(t)) {
+      // no leading zeros unless number is exactly '0'
+      if (t.length > 1 && t.startsWith('0')) return false
+    } else {
+      // operator cannot be adjacent to another operator
+      if (i === 0 || i === tokens.length - 1) return false
+      if (!/^\d+$/.test(tokens[i - 1]) || !/^\d+$/.test(tokens[i + 1])) return false
+    }
+  }
+  return true
+}
+
+// Expression evaluator with operator precedence and integer-only division
 function evaluateExpression(expr: string): number {
-  // Remove spaces
-  expr = expr.replace(/\s/g, '')
+  const tokens = tokenize(expr)
+  if (!validateTokens(tokens)) throw new Error('Invalid tokens')
   
-  // Handle multiplication and division first
-  expr = expr.replace(/(\d+)\*(\d+)/g, (match, a, b) => String(parseInt(a) * parseInt(b)))
-  expr = expr.replace(/(\d+)\/(\d+)/g, (match, a, b) => String(Math.floor(parseInt(a) / parseInt(b))))
+  // First pass: handle * and /
+  const stack: string[] = []
+  let i = 0
+  while (i < tokens.length) {
+    const token = tokens[i]
+    if (token === '*' || token === '/') {
+      // compute with previous number
+      const prev = parseInt(stack.pop() as string)
+      const next = parseInt(tokens[i + 1])
+      if (Number.isNaN(prev) || Number.isNaN(next)) throw new Error('Invalid operands')
+      let value: number
+      if (token === '*') {
+        value = prev * next
+      } else {
+        // require exact integer division
+        if (next === 0) throw new Error('Division by zero')
+        if (prev % next !== 0) throw new Error('Non-integer division')
+        value = Math.trunc(prev / next)
+      }
+      stack.push(String(value))
+      i += 2
+    } else {
+      stack.push(token)
+      i += 1
+    }
+  }
   
-  // Handle addition and subtraction
-  expr = expr.replace(/(\d+)\+(\d+)/g, (match, a, b) => String(parseInt(a) + parseInt(b)))
-  expr = expr.replace(/(\d+)-(\d+)/g, (match, a, b) => String(parseInt(a) - parseInt(b)))
-  
-  return parseInt(expr)
+  // Second pass: handle + and - left-to-right
+  let result = parseInt(stack[0])
+  for (let j = 1; j < stack.length; j += 2) {
+    const op = stack[j]
+    const num = parseInt(stack[j + 1])
+    if (op === '+') result += num
+    else if (op === '-') result -= num
+  }
+  return result
 }
 
 // Check if a character is valid for the game
