@@ -1,18 +1,23 @@
 // Google Analytics configuration and utilities
 export const GA_TRACKING_ID = 'G-PT1MK2SF3F'
 
+// Define gtag function outside of initGA
+const createGtag = () => {
+  return (...args: any[]) => {
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push(args)
+    }
+  }
+}
+
 // Initialize Google Analytics
 export const initGA = () => {
   if (typeof window !== 'undefined') {
     // Initialize dataLayer
     window.dataLayer = window.dataLayer || []
     
-    // Define gtag function
-    function gtag(...args: any[]) {
-      window.dataLayer.push(args)
-    }
-    
-    // Make gtag available globally
+    // Create and assign gtag function
+    const gtag = createGtag()
     window.gtag = gtag
     
     // Initialize with current date

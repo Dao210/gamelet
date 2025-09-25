@@ -64,7 +64,7 @@ export default function GameResult({ className = '' }: GameResultProps) {
     // Track share event
     trackShare(platform, mode, isWon ? 'won' : 'lost')
     
-    if (platform === 'native' && navigator.share) {
+    if (platform === 'native' && typeof navigator !== 'undefined' && navigator.share && typeof navigator.share === 'function') {
       try {
         await navigator.share(shareData)
         return
@@ -238,7 +238,7 @@ export default function GameResult({ className = '' }: GameResultProps) {
             Copy Link
           </motion.button>
           
-          {navigator.share && (
+          {typeof navigator !== 'undefined' && navigator.share && typeof navigator.share === 'function' && (
             <motion.button
               className="flex items-center gap-2 px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors duration-200"
               onClick={() => handleShare('native')}
