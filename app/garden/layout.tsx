@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Navigation from '@/components/Navigation';
+import { Navigation } from '../../components/Navigation';
 
 export const metadata = {
   title: '全球藤架 - 创意植物花园',

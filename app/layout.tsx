@@ -1,15 +1,53 @@
-import React from 'react';
 import '../styles/globals.css';
-import { DefaultSeo } from 'next-seo';
-import { defaultSEO } from '../lib/seo';
-import GoogleAnalytics from '../components/GoogleAnalytics';
+import { GoogleAnalytics } from '../components/GoogleAnalytics';
 
 export const metadata = {
-  title: defaultSEO.title,
-  description: defaultSEO.description,
-  openGraph: defaultSEO.openGraph,
-  twitter: defaultSEO.twitter,
-  additionalMetaTags: defaultSEO.additionalMetaTags,
+  title: {
+    default: 'Nerdle - Daily Math Equation Puzzle Game',
+    template: '%s | Nerdle Math Game'
+  },
+  description: 'Play Nerdle, the addictive daily math equation guessing game! Challenge your mathematical skills with our free online puzzle game.',
+  keywords: 'nerdle, mathle, math game, equation puzzle, daily challenge, mathematical puzzle, number game',
+  authors: [{ name: 'Chimii.com' }],
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://chimii.com',
+    siteName: 'Nerdle Math Game',
+    title: 'Nerdle - Daily Math Equation Puzzle Game',
+    description: 'Play Nerdle, the addictive daily math equation guessing game!',
+    images: [
+      {
+        url: 'https://chimii.com/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Nerdle Math Game - Daily Equation Puzzle',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Nerdle - Daily Math Equation Puzzle Game',
+    description: 'Play Nerdle, the addictive daily math equation guessing game!',
+    site: '@nerdlemathgame',
+    creator: '@nerdlemathgame',
+    images: ['https://chimii.com/og-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+  },
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
+  verification: {
+    google: 'your-google-verification-code',
+  },
 };
 
 export default function RootLayout({
@@ -18,11 +56,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/favicon.svg" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -32,7 +67,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body>
+      <body className="h-full">
         <GoogleAnalytics />
         {children}
       </body>

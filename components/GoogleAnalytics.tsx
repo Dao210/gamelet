@@ -1,18 +1,13 @@
 'use client'
 
-import React, { useEffect } from 'react'
 import Script from 'next/script'
-import { GA_TRACKING_ID, initGA } from '../lib/analytics'
+import { GA_TRACKING_ID } from '../lib/analytics'
 
 interface GoogleAnalyticsProps {
   trackingId?: string
 }
 
-export default function GoogleAnalytics({ trackingId = GA_TRACKING_ID }: GoogleAnalyticsProps) {
-  useEffect(() => {
-    // Initialize GA after component mounts
-    initGA()
-  }, [])
+export function GoogleAnalytics({ trackingId = GA_TRACKING_ID }: GoogleAnalyticsProps) {
 
   return (
     <>
