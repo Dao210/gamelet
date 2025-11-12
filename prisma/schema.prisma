@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 用户表
+model User {
+  id                  String    @id @default(cuid())
+  username            String    @unique @db.VarChar(50)
+  email               String?   @unique @db.VarChar(255)
+  avatarUrl           String?   @map("avatar_url") @db.Text
+  totalPlants         Int       @default(0) @map("total_plants")
+  totalLikesReceived  Int       @default(0) @map("total_likes_received")
+  isVip               Boolean   @default(false) @map("is_vip")
+  createdAt           DateTime  @default(now()) @map("created_at")
+  updatedAt           DateTime  @updatedAt @map("updated_at")
+  lastActive          DateTime  @default(now()) @map("last_active")
+
+  // 关联关系
+  plants      Plant[]      // 用户创建的植物
+  likes       PlantLike[]  // 用户的点赞记录
+  comments    Comment[]    // 用户的评论
+
+  @@map("users")
+}
+
+// 植物表
+model Plant {
+  id          String      @id @default(cuid())
+  userId      String      @map("user_id")
+  name        String      @db.VarChar(100)
+  description String?     @db.Text
+  imageUrl    String      @map("image_url") @db.Text
+  thumbnailUrl String?    @map("thumbnail_url") @db.Text
+  likeCount   Int         @default(0) @map("like_count")
+  level       Int         @default(0) // 0-3 四个生长等级
+  tags        String[]    // PostgreSQL 数组类型存储标签
+  metadata    Json?       // 存储额外的植物信息
+  isActive    Boolean     @default(true) @map("is_active")
+  isFeatured  Boolean     @default(false) @map("is_featured")
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime    @updatedAt @map("updated_at")
+
+  // 关联关系
+  user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  likes    PlantLike[]
+  comments Comment[]
+
+  @@map("plants")
+}
+
+// 植物点赞记录表
+model PlantLike {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  plantId   String   @map("plant_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // 关联关系
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plant Plant @relation(fields: [plantId], references: [id], onDelete: Cascade)
+
+  // 防止同用户对同植物重复点赞（可选：可以根据需要添加日期限制）
+  @@unique([userId, plantId])
+  @@map("plant_likes")
+}
+
+// 评论表
+model Comment {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  plantId   String   @map("plant_id")
+  content   String   @db.Text
+  isDeleted Boolean  @default(false) @map("is_deleted")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // 关联关系
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plant Plant @relation(fields: [plantId], references: [id], onDelete: Cascade)
+
+  @@map("comments")
+}
+
+// 举报表
+model Report {
+  id         String   @id @default(cuid())
+  reporterId String   @map("reporter_id")
+  plantId    String   @map("plant_id")
+  reason     String   @db.VarChar(100)
+  status     String   @default("pending") @db.VarChar(20) // pending, reviewed, dismissed
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("reports")
+}

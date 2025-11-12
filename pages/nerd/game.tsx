@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { NextSeo } from 'next-seo'
 import { motion } from 'framer-motion'
-import { useGameStore } from '../lib/store'
-import { gameSEO } from '../lib/seo'
-import GameHeader from '../components/GameHeader'
-import GameBoard from '../components/GameBoard'
-import GameKeyboard from '../components/GameKeyboard'
-import GameResult from '../components/GameResult'
+import { useGameStore } from '../../lib/store'
+import { gameSEO } from '../../lib/seo'
+import GameHeader from '../../components/GameHeader'
+import GameBoard from '../../components/GameBoard'
+import GameKeyboard from '../../components/GameKeyboard'
+import GameResult from '../../components/GameResult'
 
 export default function GamePage() {
   const { gameState, startNewGame } = useGameStore()
