@@ -47,25 +47,25 @@ export default function GameBoard({ className = '' }: GameBoardProps) {
   const getTileColor = (state: TileState): string => {
     switch (state) {
       case 'correct':
-        return 'bg-green-500 text-white'
+        return 'bg-gradient-to-br from-green-500 to-green-600 text-white shadow-lg shadow-green-500/50'
       case 'present':
-        return 'bg-yellow-500 text-white'
+        return 'bg-gradient-to-br from-yellow-500 to-yellow-600 text-white shadow-lg shadow-yellow-500/50'
       case 'absent':
-        return 'bg-gray-500 text-white'
+        return 'bg-gradient-to-br from-gray-500 to-gray-600 text-white shadow-md'
       default:
-        return 'bg-white border-2 border-gray-300 text-gray-900'
+        return 'bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-2 border-gray-300/50 dark:border-gray-600/50 text-gray-900 dark:text-white shadow-md hover:border-blue-400/50 dark:hover:border-purple-400/50'
     }
   }
-  
+
   return (
-    <div className={`flex flex-col gap-2 ${className}`}>
+    <div className={`flex flex-col gap-2.5 ${className}`}>
       {Array.from({ length: maxAttempts }, (_, row) => (
-        <div key={row} className="flex gap-2 justify-center">
+        <div key={row} className="flex gap-2.5 justify-center">
           {Array.from({ length: equationLength }, (_, col) => {
             const state = getTileState(row, col)
             const content = getTileContent(row, col)
             const isActive = row === gameState.attempts.length && col === currentAttempt.length
-            
+
             return (
               <motion.div
                 key={`${row}-${col}`}
@@ -73,15 +73,20 @@ export default function GameBoard({ className = '' }: GameBoardProps) {
                   w-12 h-12 md:w-14 md:h-14
                   flex items-center justify-center
                   text-xl md:text-2xl font-bold
-                  rounded-lg
+                  rounded-xl
                   ${getTileColor(state)}
-                  ${isActive ? 'ring-2 ring-blue-500' : ''}
-                  transition-all duration-200
+                  ${isActive ? 'ring-2 ring-blue-500 dark:ring-purple-500 ring-offset-2' : ''}
+                  transition-all duration-300
                 `}
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: col * 0.1 }}
-                whileHover={{ scale: 1.05 }}
+                transition={{
+                  delay: col * 0.05,
+                  type: 'spring',
+                  stiffness: 200,
+                  damping: 15
+                }}
+                whileHover={{ scale: 1.08, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
                 {content}

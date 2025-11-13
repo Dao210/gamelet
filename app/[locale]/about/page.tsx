@@ -103,7 +103,7 @@ export default function AboutPage() {
                   Ready to Play?
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                  Put your math skills to the test with today's Nerdle puzzle!
+                  Put your math skills to the test with today&apos;s Nerdle puzzle!
                 </p>
                 <Link href="/nerd/game" className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-xl text-lg transition-colors">
                   Play Nerdle Now

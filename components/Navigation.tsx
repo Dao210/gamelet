@@ -1,25 +1,35 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { useState } from 'react'
+import { useTranslations } from 'next-intl'
+import { Link, usePathname } from '@/i18n/routing'
+import { motion } from 'framer-motion'
+import LanguageSelector from './LanguageSelector'
+import ChimiiLogo from './ChimiiLogo'
 
-export function Navigation() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathname = usePathname() || '';
+export default function Navigation() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const t = useTranslations('navigation')
 
-  const navigation = [
-    { name: 'Nerdle', href: '/nerd', icon: '🧮', description: '数学方程猜谜游戏' },
-    { name: 'Garden', href: '/garden', icon: '🌱', description: '创意植物社交平台' },
-  ];
+  // Main navigation with icons and descriptions (displayed prominently)
+  const mainNavigation = [
+    { name: t('nerdle'), href: '/nerd', icon: '🧮', description: t('nerdleDescription') },
+    { name: t('garden'), href: '/garden', icon: '🌱', description: t('gardenDescription') },
+  ]
+
+  // Secondary navigation (text-only links)
+  const secondaryNavigation = [
+    { name: t('about'), href: '/about' },
+    { name: t('tipsStrategies'), href: '/nerd/nerdle-answer-today' },
+  ]
 
   const isActive = (href: string) => {
     if (href === '/') {
-      return pathname === '/';
+      return pathname === '/'
     }
-    return pathname.startsWith(href);
-  };
+    return pathname.startsWith(href)
+  }
 
   return (
     <nav className="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-50">
@@ -27,40 +37,61 @@ export function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-              Chimii
-            </span>
+            <ChimiiLogo width={100} height={32} className="transition-opacity hover:opacity-80" />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`
-                  relative px-3 py-2 text-sm font-medium rounded-lg transition-colors
-                  ${isActive(item.href)
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'
-                  }
-                `}
-              >
-                <span className="mr-2">{item.icon}</span>
-                {item.name}
-                {isActive(item.href) && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400 rounded-full"
-                    initial={false}
-                  />
-                )}
-              </Link>
-            ))}
+          <div className="hidden md:flex items-center space-x-4">
+            <div className="flex items-center space-x-6">
+              {mainNavigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`
+                    relative px-3 py-2 text-sm font-medium rounded-lg transition-colors
+                    ${isActive(item.href)
+                      ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+                    }
+                  `}
+                >
+                  <span className="mr-2">{item.icon}</span>
+                  {item.name}
+                  {isActive(item.href) && (
+                    <motion.div
+                      layoutId="activeTab"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400 rounded-full"
+                      initial={false}
+                    />
+                  )}
+                </Link>
+              ))}
+
+              {/* Secondary navigation links */}
+              {secondaryNavigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`
+                    px-3 py-2 text-sm font-medium rounded-lg transition-colors
+                    ${isActive(item.href)
+                      ? 'text-blue-600 dark:text-blue-400'
+                      : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400'
+                    }
+                  `}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* Language Selector */}
+            <LanguageSelector />
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-2">
+            <LanguageSelector />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -95,8 +126,9 @@ export function Navigation() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden border-t border-gray-200 dark:border-gray-700"
           >
+            {/* Main navigation items */}
             <div className="py-4 space-y-2">
-              {navigation.map((item) => (
+              {mainNavigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
@@ -120,28 +152,30 @@ export function Navigation() {
               ))}
             </div>
 
-            {/* Additional Links for Mobile */}
+            {/* Secondary navigation items */}
             <div className="py-4 border-t border-gray-200 dark:border-gray-700">
               <div className="space-y-2">
-                <Link
-                  href="/about"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-                >
-                  About
-                </Link>
-                <Link
-                  href="/nerd/nerdle-answer-today"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-                >
-                  Tips & Strategies
-                </Link>
+                {secondaryNavigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`
+                      block px-3 py-2 text-sm rounded-lg transition-colors
+                      ${isActive(item.href)
+                        ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                        : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
+                      }
+                    `}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
               </div>
             </div>
           </motion.div>
         )}
       </div>
     </nav>
-  );
+  )
 }

@@ -12,7 +12,7 @@ export interface Plant {
   likeCount: number
   level: number // 0-3 四个生长等级
   tags: string[]
-  metadata?: Record<string, any>
+  metadata?: Record<string, unknown>
   isActive: boolean
   isFeatured: boolean
   createdAt: Date

@@ -1,0 +1,13 @@
+
+> nerdle-math-game@1.0.0 dev
+> next dev
+
+ ⚠ Port 3000 is in use by process 11934, using available port 3003 instead.
+   ▲ Next.js 15.5.4
+   - Local:        http://localhost:3003
+   - Network:      http://192.168.10.172:3003
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 3.7s
+[?25h

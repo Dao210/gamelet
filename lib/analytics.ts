@@ -3,7 +3,7 @@ export const GA_TRACKING_ID = 'G-PT1MK2SF3F'
 
 // Define gtag function outside of initGA
 const createGtag = () => {
-  return (...args: any[]) => {
+  return (...args: unknown[]) => {
     if (typeof window !== 'undefined' && window.dataLayer) {
       window.dataLayer.push(args)
     }
@@ -49,7 +49,7 @@ export const trackPageView = (url: string, title?: string) => {
 }
 
 // Track custom events
-export const trackEvent = (eventName: string, parameters?: Record<string, any>) => {
+export const trackEvent = (eventName: string, parameters?: Record<string, unknown>) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', eventName, {
       event_category: 'engagement',
@@ -59,7 +59,7 @@ export const trackEvent = (eventName: string, parameters?: Record<string, any>) 
 }
 
 // Track game-specific events
-export const trackGameEvent = (eventName: string, gameMode: string, parameters?: Record<string, any>) => {
+export const trackGameEvent = (eventName: string, gameMode: string, parameters?: Record<string, unknown>) => {
   trackEvent(eventName, {
     event_category: 'game',
     game_mode: gameMode,
@@ -102,7 +102,7 @@ export const trackModeSwitch = (fromMode: string, toMode: string) => {
 // Declare global types for TypeScript
 declare global {
   interface Window {
-    dataLayer: any[]
-    gtag: (...args: any[]) => void
+    dataLayer: unknown[]
+    gtag: (...args: unknown[]) => void
   }
 }

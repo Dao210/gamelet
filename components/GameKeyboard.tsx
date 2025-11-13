@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useGameStore } from '../lib/store'
 import { isValidChar } from '../lib/game-engine'
@@ -11,44 +11,75 @@ interface GameKeyboardProps {
 
 export default function GameKeyboard({ className = '' }: GameKeyboardProps) {
   const { gameState, currentAttempt, addCharToAttempt, removeCharFromAttempt, submitAttempt } = useGameStore()
-  
-  if (!gameState) return null
-  
-  const equationLength = gameState.mode === 'classic' ? 8 : 
-                        gameState.mode === 'mini' ? 6 : 10
-  
-  const canSubmit = currentAttempt.length === equationLength && gameState.status === 'playing'
-  
-  const handleKeyPress = (char: string) => {
-    if (gameState.status !== 'playing') return
+  const keyboardRef = useRef<HTMLDivElement>(null)
+  const [pressedKey, setPressedKey] = useState<string | null>(null)
+
+  const equationLength = gameState?.mode === 'classic' ? 8 :
+                        gameState?.mode === 'mini' ? 6 : 10
+  const canSubmit = gameState?.status === 'playing' && currentAttempt.length === equationLength
+
+  const handleKeyPress = React.useCallback((char: string) => {
+    if (gameState?.status !== 'playing') return
     if (currentAttempt.length >= equationLength) return
     if (!isValidChar(char)) return
-    
+
+    // Show visual feedback with RAF for better performance
+    setPressedKey(char)
+    requestAnimationFrame(() => {
+      setTimeout(() => setPressedKey(null), 50)
+    })
+
     addCharToAttempt(char)
-  }
-  
-  const handleBackspace = () => {
+  }, [gameState?.status, currentAttempt.length, equationLength, addCharToAttempt])
+
+  const handleBackspace = React.useCallback(() => {
     if (currentAttempt.length > 0) {
+      // Show visual feedback with RAF for better performance
+      setPressedKey('Backspace')
+      requestAnimationFrame(() => {
+        setTimeout(() => setPressedKey(null), 50)
+      })
+
       removeCharFromAttempt()
     }
-  }
-  
-  const handleSubmit = () => {
+  }, [currentAttempt.length, removeCharFromAttempt])
+
+  const handleSubmit = React.useCallback(() => {
     if (canSubmit) {
+      // Show visual feedback with RAF for better performance
+      setPressedKey('Enter')
+      requestAnimationFrame(() => {
+        setTimeout(() => setPressedKey(null), 50)
+      })
+
       submitAttempt()
     }
-  }
-  
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' && canSubmit) {
+  }, [canSubmit, submitAttempt])
+
+  // Simple keyboard event handler
+  const handleKeyDown = React.useCallback((event: React.KeyboardEvent) => {
+    const key = event.key
+
+    if (key === 'Enter' && canSubmit) {
+      event.preventDefault()
       handleSubmit()
-    } else if (event.key === 'Backspace') {
+    } else if (key === 'Backspace') {
       event.preventDefault()
       handleBackspace()
-    } else if (isValidChar(event.key)) {
-      handleKeyPress(event.key)
+    } else if (isValidChar(key)) {
+      handleKeyPress(key)
     }
-  }
+  }, [canSubmit, handleKeyPress, handleBackspace, handleSubmit])
+
+  // Auto-focus on mount
+  useEffect(() => {
+    if (keyboardRef.current && gameState?.status === 'playing') {
+      keyboardRef.current.focus()
+    }
+  }, [gameState?.status])
+
+  // Early return if no game state - but AFTER all hooks are called
+  if (!gameState) return null
   
   const keyboardRows = [
     ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
@@ -56,8 +87,23 @@ export default function GameKeyboard({ className = '' }: GameKeyboardProps) {
   ]
   
   return (
-    <div 
-      className={`flex flex-col gap-2 ${className}`}
+    <div
+      ref={keyboardRef}
+      data-keyboard-container
+      data-game-area
+      role="application"
+      aria-label="Virtual keyboard for math equation input"
+      className={`
+        flex flex-col gap-2 select-none
+        outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg
+        ${className}
+      `}
+      style={{
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
+        WebkitTouchCallout: 'none',
+        WebkitTapHighlightColor: 'transparent'
+      }}
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >
@@ -66,61 +112,92 @@ export default function GameKeyboard({ className = '' }: GameKeyboardProps) {
           {row.map((key) => (
             <motion.button
               key={key}
-              className="
+              data-key={key}
+              type="button"
+              className={`
                 px-3 py-2 md:px-4 md:py-3
-                bg-gray-200 hover:bg-gray-300
-                dark:bg-gray-700 dark:hover:bg-gray-600
-                text-gray-900 dark:text-white
-                font-semibold text-lg md:text-xl
-                rounded-lg
-                transition-colors duration-200
-                focus:outline-none focus:ring-2 focus:ring-blue-500
-              "
+                font-bold text-lg md:text-xl
+                rounded-xl
+                transition-all duration-200
+                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1
+                ${pressedKey === key
+                  ? 'bg-gradient-to-br from-blue-500 to-purple-500 text-white scale-95 shadow-lg'
+                  : gameState?.status !== 'playing'
+                  ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-600 cursor-not-allowed opacity-50'
+                  : 'bg-gradient-to-br from-white to-gray-50 dark:from-gray-700 dark:to-gray-800 hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-600 dark:hover:to-gray-700 text-gray-900 dark:text-white shadow-md hover:shadow-lg hover:scale-105'
+                }
+              `}
+              style={{
+                WebkitTapHighlightColor: 'transparent'
+              }}
               onClick={() => handleKeyPress(key)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              disabled={gameState.status !== 'playing'}
+              disabled={gameState?.status !== 'playing'}
+              whileHover={{ scale: gameState?.status === 'playing' ? 1.05 : 1 }}
+              whileTap={{ scale: gameState?.status === 'playing' ? 0.95 : 1 }}
+              aria-label={`Enter ${key} ${'+-*/='.includes(key) ? 'operator' : 'number'}`}
+              aria-disabled={gameState?.status !== 'playing'}
             >
               {key}
             </motion.button>
           ))}
         </div>
       ))}
-      
+
       <div className="flex gap-2 justify-center mt-2">
         <motion.button
-          className="
+          data-key="Backspace"
+          type="button"
+          className={`
             px-6 py-3 md:px-8 md:py-4
-            bg-gray-500 hover:bg-gray-600
-            text-white font-semibold text-lg
-            rounded-lg
-            transition-colors duration-200
-            focus:outline-none focus:ring-2 focus:ring-blue-500
-          "
+            font-bold text-lg
+            rounded-xl
+            transition-all duration-200
+            focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-1
+            ${pressedKey === 'Backspace'
+              ? 'bg-gradient-to-br from-orange-500 to-red-500 text-white scale-95 shadow-lg'
+              : gameState?.status !== 'playing' || currentAttempt.length === 0
+              ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-600 cursor-not-allowed opacity-50'
+              : 'bg-gradient-to-br from-gray-600 to-gray-700 dark:from-gray-600 dark:to-gray-800 hover:from-orange-500 hover:to-red-500 text-white shadow-lg hover:shadow-xl hover:scale-105'
+            }
+          `}
+          style={{
+            WebkitTapHighlightColor: 'transparent'
+          }}
           onClick={handleBackspace}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          disabled={gameState.status !== 'playing' || currentAttempt.length === 0}
+          disabled={gameState?.status !== 'playing' || currentAttempt.length === 0}
+          whileHover={{ scale: (gameState?.status === 'playing' && currentAttempt.length > 0) ? 1.05 : 1 }}
+          whileTap={{ scale: (gameState?.status === 'playing' && currentAttempt.length > 0) ? 0.95 : 1 }}
+          aria-label="Backspace delete last character"
+          aria-disabled={gameState?.status !== 'playing' || currentAttempt.length === 0}
         >
           ⌫
         </motion.button>
-        
+
         <motion.button
+          data-key="Enter"
+          type="button"
           className={`
             px-6 py-3 md:px-8 md:py-4
-            font-semibold text-lg
-            rounded-lg
-            transition-colors duration-200
-            focus:outline-none focus:ring-2 focus:ring-blue-500
-            ${canSubmit 
-              ? 'bg-green-500 hover:bg-green-600 text-white' 
-              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            font-bold text-lg
+            rounded-xl
+            transition-all duration-200
+            focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-1
+            ${pressedKey === 'Enter'
+              ? 'bg-gradient-to-br from-green-600 to-emerald-600 text-white scale-95 shadow-lg'
+              : canSubmit
+              ? 'bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white shadow-lg hover:shadow-xl hover:scale-105'
+              : 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-600 cursor-not-allowed opacity-50'
             }
           `}
+          style={{
+            WebkitTapHighlightColor: 'transparent'
+          }}
           onClick={handleSubmit}
-          whileHover={canSubmit ? { scale: 1.05 } : {}}
-          whileTap={canSubmit ? { scale: 0.95 } : {}}
           disabled={!canSubmit}
+          whileHover={{ scale: canSubmit ? 1.05 : 1 }}
+          whileTap={{ scale: canSubmit ? 0.95 : 1 }}
+          aria-label={`Submit equation ${canSubmit ? '' : '(disabled - equation incomplete)'}`}
+          aria-disabled={!canSubmit}
         >
           Enter
         </motion.button>

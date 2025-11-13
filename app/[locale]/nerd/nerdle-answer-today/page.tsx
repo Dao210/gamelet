@@ -36,17 +36,17 @@ export default function NerdleAnswerTodayPage() {
                 Nerdle Answer Today
               </h1>
               <p className="text-xl text-gray-600 dark:text-gray-300">
-                Expert Strategies & Tips for Today's Puzzle
+                Expert Strategies & Tips for Today&apos;s Puzzle
               </p>
             </header>
 
             <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-6 mb-8">
               <h2 className="text-2xl font-bold text-blue-900 dark:text-blue-100 mb-4">
-                Why We Don't Provide Direct Answers
+                Why We Don&apos;t Provide Direct Answers
               </h2>
               <p className="text-blue-800 dark:text-blue-200 leading-relaxed">
                 We believe the joy of Nerdle comes from the challenge of solving the puzzle yourself.
-                Instead of giving today's answer, we'll equip you with the strategies and techniques
+                Instead of giving today&apos;s answer, we&apos;ll equip you with the strategies and techniques
                 to solve any Nerdle puzzle with confidence.
               </p>
             </div>
@@ -114,10 +114,10 @@ export default function NerdleAnswerTodayPage() {
                 Ready to Apply These Strategies?
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
-                Use these expert tips to solve today's Nerdle puzzle without spoilers.
+                Use these expert tips to solve today&apos;s Nerdle puzzle without spoilers.
               </p>
               <Link href="/nerd/game" className="inline-block bg-gradient-to-r from-green-500 to-blue-600 text-white font-bold py-3 px-8 rounded-xl text-lg">
-                Play Today's Nerdle
+                Play Today&apos;s Nerdle
               </Link>
             </div>
           </div>
