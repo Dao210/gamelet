@@ -29,6 +29,9 @@ importers:
       framer-motion:
         specifier: ^11.0.0
         version: 11.18.2(@emotion/is-prop-valid@0.8.8)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      immer:
+        specifier: ^10.2.0
+        version: 10.2.0
       next:
         specifier: ^15.5.0
         version: 15.5.4(@babel/core@7.28.5)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -55,7 +58,7 @@ importers:
         version: 13.0.0
       zustand:
         specifier: ^4.4.7
-        version: 4.5.7(@types/react@19.1.13)(react@19.1.1)
+        version: 4.5.7(@types/react@19.1.13)(immer@10.2.0)(react@19.1.1)
     devDependencies:
       '@testing-library/jest-dom':
         specifier: ^6.9.1
@@ -2114,6 +2117,9 @@ packages:
   ignore@7.0.5:
     resolution: {integrity: sha512-Hs59xBNfUIunMFgWAbGX5cq6893IbWg4KnrjbYwX3tx0ztorVgTDA6B2sxf8ejHJ4wz8BqGUMYlnzNBer5NvGg==}
     engines: {node: '>= 4'}
+
+  immer@10.2.0:
+    resolution: {integrity: sha512-d/+XTN3zfODyjr89gM3mPq1WNX2B8pYsu7eORitdwyA2sBubnTl3laYlBk4sXY5FUa5qTZGBDPJICVbvqzjlbw==}
 
   import-fresh@3.3.1:
     resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
@@ -6004,6 +6010,8 @@ snapshots:
 
   ignore@7.0.5: {}
 
+  immer@10.2.0: {}
+
   import-fresh@3.3.1:
     dependencies:
       parent-module: 1.0.1
@@ -7922,9 +7930,10 @@ snapshots:
 
   yoga-wasm-web@0.3.3: {}
 
-  zustand@4.5.7(@types/react@19.1.13)(react@19.1.1):
+  zustand@4.5.7(@types/react@19.1.13)(immer@10.2.0)(react@19.1.1):
     dependencies:
       use-sync-external-store: 1.5.0(react@19.1.1)
     optionalDependencies:
       '@types/react': 19.1.13
+      immer: 10.2.0
       react: 19.1.1
