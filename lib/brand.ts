@@ -224,6 +224,22 @@ export function generateSEOContent(
       canonical: getCanonicalUrl(type),
       ogTitle: config.name,
       ogDescription: `Download ${config.name} - ${config.tagline}`
+    },
+    legal: {
+      title: `${config.name} - Legal & Privacy`,
+      description: `Legal information, privacy policy, and terms of service for ${config.name}`,
+      keywords: [...config.keywords, 'legal', 'privacy', 'terms', 'policy'].join(', '),
+      canonical: getCanonicalUrl(type),
+      ogTitle: `${config.name} - Legal Information`,
+      ogDescription: `Legal and privacy information for ${config.name}`
+    },
+    marketing: {
+      title: `${config.name}: ${getPrimaryBenefit(type)}`,
+      description: `${config.description}. Join thousands of satisfied users today!`,
+      keywords: [...config.keywords, 'marketing', 'promotion', 'features', 'benefits'].join(', '),
+      canonical: getCanonicalUrl(type),
+      ogTitle: `${config.name} - ${config.tagline}`,
+      ogDescription: `Discover why ${config.name} is the best choice for ${getTargetAudience(type)}`
     }
   }
 
@@ -363,6 +379,16 @@ function getCallToAction(type: BrandType): string {
     platform: 'Experience the difference!'
   }
   return ctas[type] || ctas.primary
+}
+
+function getTargetAudience(type: BrandType): string {
+  const audiences = {
+    primary: 'creative professionals and enthusiasts',
+    game: 'puzzle lovers and math enthusiasts',
+    creative: 'artists and creative individuals',
+    platform: 'users seeking integrated creative experiences'
+  }
+  return audiences[type] || audiences.primary
 }
 
 function getCanonicalUrl(type: BrandType): string {
