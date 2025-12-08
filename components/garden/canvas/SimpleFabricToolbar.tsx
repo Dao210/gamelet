@@ -42,7 +42,7 @@ export default function SimpleFabricToolbar() {
           {tools.map((tool) => (
             <motion.button
               key={tool.id}
-              onClick={() => setTool(tool.id as any)}
+              onClick={() => setTool(tool.id as 'select' | 'brush' | 'eraser')}
               className={`
                 w-full px-4 py-3 rounded-xl text-left
                 flex items-center justify-between

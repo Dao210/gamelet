@@ -26,9 +26,8 @@ export class EraserTool {
     this.canvas.freeDrawingBrush = eraser
 
     // 设置橡皮擦模式
-    // @ts-ignore - Fabric.js 类型定义可能不完整
     if (this.canvas.freeDrawingBrush) {
-      // @ts-ignore
+      // @ts-expect-error - globalCompositeOperation 存在但类型未定义
       this.canvas.freeDrawingBrush.globalCompositeOperation = 'destination-out'
     }
   }
@@ -38,7 +37,7 @@ export class EraserTool {
    */
   deactivate() {
     this.canvas.isDrawingMode = false
-    this.canvas.freeDrawingBrush = null as any
+    this.canvas.freeDrawingBrush = null as unknown as fabric.BaseBrush
   }
 
   /**
@@ -67,7 +66,7 @@ export class EraserTool {
     const objects = this.canvas.getObjects()
     // 保留背景层对象
     const objectsToRemove = objects.filter(obj => {
-      // @ts-ignore
+      // @ts-expect-error - layerId 是自定义属性，不在标准类型中
       return obj.layerId !== 'bg-layer'
     })
 

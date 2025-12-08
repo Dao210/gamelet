@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { immer } from 'zustand/middleware/immer'
+import * as fabric from 'fabric'
 import type { Canvas } from 'fabric/fabric-impl'
 
 // Tool Types
@@ -396,7 +397,7 @@ export const useFabricStore = create<FabricStore>()(
         const state = get()
         if (!state.canvas) return
 
-        state.canvas.absolutePan(offset)
+        state.canvas.absolutePan(new fabric.Point(offset.x, offset.y))
         set({ panOffset: offset })
       },
 
@@ -405,7 +406,7 @@ export const useFabricStore = create<FabricStore>()(
         if (!state.canvas) return
 
         state.canvas.setZoom(1)
-        state.canvas.absolutePan({ x: 0, y: 0 })
+        state.canvas.absolutePan(new fabric.Point(0, 0))
         state.canvas.renderAll()
 
         set({ zoom: 1, panOffset: { x: 0, y: 0 } })

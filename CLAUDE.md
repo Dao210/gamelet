@@ -131,3 +131,7 @@ The planned expansion uses `/garden` route with:
 - Frame protection to prevent clickjacking
 
 This codebase is production-ready for the current Nerdle game and has detailed architectural plans for the Global Trellis expansion. The focus is on performance, SEO optimization, and user experience.
+
+## Task Master AI Instructions
+**Import Task Master's development workflow commands and guidelines, treat as if import is in the main CLAUDE.md file.**
+@./.taskmaster/CLAUDE.md

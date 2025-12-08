@@ -29,7 +29,7 @@ export class BrushTool {
    */
   deactivate() {
     this.canvas.isDrawingMode = false
-    this.canvas.freeDrawingBrush = null as any
+    this.canvas.freeDrawingBrush = null as unknown as fabric.BaseBrush
   }
 
   /**

@@ -1,0 +1,1544 @@
+# 全球草原花园 (Global Prairie Garden) - 产品设计文档 v1.0
+
+## 📋 文档信息
+
+- **项目名称**: 全球草原花园 (Global Prairie Garden)
+- **版本**: v1.0
+- **创建日期**: 2025-11-14
+- **产品定位**: 基于用户创作的治愈系社交平台
+- **核心理念**: 共生共长，温暖相伴
+
+---
+
+## 🌟 一、核心理念
+
+### 1.1 创意
+
+**全球草原花园 (Global Prairie Garden)** ✨
+- **空间形态**: 水平延展，共享空间
+- **共生性**: 和谐共生，相互陪伴
+- **视觉隐喻**: 一片广袤的草原，每朵花都有自己的位置
+- **情感基调**: 温暖、治愈、归属感、陪伴
+
+### 1.2 核心价值主张
+
+> **"在这片草原上，每一株植物都沐浴着同样温暖的阳光，感受着同样轻柔的微风。你的创作不是孤独的，它与来自世界各地的植物们一起，构成了这片生机勃勃的花园。"**
+
+**三大核心价值**:
+1. **创作自由** - 用简单的工具，画出独特的植物
+2. **情感连接** - 每一次浇水都是一份温暖的陪伴
+3. **共生美学** - 在广袤的草原上，见证生命的多样性与和谐
+
+---
+
+## 🎨 二、视觉设计创意
+
+### 2.1 草原场景设计
+
+#### 天空层 (Sky Layer)
+```
+层次结构:
+├── 背景渐变 (Gradient Background)
+│   ├── 日出: #FFE5B4 → #87CEEB (暖橙到天蓝)
+│   ├── 白天: #87CEEB → #E0F6FF (天蓝到浅蓝)
+│   ├── 日落: #FF6B6B → #FFD93D (橙红到金黄)
+│   └── 夜晚: #0F2027 → #203A43 (深蓝到墨蓝)
+├── 云朵层 (Clouds) - Parallax滚动
+│   ├── 远景云: 透明度 30%, 移动速度 0.3x
+│   ├── 中景云: 透明度 50%, 移动速度 0.6x
+│   └── 近景云: 透明度 70%, 移动速度 1x
+└── 太阳/月亮 (Celestial Bodies)
+    ├── 太阳: radial-gradient, 光晕效果
+    └── 月亮: SVG, 星星点缀
+```
+
+#### 草原层 (Prairie Layer)
+```
+草地设计:
+├── 基础草地纹理 (Base Texture)
+│   ├── 颜色: #7CB342 (深绿) + #AED581 (浅绿) + #DCEDC8 (嫩绿)
+│   ├── 实现: CSS multiple backgrounds + SVG noise filter
+│   └── 细节: Perlin Noise生成自然纹理
+├── 草丛摆动动画 (Sway Animation)
+│   ├── 动画类型: transform: rotate() + translate()
+│   ├── 触发: 风力系统驱动
+│   ├── 参数: duration 2-4s, easing cubic-bezier
+│   └── 分层: 前景草(幅度大) + 背景草(幅度小)
+└── 地平线设计 (Horizon Line)
+    ├── 位置: 视口顶部 30%
+    ├── 效果: 模糊渐变 (blur 10px)
+    └── 远山剪影: SVG path, opacity 20%
+```
+
+### 2.2 植物布局系统
+
+#### Poisson Disk Sampling 算法
+```typescript
+interface PlantPosition {
+  x: number
+  y: number
+  radius: number // 植物占用半径
+  plantId: string
+  growthLevel: 1 | 2 | 3 | 4 // 生长等级决定半径
+}
+
+/**
+ * Poisson Disk Sampling 保证植物分布均匀且不重叠
+ * 参数:
+ * - minDistance: 最小间距 (基于植物半径)
+ * - maxAttempts: 每个点的最大尝试次数 (默认30)
+ * - bounds: 草原边界 {width, height}
+ */
+function generatePlantPositions(
+  plants: Plant[],
+  minDistance: number,
+  bounds: Bounds
+): PlantPosition[] {
+  // 实现Bridson's algorithm
+  const grid: Cell[][] = []
+  const active: PlantPosition[] = []
+  const result: PlantPosition[] = []
+
+  // 1. 初始化网格 (grid cell size = minDistance / sqrt(2))
+  // 2. 选择初始样本点
+  // 3. 从active列表中随机选点，尝试生成新点
+  // 4. 验证新点与所有已生成点的距离 > minDistance
+  // 5. 重复直到active列表为空
+
+  return result
+}
+```
+
+#### 植物层级系统
+```
+Z-Index分层:
+├── Layer 1 (z-index: 10) - 背景植物
+│   └── 距离感: scale(0.6), opacity(0.7), blur(2px)
+├── Layer 2 (z-index: 20) - 中景植物
+│   └── 距离感: scale(0.8), opacity(0.85)
+├── Layer 3 (z-index: 30) - 前景植物
+│   └── 距离感: scale(1), opacity(1)
+└── Layer 4 (z-index: 40) - 焦点植物 (hover/focus)
+    └── 距离感: scale(1.1), opacity(1), shadow
+```
+
+### 2.3 自然元素动画
+
+#### 阳光系统
+```css
+/* 阳光洒落动画 */
+.sunlight-rays {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  animation: sunlight-pulse 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sunlight-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* 光斑粒子 */
+.light-particles {
+  /* Canvas绘制，模拟空气中的尘埃光斑 */
+  /* 使用 requestAnimationFrame 实现缓慢漂浮 */
+}
+```
+
+#### 微风系统
+```typescript
+interface WindSystem {
+  direction: number // 0-360度
+  strength: number // 0-1
+  gustInterval: number // 阵风间隔(ms)
+}
+
+/**
+ * 风力驱动草和植物的摆动
+ * 影响范围:
+ * - 草地摆动 (sway animation)
+ * - 植物摇曳 (plant sway)
+ * - 云朵移动 (cloud drift)
+ */
+function applyWind(element: HTMLElement, wind: WindSystem) {
+  const baseRotation = wind.direction
+  const amplitude = wind.strength * 15 // 最大15度摆动
+  const duration = 2000 - (wind.strength * 1000) // 风越大，摆动越快
+
+  element.style.animation = `
+    sway ${duration}ms ease-in-out infinite
+  `
+  element.style.setProperty('--rotation', `${baseRotation}deg`)
+  element.style.setProperty('--amplitude', `${amplitude}deg`)
+}
+```
+
+---
+
+## 💫 三、交互体验设计
+
+### 3.1 浏览模式
+
+#### 模式一: 自由漫步 (Free Roam)
+```
+特性:
+├── 无限垂直滚动 (Infinite Scroll)
+│   ├── 虚拟滚动: @tanstack/react-virtual
+│   ├── 预加载: 提前加载视口外3屏内容
+│   └── 懒加载图片: Intersection Observer
+├── 视差效果 (Parallax)
+│   ├── 背景云朵: transform translateY(scrollY * 0.3)
+│   ├── 远景植物: transform translateY(scrollY * 0.5)
+│   └── 前景植物: transform translateY(scrollY * 1)
+└── 焦点跟随
+    └── 当前视口中心的植物会自动获得微妙的高亮
+```
+
+#### 模式二: 社区导航 (Community Navigation)
+```
+导航选项:
+├── 🆕 最新创作 (Latest) - 按创建时间排序
+├── 🔥 热门植物 (Trending) - 按浇水量排序(24h)
+├── 🌱 新手花园 (Newcomers) - 过滤等级≤5的植物
+├── 🌳 古树专区 (Veterans) - 过滤等级≥20的植物
+└── 🌍 地区花园 (Regional) - 按用户地理位置分组
+```
+
+### 3.2 社交互动系统
+
+#### 一键浇水 (One-Click Watering)
+```typescript
+interface WateringAction {
+  plantId: string
+  userId: string
+  timestamp: number
+  xpGained: number // 每次浇水+10 XP
+}
+
+/**
+ * 浇水动画序列:
+ * 1. 点击/触摸 → 水滴图标从手指位置飞向植物 (0.3s, ease-out)
+ * 2. 水滴接触 → 产生水花粒子效果 (Canvas, 15个粒子, 0.5s)
+ * 3. 植物反馈 → 轻微放大+发光 (scale 1.05, 0.2s, spring)
+ * 4. XP提示 → "+10 XP" 文字向上飘出并淡出 (1s, ease-out)
+ */
+async function waterPlant(plantId: string) {
+  // 1. 防抖检查 (同一用户对同一植物，24h内只能浇一次)
+  if (hasWateredToday(plantId)) {
+    showToast('今天已经浇过水啦！明天再来吧~')
+    return
+  }
+
+  // 2. 乐观更新 UI
+  playWaterAnimation(plantId)
+
+  // 3. API请求
+  const result = await api.post('/garden/water', { plantId })
+
+  // 4. 更新植物数据
+  updatePlantXP(plantId, result.newXP)
+  checkLevelUp(plantId, result.oldLevel, result.newLevel)
+}
+```
+
+#### 等级成长系统
+```typescript
+interface GrowthLevel {
+  level: 1 | 2 | 3 | 4
+  xpRequired: number
+  visualChanges: VisualChanges
+}
+
+const GROWTH_LEVELS: GrowthLevel[] = [
+  {
+    level: 1,
+    xpRequired: 0,
+    visualChanges: {
+      size: 'small', // 50px
+      opacity: 0.7,
+      animation: 'subtle-sway',
+      specialEffect: null
+    }
+  },
+  {
+    level: 2,
+    xpRequired: 100, // 10人浇水
+    visualChanges: {
+      size: 'medium', // 80px
+      opacity: 0.85,
+      animation: 'gentle-sway',
+      specialEffect: 'sparkle' // 偶尔闪烁光点
+    }
+  },
+  {
+    level: 3,
+    xpRequired: 500, // 50人浇水
+    visualChanges: {
+      size: 'large', // 120px
+      opacity: 1,
+      animation: 'dynamic-sway',
+      specialEffect: 'glow' // 持续发光
+    }
+  },
+  {
+    level: 4,
+    xpRequired: 2000, // 200人浇水
+    visualChanges: {
+      size: 'xlarge', // 160px
+      opacity: 1,
+      animation: 'majestic-sway',
+      specialEffect: 'aura' // 光环+粒子
+    }
+  }
+]
+
+/**
+ * 升级动画:
+ * 1. 植物发光+脉冲 (0.5s)
+ * 2. 光波扩散 (1s, radial gradient)
+ * 3. 尺寸渐变到新等级 (0.8s, spring)
+ * 4. 庆祝粒子爆发 (30个粒子, 1.5s)
+ * 5. 提示文字: "恭喜！你的植物长大啦！" (2s)
+ */
+function playLevelUpAnimation(plantElement: HTMLElement) {
+  // Framer Motion动画序列
+}
+```
+
+### 3.3 创作入口
+
+#### 飘浮按钮 (Floating Action Button)
+```css
+.create-fab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.create-fab:hover {
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.6);
+}
+
+/* 呼吸动画提示 */
+@keyframes fab-pulse {
+  0%, 100% {
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  }
+  50% {
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.8);
+  }
+}
+```
+
+---
+
+## 🌱 四、生长机制设计
+
+### 4.1 双引擎生长系统
+
+```typescript
+interface PlantGrowth {
+  socialGrowth: {
+    xp: number // 社交经验值
+    waterCount: number // 被浇水次数
+    uniqueWaterers: string[] // 独立浇水用户
+  }
+  timeGrowth: {
+    createdAt: Date
+    daysSinceCreation: number
+    ageBonus: number // 时间加成 (每天+5 XP)
+  }
+}
+
+/**
+ * 双引擎计算公式:
+ * totalXP = socialXP + timeXP
+ * socialXP = waterCount * 10
+ * timeXP = daysSinceCreation * 5
+ *
+ * 设计理念:
+ * - 社交引擎: 鼓励互动和传播
+ * - 时间引擎: 保护冷门但用心的作品
+ */
+function calculateTotalXP(plant: PlantGrowth): number {
+  const socialXP = plant.socialGrowth.waterCount * 10
+  const timeXP = plant.timeGrowth.daysSinceCreation * 5
+  return socialXP + timeXP
+}
+```
+
+### 4.2 四阶段生长演绎
+
+#### Level 1: 幼苗期 (Seedling)
+```
+视觉特征:
+- 尺寸: 50x50px
+- 透明度: 70%
+- 颜色: 嫩绿色 (#8BC34A)
+- 动画: 微弱摆动 (2-3度)
+- 特效: 无
+
+情感基调: 稚嫩、需要呵护
+用户心态: "这是我的小宝贝，希望它能茁壮成长"
+```
+
+#### Level 2: 成长期 (Growing)
+```
+视觉特征:
+- 尺寸: 80x80px
+- 透明度: 85%
+- 颜色: 翠绿色 (#4CAF50)
+- 动画: 轻柔摆动 (5-7度)
+- 特效: 偶尔闪烁星光 (1/5s触发)
+
+情感基调: 活力、希望
+用户心态: "我的植物得到了大家的关注！"
+```
+
+#### Level 3: 繁茂期 (Flourishing)
+```
+视觉特征:
+- 尺寸: 120x120px
+- 透明度: 100%
+- 颜色: 深绿色 (#388E3C) + 花朵颜色
+- 动画: 动态摆动 (8-12度)
+- 特效: 持续发光光环 (blur 8px, opacity 30%)
+
+情感基调: 成就、自豪
+用户心态: "我的植物成为了草原上的明星！"
+```
+
+#### Level 4: 传奇期 (Legendary)
+```
+视觉特征:
+- 尺寸: 160x160px
+- 透明度: 100%
+- 颜色: 浓郁绿色 (#1B5E20) + 绚丽花朵
+- 动画: 威严摆动 (15-20度) + 呼吸缩放
+- 特效:
+  * 金色光环 (radial-gradient)
+  * 粒子环绕 (Canvas, 20个金色粒子)
+  * 周期性光波扩散 (每5s一次)
+
+情感基调: 传奇、永恒
+用户心态: "这是属于整个社区的宝藏！"
+```
+
+### 4.3 共生生态系统
+
+```
+生态位设计:
+├── 空间共生 (Spatial Coexistence)
+│   ├── Poisson Disk布局确保每株植物都有足够生长空间
+│   └── 大型植物(Level 4)周围会留更多空间，凸显其地位
+├── 视觉共生 (Visual Harmony)
+│   ├── 颜色调和: 自动生成互补色或类似色方案
+│   └── 高度错落: Z-index分层营造景深
+└── 情感共生 (Emotional Connection)
+    ├── 用户会更愿意浇灌周围的"邻居"植物
+    └── "我的植物旁边是一棵来自日本的樱花树！"
+```
+
+---
+
+## 🌈 五、自然元素系统
+
+### 5.1 天气系统
+
+```typescript
+enum WeatherType {
+  SUNNY = 'sunny',        // 晴天 (60%概率)
+  CLOUDY = 'cloudy',      // 多云 (25%概率)
+  RAINY = 'rainy',        // 雨天 (10%概率)
+  STARRY_NIGHT = 'starry' // 星夜 (5%概率，仅夜间)
+}
+
+interface WeatherEffect {
+  type: WeatherType
+  duration: number // 持续时间(ms)
+  visualEffects: VisualEffect[]
+  soundEffects?: string // 可选音效
+}
+
+/**
+ * 天气效果实现
+ */
+const weatherEffects: Record<WeatherType, WeatherEffect> = {
+  [WeatherType.SUNNY]: {
+    type: WeatherType.SUNNY,
+    duration: Infinity, // 默认天气
+    visualEffects: [
+      {
+        type: 'gradient',
+        target: 'sky',
+        colors: ['#87CEEB', '#E0F6FF']
+      },
+      {
+        type: 'animation',
+        target: 'sunlight-rays',
+        keyframes: 'sunlight-pulse'
+      }
+    ]
+  },
+  [WeatherType.RAINY]: {
+    type: WeatherType.RAINY,
+    duration: 120000, // 2分钟
+    visualEffects: [
+      {
+        type: 'gradient',
+        target: 'sky',
+        colors: ['#4A5568', '#718096'] // 灰色天空
+      },
+      {
+        type: 'particles',
+        target: 'rain-canvas',
+        config: {
+          count: 200,
+          speed: 8,
+          angle: 75, // 略微倾斜
+          length: 20,
+          opacity: 0.6
+        }
+      },
+      {
+        type: 'filter',
+        target: 'prairie',
+        filter: 'brightness(0.7) saturate(1.2)' // 雨天色彩更饱和
+      }
+    ],
+    soundEffects: '/sounds/rain-ambient.mp3'
+  },
+  [WeatherType.STARRY_NIGHT]: {
+    type: WeatherType.STARRY_NIGHT,
+    duration: Infinity,
+    visualEffects: [
+      {
+        type: 'gradient',
+        target: 'sky',
+        colors: ['#0F2027', '#203A43', '#2C5364']
+      },
+      {
+        type: 'particles',
+        target: 'stars-canvas',
+        config: {
+          count: 150,
+          twinkle: true, // 闪烁效果
+          shootingStarChance: 0.001 // 流星概率
+        }
+      }
+    ]
+  }
+}
+```
+
+### 5.2 昼夜循环系统
+
+```typescript
+interface TimeOfDay {
+  hour: number // 0-23
+  phase: 'dawn' | 'morning' | 'noon' | 'afternoon' | 'dusk' | 'night'
+  skyGradient: string[]
+  lightIntensity: number // 0-1
+  shadowAngle: number // 0-360度
+}
+
+/**
+ * 24小时循环系统
+ * 基于用户本地时间或服务器时间
+ */
+const timePhases: TimeOfDay[] = [
+  {
+    hour: 5,
+    phase: 'dawn',
+    skyGradient: ['#FFE5B4', '#FFB347', '#87CEEB'],
+    lightIntensity: 0.4,
+    shadowAngle: 45
+  },
+  {
+    hour: 8,
+    phase: 'morning',
+    skyGradient: ['#87CEEB', '#B0E0E6'],
+    lightIntensity: 0.7,
+    shadowAngle: 60
+  },
+  {
+    hour: 12,
+    phase: 'noon',
+    skyGradient: ['#87CEEB', '#E0F6FF'],
+    lightIntensity: 1.0,
+    shadowAngle: 90
+  },
+  {
+    hour: 17,
+    phase: 'afternoon',
+    skyGradient: ['#FFD93D', '#FFA500'],
+    lightIntensity: 0.8,
+    shadowAngle: 120
+  },
+  {
+    hour: 19,
+    phase: 'dusk',
+    skyGradient: ['#FF6B6B', '#C44569', '#5F27CD'],
+    lightIntensity: 0.3,
+    shadowAngle: 150
+  },
+  {
+    hour: 21,
+    phase: 'night',
+    skyGradient: ['#0F2027', '#203A43', '#2C5364'],
+    lightIntensity: 0.1,
+    shadowAngle: 180
+  }
+]
+
+/**
+ * 平滑过渡实现 (每小时渐变15分钟)
+ */
+function updateTimeOfDay() {
+  const now = new Date()
+  const currentHour = now.getHours()
+  const currentMinute = now.getMinutes()
+
+  const currentPhase = timePhases.find(p => p.hour === currentHour)
+  const nextPhase = timePhases.find(p => p.hour === (currentHour + 1) % 24)
+
+  if (!currentPhase || !nextPhase) return
+
+  // 在每小时的最后15分钟开始过渡
+  if (currentMinute >= 45) {
+    const progress = (currentMinute - 45) / 15 // 0-1
+    const transitionedGradient = interpolateGradient(
+      currentPhase.skyGradient,
+      nextPhase.skyGradient,
+      progress
+    )
+    applySkyGradient(transitionedGradient)
+  } else {
+    applySkyGradient(currentPhase.skyGradient)
+  }
+}
+
+// 每分钟更新一次
+setInterval(updateTimeOfDay, 60000)
+```
+
+### 5.3 季节系统 (v2.0 Feature)
+
+```typescript
+enum Season {
+  SPRING = 'spring',
+  SUMMER = 'summer',
+  AUTUMN = 'autumn',
+  WINTER = 'winter'
+}
+
+interface SeasonalChanges {
+  season: Season
+  grassColor: string
+  skyTone: string
+  specialEffects: string[]
+}
+
+const seasonalThemes: Record<Season, SeasonalChanges> = {
+  [Season.SPRING]: {
+    season: Season.SPRING,
+    grassColor: '#AED581', // 嫩绿
+    skyTone: '#E3F2FD', // 清新蓝
+    specialEffects: ['cherry-petals', 'butterfly'] // 樱花瓣+蝴蝶
+  },
+  [Season.SUMMER]: {
+    season: Season.SUMMER,
+    grassColor: '#7CB342', // 深绿
+    skyTone: '#64B5F6', // 深蓝
+    specialEffects: ['firefly'] // 萤火虫(夜晚)
+  },
+  [Season.AUTUMN]: {
+    season: Season.AUTUMN,
+    grassColor: '#FFA726', // 金黄
+    skyTone: '#FFCC80', // 橙黄
+    specialEffects: ['falling-leaves', 'warm-wind'] // 落叶+暖风
+  },
+  [Season.WINTER]: {
+    season: Season.WINTER,
+    grassColor: '#E8F5E9', // 雪白
+    skyTone: '#CFD8DC', // 冷灰
+    specialEffects: ['snowflakes', 'frost'] // 雪花+霜冻
+  }
+}
+```
+
+---
+
+## ⚙️ 六、技术实现方案
+
+### 6.1 技术架构
+
+```
+技术栈选型:
+├── 前端框架
+│   ├── Next.js 15 App Router (已有)
+│   ├── React 19 (已有)
+│   └── TypeScript (已有)
+├── 状态管理
+│   ├── Zustand + Immer (已有)
+│   └── SWR for data fetching
+├── 渲染引擎
+│   ├── Canvas API
+│   │   ├── 粒子系统 (雨、雪、风、萤火虫)
+│   │   └── 性能优化: OffscreenCanvas + Web Worker
+│   ├── SVG
+│   │   ├── 植物渲染 (可缩放、不失真)
+│   │   └── 草地纹理 (Perlin Noise filter)
+│   └── CSS3
+│       ├── 天空渐变 (linear-gradient)
+│       └── 草地摆动 (transform + animation)
+├── 动画库
+│   ├── Framer Motion (已有)
+│   │   ├── 植物摆动
+│   │   ├── 浇水动画
+│   │   └── 升级特效
+│   └── GSAP (可选，用于复杂时间线动画)
+├── 虚拟滚动
+│   └── @tanstack/react-virtual (高性能无限列表)
+├── 后端 (MVP阶段)
+│   ├── Next.js API Routes
+│   ├── PostgreSQL (Vercel Postgres)
+│   ├── Prisma ORM (已有)
+│   └── NextAuth.js (已有)
+└── 部署
+    └── Vercel (已有)
+```
+
+### 6.2 数据库设计
+
+```prisma
+// schema.prisma
+
+model Plant {
+  id            String   @id @default(cuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // 植物数据
+  imageData     String   @db.Text // Base64 or Cloudinary URL
+  width         Int
+  height        Int
+
+  // 成长数据
+  xp            Int      @default(0)
+  level         Int      @default(1) // 1-4
+  waterCount    Int      @default(0)
+
+  // 空间数据
+  positionX     Float
+  positionY     Float
+  radius        Float    @default(50) // 占用半径
+
+  // 作者信息
+  authorId      String
+  author        User     @relation(fields: [authorId], references: [id])
+
+  // 社交数据
+  waterings     Watering[]
+
+  @@index([authorId])
+  @@index([level])
+  @@index([createdAt])
+}
+
+model Watering {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+
+  plantId     String
+  plant       Plant    @relation(fields: [plantId], references: [id])
+
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+
+  xpGained    Int      @default(10)
+
+  // 防止重复浇水: 同一用户对同一植物每天只能浇一次
+  @@unique([plantId, userId, createdAt(sort: Desc)])
+  @@index([plantId])
+  @@index([userId])
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+
+  plants        Plant[]
+  waterings     Watering[]
+
+  @@index([email])
+}
+```
+
+### 6.3 关键算法实现
+
+#### Poisson Disk Sampling (植物布局)
+```typescript
+/**
+ * Bridson's Algorithm 实现
+ * 时间复杂度: O(n)
+ * 空间复杂度: O(n)
+ * 参考: https://www.cs.ubc.ca/~rbridson/docs/bridson-siggraph07-poissondisk.pdf
+ */
+
+interface Point {
+  x: number
+  y: number
+}
+
+class PoissonDiskSampling {
+  private readonly width: number
+  private readonly height: number
+  private readonly minDistance: number
+  private readonly maxAttempts: number
+  private readonly cellSize: number
+  private readonly gridWidth: number
+  private readonly gridHeight: number
+  private readonly grid: (Point | null)[][]
+
+  constructor(
+    width: number,
+    height: number,
+    minDistance: number,
+    maxAttempts: number = 30
+  ) {
+    this.width = width
+    this.height = height
+    this.minDistance = minDistance
+    this.maxAttempts = maxAttempts
+
+    // Grid cell size = minDistance / sqrt(2)
+    this.cellSize = minDistance / Math.sqrt(2)
+    this.gridWidth = Math.ceil(width / this.cellSize)
+    this.gridHeight = Math.ceil(height / this.cellSize)
+
+    // Initialize grid
+    this.grid = Array(this.gridHeight)
+      .fill(null)
+      .map(() => Array(this.gridWidth).fill(null))
+  }
+
+  generate(): Point[] {
+    const points: Point[] = []
+    const activeList: Point[] = []
+
+    // Step 1: Select initial sample
+    const initial = {
+      x: Math.random() * this.width,
+      y: Math.random() * this.height
+    }
+    points.push(initial)
+    activeList.push(initial)
+    this.insertIntoGrid(initial)
+
+    // Step 2: While active list is not empty
+    while (activeList.length > 0) {
+      const randomIndex = Math.floor(Math.random() * activeList.length)
+      const point = activeList[randomIndex]
+      let found = false
+
+      // Try to generate maxAttempts new points
+      for (let i = 0; i < this.maxAttempts; i++) {
+        const newPoint = this.generateRandomPointAround(point)
+
+        if (
+          this.isValid(newPoint) &&
+          this.isDistanceValid(newPoint)
+        ) {
+          points.push(newPoint)
+          activeList.push(newPoint)
+          this.insertIntoGrid(newPoint)
+          found = true
+          break
+        }
+      }
+
+      // Remove from active list if no valid point found
+      if (!found) {
+        activeList.splice(randomIndex, 1)
+      }
+    }
+
+    return points
+  }
+
+  private generateRandomPointAround(point: Point): Point {
+    // Generate point in annulus between minDistance and 2*minDistance
+    const angle = Math.random() * 2 * Math.PI
+    const radius =
+      this.minDistance * (1 + Math.random()) // [minDistance, 2*minDistance]
+
+    return {
+      x: point.x + radius * Math.cos(angle),
+      y: point.y + radius * Math.sin(angle)
+    }
+  }
+
+  private isValid(point: Point): boolean {
+    return (
+      point.x >= 0 &&
+      point.x < this.width &&
+      point.y >= 0 &&
+      point.y < this.height
+    )
+  }
+
+  private isDistanceValid(point: Point): boolean {
+    const gridX = Math.floor(point.x / this.cellSize)
+    const gridY = Math.floor(point.y / this.cellSize)
+
+    // Check neighboring cells (5x5 grid around point)
+    for (let dy = -2; dy <= 2; dy++) {
+      for (let dx = -2; dx <= 2; dx++) {
+        const nx = gridX + dx
+        const ny = gridY + dy
+
+        if (
+          nx >= 0 &&
+          nx < this.gridWidth &&
+          ny >= 0 &&
+          ny < this.gridHeight
+        ) {
+          const neighbor = this.grid[ny][nx]
+          if (neighbor) {
+            const dist = this.distance(point, neighbor)
+            if (dist < this.minDistance) {
+              return false
+            }
+          }
+        }
+      }
+    }
+
+    return true
+  }
+
+  private insertIntoGrid(point: Point): void {
+    const gridX = Math.floor(point.x / this.cellSize)
+    const gridY = Math.floor(point.y / this.cellSize)
+    this.grid[gridY][gridX] = point
+  }
+
+  private distance(a: Point, b: Point): number {
+    const dx = a.x - b.x
+    const dy = a.y - b.y
+    return Math.sqrt(dx * dx + dy * dy)
+  }
+}
+
+// Usage
+const sampler = new PoissonDiskSampling(1920, 10000, 150, 30)
+const positions = sampler.generate()
+```
+
+#### Virtual Scrolling (性能优化)
+```typescript
+/**
+ * 使用 @tanstack/react-virtual 实现虚拟滚动
+ * 只渲染视口内+缓冲区的植物，大幅提升性能
+ */
+
+import { useVirtualizer } from '@tanstack/react-virtual'
+
+function PrairieGarden({ plants }: { plants: Plant[] }) {
+  const parentRef = useRef<HTMLDivElement>(null)
+
+  // 虚拟滚动配置
+  const virtualizer = useVirtualizer({
+    count: plants.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 200, // 每行估计高度
+    overscan: 3, // 缓冲区：视口外3行
+    horizontal: false,
+    // 自定义渲染范围计算
+    measureElement:
+      typeof window !== 'undefined' &&
+      navigator.userAgent.indexOf('Firefox') === -1
+        ? (element) => element?.getBoundingClientRect().height
+        : undefined
+  })
+
+  const items = virtualizer.getVirtualItems()
+
+  return (
+    <div
+      ref={parentRef}
+      style={{
+        height: '100vh',
+        overflow: 'auto'
+      }}
+    >
+      <div
+        style={{
+          height: `${virtualizer.getTotalSize()}px`,
+          width: '100%',
+          position: 'relative'
+        }}
+      >
+        {items.map((virtualItem) => {
+          const plant = plants[virtualItem.index]
+          return (
+            <div
+              key={virtualItem.key}
+              data-index={virtualItem.index}
+              ref={virtualizer.measureElement}
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                transform: `translateY(${virtualItem.start}px)`
+              }}
+            >
+              <PlantCard plant={plant} />
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+```
+
+### 6.4 性能优化策略
+
+```typescript
+/**
+ * 性能优化清单
+ */
+
+// 1. 图片优化
+const plantImageOptimization = {
+  format: 'webp', // 使用WebP格式
+  quality: 85,
+  placeholder: 'blur', // 模糊占位符
+  sizes: '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
+  loading: 'lazy' // 懒加载
+}
+
+// 2. Canvas性能
+const canvasOptimization = {
+  // 使用OffscreenCanvas + Web Worker处理粒子
+  useOffscreenCanvas: true,
+  // 降低刷新率 (30fps vs 60fps)
+  targetFPS: 30,
+  // 动画降级策略
+  degradation: {
+    // 检测FPS，低于30fps时自动降级
+    enableFPSMonitor: true,
+    fallbackStrategy: [
+      { minFPS: 50, particleCount: 200 },
+      { minFPS: 30, particleCount: 100 },
+      { minFPS: 20, particleCount: 50 },
+      { minFPS: 10, particleCount: 0 } // 完全禁用粒子
+    ]
+  }
+}
+
+// 3. 虚拟滚动
+const scrollOptimization = {
+  overscan: 3, // 缓冲区大小
+  estimateSize: 200, // 预估尺寸
+  measureElement: true // 实际测量
+}
+
+// 4. 数据获取优化
+const dataFetchOptimization = {
+  // 使用SWR的revalidate策略
+  revalidateOnFocus: false,
+  revalidateOnReconnect: true,
+  dedupingInterval: 5000,
+  // 分页加载
+  pageSize: 50,
+  // 预加载下一页
+  prefetchNextPage: true
+}
+
+// 5. 动画优化
+const animationOptimization = {
+  // 使用CSS transform代替position
+  useTransform: true,
+  // 使用will-change提示浏览器
+  willChange: ['transform', 'opacity'],
+  // 使用requestAnimationFrame
+  useRAF: true,
+  // 节流处理
+  throttleInterval: 16 // ~60fps
+}
+```
+
+---
+
+## 💖 七、情感共鸣设计
+
+### 7.1 核心情感体验
+
+```
+情感设计矩阵:
+┌─────────────────┬──────────────────┬──────────────────┐
+│   用户状态      │    场景触发      │    设计响应      │
+├─────────────────┼──────────────────┼──────────────────┤
+│ 孤独/疲惫       │ 首次进入草原     │ 温暖的欢迎动画   │
+│                 │                  │ "欢迎来到草原"   │
+│                 │                  │ 柔和的背景音乐   │
+├─────────────────┼──────────────────┼──────────────────┤
+│ 创作完成        │ 保存植物成功     │ "你的植物已经在   │
+│ (期待+不安)     │                  │  草原上生根啦！" │
+│                 │                  │ 定位到新植物位置 │
+│                 │                  │ 周围有3株邻居    │
+├─────────────────┼──────────────────┼──────────────────┤
+│ 被认可          │ 收到第一次浇水   │ "有人给你的植物   │
+│ (惊喜+感激)     │                  │  浇水啦！"       │
+│                 │                  │ 植物发光+摇曳    │
+├─────────────────┼──────────────────┼──────────────────┤
+│ 归属感          │ 植物升级         │ "你的植物长大了！"│
+│ (成就+连接)     │                  │ "已经有XX人陪伴它"│
+│                 │                  │ 展示浇水用户头像 │
+├─────────────────┼──────────────────┼──────────────────┤
+│ 治愈/放松       │ 漫步浏览         │ 舒缓的摆动动画   │
+│                 │                  │ 柔和的风声       │
+│                 │                  │ 阳光透过云朵     │
+└─────────────────┴──────────────────┴──────────────────┘
+```
+
+### 7.2 文案系统
+
+```typescript
+/**
+ * 情感化文案设计
+ * 原则: 温暖、真诚、不刻意、有共鸣
+ */
+
+const emotionalCopy = {
+  welcome: {
+    firstVisit: "欢迎来到草原花园 🌱\n这里有来自世界各地的植物，\n它们都在等待你的到来。",
+    returning: "欢迎回来！\n你的植物长得更高了 🌿"
+  },
+
+  creation: {
+    saving: "正在为你的植物找一个温暖的位置...",
+    success: "太好了！你的植物已经在草原上生根啦 🌱\n它正和XX株植物一起，享受着阳光。",
+    encouragement: "每一笔都是独一无二的创作，\n相信它会成为草原上最美的风景。"
+  },
+
+  interaction: {
+    firstWater: "你给{userName}的植物浇了水 💧\n它会记得你的温暖。",
+    waterReceived: "有人给你的植物浇水啦！\n它看起来更有精神了 ✨",
+    dailyLimit: "今天已经浇过水啦，\n明天再来看看它吧 🌸"
+  },
+
+  growth: {
+    level2: "你的植物长大了！\n已经有{count}位朋友陪伴着它 🌿",
+    level3: "哇！你的植物开花了！\n它成为了草原上的明星 🌺",
+    level4: "传奇诞生！\n你的植物已经成为这片草原的守护者 🌳\n{count}位用户见证了它的成长。"
+  },
+
+  atmosphere: {
+    morning: "清晨的露珠还挂在叶尖，\n新的一天开始了 🌅",
+    noon: "阳光正好，微风不燥，\n最适合在草原上漫步 ☀️",
+    dusk: "夕阳给每一株植物都镀上了金边，\n今天辛苦啦 🌇",
+    night: "星空下的草原格外宁静，\n晚安 🌙"
+  }
+}
+```
+
+### 7.3 音效设计 (v1.0 Optional)
+
+```typescript
+/**
+ * 音效系统 (可选功能，默认关闭，用户可开启)
+ * 原则: 轻柔、自然、不干扰
+ */
+
+const soundEffects = {
+  ambient: {
+    // 环境音 (循环播放，音量10%)
+    prairie: '/sounds/prairie-ambient.mp3', // 风声+鸟鸣
+    rain: '/sounds/rain-ambient.mp3', // 雨声
+    night: '/sounds/night-ambient.mp3' // 虫鸣
+  },
+
+  interaction: {
+    // 交互音效 (单次播放，音量30%)
+    water: '/sounds/water-drop.mp3', // 浇水
+    levelUp: '/sounds/sparkle.mp3', // 升级
+    click: '/sounds/soft-click.mp3' // 点击
+  },
+
+  settings: {
+    enableAmbient: false, // 默认关闭环境音
+    enableSFX: true, // 默认开启音效
+    volume: 0.3 // 默认音量30%
+  }
+}
+```
+
+---
+
+## 📅 八、实施路线图
+
+### Phase 1: MVP (4-6周)
+
+**目标**: 核心体验可用，验证概念
+
+```
+Week 1-2: 基础架构
+├── [x] 数据库设计 (Prisma schema)
+├── [ ] API路由设计
+│   ├── POST /api/garden/plants - 创建植物
+│   ├── GET /api/garden/plants - 获取植物列表(分页)
+│   ├── POST /api/garden/water - 浇水
+│   └── GET /api/garden/my-plants - 我的植物
+├── [ ] 实现Poisson Disk Sampling算法
+└── [ ] 测试布局算法性能 (1000+植物)
+
+Week 3-4: 核心渲染
+├── [ ] 草原场景实现
+│   ├── 静态天空渐变
+│   ├── SVG草地纹理
+│   └── 地平线设计
+├── [ ] 植物渲染系统
+│   ├── SVG植物4级渲染
+│   ├── Z-index分层
+│   └── 基础摆动动画 (CSS)
+└── [ ] 虚拟滚动集成
+    └── @tanstack/react-virtual
+
+Week 5-6: 社交互动
+├── [ ] 浇水系统
+│   ├── 一键浇水 (防重复)
+│   ├── 水滴飞行动画
+│   └── 水花粒子效果 (Canvas)
+├── [ ] 等级系统
+│   ├── XP计算逻辑
+│   ├── 升级动画 (Framer Motion)
+│   └── 视觉变化应用
+└── [ ] 创作集成
+    └── 复用现有Fabric.js画布
+
+MVP交付物:
+✅ 用户可以创作植物并发布到草原
+✅ 草原无限垂直滚动，展示所有植物
+✅ 用户可以给任何植物浇水(24h限制)
+✅ 植物根据浇水量升级(1-4级)
+✅ 基础摆动动画+浇水特效
+✅ 响应式设计 (桌面+移动)
+```
+
+### Phase 2: v1.0 (2-3周)
+
+**目标**: 完善体验，增加自然元素
+
+```
+Week 7-8: 自然元素
+├── [ ] 天气系统
+│   ├── 4种天气 (晴/云/雨/星夜)
+│   ├── 天气切换逻辑 (概率+时间)
+│   ├── 雨天粒子系统 (Canvas)
+│   └── 星夜粒子系统 (Canvas)
+├── [ ] 昼夜循环
+│   ├── 6个时间段
+│   ├── 天空渐变过渡 (15min)
+│   └── 光照强度调整
+└── [ ] 微风系统
+    ├── 随机风力变化
+    ├── 草地摆动响应
+    └── 植物摆动响应
+
+Week 9: 性能优化+细节
+├── [ ] OffscreenCanvas + Worker (粒子)
+├── [ ] 动画降级策略 (FPS监控)
+├── [ ] 图片懒加载+WebP
+├── [ ] 音效系统 (可选)
+└── [ ] 情感化文案完善
+
+v1.0交付物:
+✅ MVP所有功能
+✅ 动态天气系统
+✅ 24小时昼夜循环
+✅ 微风驱动的自然摆动
+✅ 高性能渲染 (60fps, 1000+植物)
+✅ 治愈系音效 (可选)
+```
+
+### Phase 3: v2.0 (未来规划)
+
+**目标**: 深化社交，扩展玩法
+
+```
+功能规划:
+├── [ ] 季节系统 (春夏秋冬)
+├── [ ] 植物图鉴 (收集成就)
+├── [ ] 评论系统 (植物留言板)
+├── [ ] 关注系统 (关注创作者)
+├── [ ] 推荐算法 (个性化Feed)
+├── [ ] 分享功能 (社交媒体)
+├── [ ] 每日任务 (浇水X次获得奖励)
+├── [ ] 主题活动 (节日特别植物)
+└── [ ] 移动端原生App (React Native)
+
+探索方向:
+├── AI生成植物变体
+├── 植物NFT (可选Web3方向)
+├── 多人实时协作创作
+└── VR草原体验
+```
+
+---
+
+## 🎯 九、核心差异化亮点
+
+### 9.1 与"全球藤架"的对比
+
+| 维度 | 全球藤架 (Trellis) | 全球草原花园 (Prairie) |
+|------|-------------------|----------------------|
+| **空间隐喻** | 垂直攀爬 | 水平延展 |
+| **竞争性** | 高 (争夺高度) | 低 (共享空间) |
+| **情感基调** | 激励、奋斗 | 治愈、陪伴 |
+| **社交压力** | 较高 (排名焦虑) | 较低 (和谐共生) |
+| **视觉风格** | 向上、紧张 | 开阔、舒缓 |
+| **目标用户** | 进取型 | 治愈型 |
+
+### 9.2 与现有产品的差异
+
+**vs. 涂鸦/画板类产品 (如Skribbl.io)**
+- ❌ 它们: 即时创作+即时消失
+- ✅ 我们: 创作永久保存+持续成长
+
+**vs. 社交媒体 (如Instagram)**
+- ❌ 它们: 点赞数焦虑+算法分发不公
+- ✅ 我们: 时间加成保护+每株植物都可见
+
+**vs. 养成游戏 (如旅行青蛙)**
+- ❌ 它们: 单人体验+虚拟宠物
+- ✅ 我们: 社区共建+真实创作
+
+**vs. 在线画廊 (如DeviantArt)**
+- ❌ 它们: 静态展示+专业门槛高
+- ✅ 我们: 动态生长+简单工具+低门槛
+
+---
+
+## ⚠️ 十、风险与应对
+
+### 10.1 技术风险
+
+| 风险 | 影响 | 概率 | 应对措施 |
+|------|------|------|---------|
+| **性能瓶颈** (1000+植物渲染卡顿) | 高 | 中 | 1. 虚拟滚动 <br> 2. 动画降级 <br> 3. OffscreenCanvas |
+| **布局算法失效** (植物重叠) | 高 | 低 | 1. Poisson Disk经过验证 <br> 2. 回退到简单grid布局 |
+| **数据库扩展性** (百万级植物) | 中 | 中 | 1. 分页+索引优化 <br> 2. Redis缓存 <br> 3. CDN加速 |
+| **浏览器兼容性** (Canvas/SVG) | 低 | 低 | 1. 渐进式增强 <br> 2. 提供降级方案 |
+
+### 10.2 产品风险
+
+| 风险 | 影响 | 概率 | 应对措施 |
+|------|------|------|---------|
+| **UGC质量** (低质量/不当内容) | 高 | 高 | 1. AI内容审核 <br> 2. 用户举报系统 <br> 3. 社区规范 |
+| **用户留存** (新鲜感过后流失) | 高 | 中 | 1. 每日任务 <br> 2. 季节系统 <br> 3. 社交连接强化 |
+| **冷启动** (初期植物稀少) | 中 | 高 | 1. 官方种子植物 <br> 2. 邀请机制 <br> 3. 社区KOL合作 |
+| **商业模式** (如何盈利) | 中 | 低 | 1. 先专注增长 <br> 2. 未来: 虚拟物品/NFT <br> 3. 品牌合作 |
+
+### 10.3 市场风险
+
+| 风险 | 影响 | 概率 | 应对措施 |
+|------|------|------|---------|
+| **竞品出现** (类似产品抄袭) | 中 | 中 | 1. 快速迭代 <br> 2. 建立社区壁垒 <br> 3. 专利保护(可选) |
+| **用户定位模糊** (不知道服务谁) | 高 | 低 | 1. 清晰定位: 年轻人+治愈需求 <br> 2. MVP验证 |
+| **增长缓慢** (传播力不足) | 中 | 中 | 1. 病毒式分享机制 <br> 2. 社交媒体营销 <br> 3. KOL合作 |
+
+---
+
+## 📊 十一、成功指标 (KPIs)
+
+### MVP阶段 (上线后1个月)
+```
+用户指标:
+├── 注册用户数: 1,000+
+├── DAU: 200+
+├── 留存率 (D7): 30%+
+└── 创作率: 60% (注册用户中至少创作1株植物)
+
+内容指标:
+├── 总植物数: 500+
+├── 日均新增植物: 20+
+└── 平均每株植物浇水量: 5+
+
+技术指标:
+├── 页面加载时间 (LCP): <2.5s
+├── 首次输入延迟 (FID): <100ms
+├── 累积布局偏移 (CLS): <0.1
+└── 平均FPS: 55+
+```
+
+### v1.0阶段 (上线后3个月)
+```
+用户指标:
+├── 注册用户数: 10,000+
+├── DAU: 2,000+
+├── 留存率 (D30): 20%+
+└── 社交互动率: 70% (用户至少浇过1次水)
+
+内容指标:
+├── 总植物数: 5,000+
+├── Level 4植物数: 10+
+└── 日均浇水次数: 1,000+
+
+社区指标:
+├── 用户生成分享: 100+ (社交媒体)
+├── 用户推荐率 (NPS): 50+
+└── 社区活跃用户: 500+ (每周至少登录3次)
+```
+
+---
+
+## 🎨 十二、视觉参考 (Mood Board)
+
+### 色彩灵感
+```
+主色调:
+├── 草原绿: #7CB342, #AED581, #DCEDC8
+├── 天空蓝: #87CEEB, #E0F6FF, #64B5F6
+├── 温暖黄: #FFD93D, #FFA726 (阳光)
+└── 梦幻紫: #667eea, #764ba2 (UI元素)
+
+辅助色:
+├── 雨天灰: #4A5568, #718096
+├── 日落橙: #FF6B6B, #FFB347
+├── 夜空黑: #0F2027, #203A43
+└── 纯白: #FFFFFF (植物背景)
+```
+
+### 设计风格关键词
+- **宫崎骏动画** - 治愈、自然、温暖
+- **Monument Valley** - 简洁、几何、艺术性
+- **Journey** - 陪伴感、情感连接
+- **Gris** - 色彩叙事、诗意
+
+### 参考网站
+- https://www.awwwards.com/websites/nature/ (自然主题设计)
+- https://dribbble.com/tags/prairie (草原视觉参考)
+- https://www.pinterest.com/search/pins/?q=illustrated%20plants (植物插画)
+
+---
+
+## 📝 十三、下一步行动
+
+### 立即执行 (本周)
+- [x] 完成本设计文档
+- [ ] 团队评审会议
+- [ ] 确定MVP范围
+- [ ] 技术预研
+  - [ ] Poisson Disk算法原型
+  - [ ] Canvas粒子系统性能测试
+  - [ ] @tanstack/react-virtual集成测试
+
+### 短期计划 (2周内)
+- [ ] UI设计稿 (Figma)
+  - [ ] 草原场景mockup
+  - [ ] 植物4级视觉设计
+  - [ ] 浇水动画storyboard
+- [ ] 数据库初始化
+  - [ ] Prisma schema定稿
+  - [ ] 迁移脚本编写
+- [ ] API设计文档
+
+### 中期计划 (1个月内)
+- [ ] MVP开发启动
+- [ ] 内测用户招募 (50人)
+- [ ] 内容审核机制搭建
+
+---
+
+## 🙏 十四、致谢与愿景
+
+### 设计理念来源
+
+本文档的创意灵感来自:
+- **全球藤架 (Global Trellis)** - 原始概念的垂直生长系统
+- **用户需求** - "在一大片草原上，植物共同生长，迎接阳光和微风"
+- **自然哲学** - 万物共生，和谐共存
+
+### 产品愿景
+
+> **"我们希望打造一个温暖的数字草原，在这里：**
+> - **每一笔创作都值得被看见**
+> - **每一份陪伴都会被铭记**
+> - **每一株植物都有自己的故事**
+>
+> **这不只是一个产品，更是一个治愈系的社区。**
+> **在这片草原上，你永远不会孤单。**"
+
+---
+
+## 📚 十五、附录
+
+### A. 技术名词解释
+
+- **Poisson Disk Sampling**: 一种空间点分布算法，确保点之间保持最小距离且分布均匀
+- **Parallax Scrolling**: 视差滚动，不同层以不同速度移动，营造景深感
+- **Virtual Scrolling**: 虚拟滚动，只渲染视口内的元素，提升性能
+- **OffscreenCanvas**: 浏览器API，允许Canvas在Web Worker中渲染
+- **Perlin Noise**: 一种自然纹理生成算法，常用于地形、云朵等
+
+### B. 相关资源
+
+**算法参考**:
+- Bridson's Poisson Disk Sampling: https://www.cs.ubc.ca/~rbridson/docs/bridson-siggraph07-poissondisk.pdf
+- Perlin Noise: https://en.wikipedia.org/wiki/Perlin_noise
+
+**技术文档**:
+- @tanstack/react-virtual: https://tanstack.com/virtual/latest
+- Framer Motion: https://www.framer.com/motion/
+- Fabric.js: http://fabricjs.com/docs/
+
+**设计工具**:
+- Figma: https://www.figma.com
+- Coolors (配色): https://coolors.co
+- SVG编辑器: https://inkscape.org
+
+### C. 更新日志
+
+| 版本 | 日期 | 作者 | 更新内容 |
+|------|------|------|---------|
+| v1.0 | 2025-11-14 | Claude | 初始版本，完整设计文档 |
+
+---
+
+**文档状态**: ✅ 已完成
+**下一步**: 等待团队评审与技术预研
+
+**联系方式**: 请通过项目仓库Issue或团队沟通渠道提出反馈
+
+---
+
+*这片草原，等待你的到来 🌱*
