@@ -1,6 +1,6 @@
 /**
  * Brand Constants
- * Centralized brand-related constants for the Chimii ecosystem
+ * Centralized brand-related constants for the Gamelet ecosystem
  */
 
 /**
@@ -53,7 +53,7 @@ export const BRAND_STYLES = {
  * Default brand configurations
  */
 export const DEFAULT_BRANDS = {
-  CHIMII: 'Chimii',
+  GAMELET: 'Gamelet',
   NERDLE: 'Nerdle',
   GLOBAL_TRELLIS: 'Global Trellis'
 } as const
@@ -62,17 +62,17 @@ export const DEFAULT_BRANDS = {
  * URL patterns for different brand contexts
  */
 export const BRAND_URLS = {
-  PRIMARY: 'https://chimii.com',
-  GAME: 'https://chimii.com/nerd',
-  CREATIVE: 'https://chimii.com/garden',
-  PLATFORM: 'https://chimii.com'
+  PRIMARY: 'https://gamelet.app',
+  GAME: 'https://gamelet.app/nerd',
+  CREATIVE: 'https://gamelet.app/garden',
+  PLATFORM: 'https://gamelet.app'
 } as const
 
 /**
  * Social media handle patterns
  */
 export const SOCIAL_HANDLES = {
-  CHIMII: '@chimiitech',
+  GAMELET: '@gameletapp',
   NERDLE: '@nerdlemathgame',
   GLOBAL_TRELLIS: '@globaltrellis'
 } as const
@@ -81,7 +81,7 @@ export const SOCIAL_HANDLES = {
  * SEO keyword groups for different brands
  */
 export const SEO_KEYWORDS = {
-  CHIMII: ['creative platform', 'technology', 'innovation', 'community'],
+  GAMELET: ['creative platform', 'technology', 'innovation', 'community'],
   NERDLE: ['math game', 'equation puzzle', 'daily challenge', 'educational'],
   GLOBAL_TRELLIS: ['creative garden', 'social platform', 'collaboration', 'digital art']
 } as const
@@ -90,7 +90,7 @@ export const SEO_KEYWORDS = {
  * Brand color schemes (Tailwind classes)
  */
 export const BRAND_COLORS = {
-  CHIMII: {
+  GAMELET: {
     primary: 'blue-600',
     secondary: 'purple-600',
     accent: 'indigo-500',
@@ -123,12 +123,12 @@ export const BRAND_COLORS = {
 } as const
 
 /**
- * Brand logo configurations
+ * Brand logo configurations (Square 1:1 ratio)
  */
 export const LOGO_CONFIGS = {
-  DEFAULT_SIZE: { width: 120, height: 40 },
-  MINI_SIZE: { width: 60, height: 20 },
-  LARGE_SIZE: { width: 200, height: 66 },
+  DEFAULT_SIZE: { width: 48, height: 48 },
+  MINI_SIZE: { width: 32, height: 32 },
+  LARGE_SIZE: { width: 64, height: 64 },
   ASPECT_RATIOS: {
     HORIZONTAL: 3 as const,
     SQUARE: 1 as const,

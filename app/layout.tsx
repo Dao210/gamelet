@@ -10,17 +10,17 @@ export const metadata = {
   },
   description: 'Play Nerdle, the addictive daily math equation guessing game! Challenge your mathematical skills with our free online puzzle game.',
   keywords: 'nerdle, mathle, math game, equation puzzle, daily challenge, mathematical puzzle, number game',
-  authors: [{ name: 'Chimii.com' }],
+  authors: [{ name: 'Gamelet.app' }],
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://chimii.com',
+    url: 'https://gamelet.app',
     siteName: 'Nerdle Math Game',
     title: 'Nerdle - Daily Math Equation Puzzle Game',
     description: 'Play Nerdle, the addictive daily math equation guessing game!',
     images: [
       {
-        url: 'https://chimii.com/og-image.png',
+        url: 'https://gamelet.app/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Nerdle Math Game - Daily Equation Puzzle',
@@ -33,7 +33,7 @@ export const metadata = {
     description: 'Play Nerdle, the addictive daily math equation guessing game!',
     site: '@nerdlemathgame',
     creator: '@nerdlemathgame',
-    images: ['https://chimii.com/og-image.png'],
+    images: ['https://gamelet.app/og-image.png'],
   },
   robots: {
     index: true,
@@ -44,8 +44,8 @@ export const metadata = {
     initialScale: 1,
   },
   icons: {
-    icon: '/favicon.svg',
-    apple: '/favicon.svg',
+    icon: '/favicon.ico',
+    apple: '/favicon.ico',
   },
   verification: {
     google: 'your-google-verification-code',

@@ -1,6 +1,6 @@
 {
   "common": {
-    "logo": "Chimii",
+    "logo": "Gamelet",
     "backToNerdle": "Back to Nerdle"
   },
   "navigation": {
@@ -186,7 +186,7 @@
     "cookies": "Cookie Policy",
     "contact": "Contact Us",
     "language": "Language",
-    "copyright": "© {year} Chimii.com • Fatto con ❤️ per te giovane",
+    "copyright": "© {year} Gamelet.app • Fatto con ❤️ per te giovane",
     "poweredBy": "topzeal.com"
   },
   "nerdLanding": {
@@ -287,5 +287,16 @@
     "levelGrowing": "Crescita",
     "levelThriving": "Fiorente",
     "levelLegendary": "Leggendario"
+  },
+  "flowersPage": {
+    "title": "Giardino di Fiori Onesti",
+    "subtitle": "Animazione Interattiva di Fiori 2D",
+    "description": "Sperimenta la bellezza naturale dei fiori che dondolano nel vento con p5.js",
+    "instructionsTitle": "Come Interagire",
+    "instructions": {
+      "wind": "Sposta il mouse a sinistra/destra per creare vento e guardare i fiori dondolare naturalmente",
+      "click": "Clicca su qualsiasi fiore per vederlo sbocciare e cambiare colore"
+    },
+    "technology": "Costruito con p5.js • Simulazione fisica naturale • 40 fiori unici"
   }
 }

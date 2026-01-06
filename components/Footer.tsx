@@ -1,9 +1,9 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/routing'
-import ChimiiLogo from './ChimiiLogo'
+import GameletLogo from './GameletLogo'
 import LanguageSelector from './LanguageSelector'
 
 export default function Footer() {
@@ -11,7 +11,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   // Animation variants for staggered reveal
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -22,14 +22,14 @@ export default function Footer() {
     }
   }
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.5,
-        ease: 'easeOut'
+        ease: [0, 0, 0.2, 1] as const
       }
     }
   }
@@ -98,9 +98,14 @@ export default function Footer() {
         >
           {/* Section 1: Brand & Social */}
           <motion.div variants={itemVariants} className="space-y-4">
-            <Link href="/" className="inline-block">
-              <ChimiiLogo width={120} height={40} className="transition-opacity hover:opacity-80" />
-            </Link>
+            <GameletLogo
+              width={48}
+              height={48}
+              className="transition-opacity hover:opacity-80 w-10 h-10 md:w-12 md:h-12"
+              linkClassName="inline-block"
+              showBrandName={true}
+              brandNameClassName="text-xl font-semibold text-gray-900 dark:text-white"
+            />
             <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
               {t('tagline')}
             </p>

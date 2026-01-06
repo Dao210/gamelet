@@ -1,6 +1,6 @@
 /**
  * Brand Management System
- * Comprehensive brand utilities for Chimii ecosystem
+ * Comprehensive brand utilities for Gamelet ecosystem
  * Supports multiple brands, SEO optimization, and internationalization
  */
 
@@ -36,11 +36,11 @@ export interface SEOConfig {
 }
 
 /**
- * Core brand configurations for Chimii ecosystem
+ * Core brand configurations for Gamelet ecosystem
  */
 export const BRAND_CONFIGS: Record<BrandType, BrandConfig> = {
   primary: {
-    name: 'Chimii',
+    name: 'Gamelet',
     tagline: 'Creative Technology Platform',
     description: 'Innovative creative technology platform connecting communities through engaging experiences',
     keywords: ['creative', 'platform', 'technology', 'innovation', 'community'],
@@ -67,7 +67,7 @@ export const BRAND_CONFIGS: Record<BrandType, BrandConfig> = {
     mission: 'Cultivate creativity through collaborative digital experiences'
   },
   platform: {
-    name: 'Chimii Platform',
+    name: 'Gamelet Platform',
     tagline: 'Unified Creative Experience',
     description: 'Comprehensive platform for creative games and social experiences',
     keywords: ['platform', 'unified', 'creative', 'experience', 'integrated'],
@@ -393,10 +393,10 @@ function getTargetAudience(type: BrandType): string {
 
 function getCanonicalUrl(type: BrandType): string {
   const urls = {
-    primary: 'https://chimii.com',
-    game: 'https://chimii.com/nerd',
-    creative: 'https://chimii.com/garden',
-    platform: 'https://chimii.com'
+    primary: 'https://gamelet.app',
+    game: 'https://gamelet.app/nerd',
+    creative: 'https://gamelet.app/garden',
+    platform: 'https://gamelet.app'
   }
   return urls[type] || urls.primary
 }

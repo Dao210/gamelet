@@ -9,7 +9,7 @@ export const metadata = {
     description: 'Master Nerdle with expert strategies, tips, and techniques. Learn why direct answers aren\'t provided and how to solve daily math puzzles like a pro.',
     images: [
       {
-        url: 'https://chimii.com/api/share-image?title=Nerdle%20Answer%20Today&subtitle=Expert%20Strategies%20%26%20Tips',
+        url: 'https://gamelet.app/api/share-image?title=Nerdle%20Answer%20Today&subtitle=Expert%20Strategies%20%26%20Tips',
         width: 1200,
         height: 630,
         alt: 'Nerdle Answer Today - Expert Strategies',

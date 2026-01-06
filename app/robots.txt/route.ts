@@ -25,13 +25,13 @@ Disallow: /static/
 Disallow: /*.json$
 
 # Sitemap
-Sitemap: https://chimii.com/sitemap.xml
+Sitemap: https://gamelet.app/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
 
 # Host (preferred domain)
-Host: https://chimii.com`
+Host: https://gamelet.app`
 
   return new NextResponse(robotsTxt, {
     headers: {

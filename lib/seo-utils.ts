@@ -1,6 +1,6 @@
 import { locales, defaultLocale, type Locale } from '@/i18n/config'
 
-const baseUrl = 'https://chimii.com'
+const baseUrl = 'https://gamelet.app'
 
 /**
  * Generate language alternates for all supported locales

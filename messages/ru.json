@@ -1,6 +1,6 @@
 {
   "common": {
-    "logo": "Chimii",
+    "logo": "Gamelet",
     "backToNerdle": "Back to Nerdle"
   },
   "navigation": {
@@ -186,7 +186,7 @@
     "cookies": "Cookie Policy",
     "contact": "Contact Us",
     "language": "Language",
-    "copyright": "© {year} Chimii.com • Создано с ❤️ для молодых сердцем",
+    "copyright": "© {year} Gamelet.app • Создано с ❤️ для молодых сердцем",
     "poweredBy": "topzeal.com"
   },
   "nerdLanding": {
@@ -287,5 +287,16 @@
     "levelGrowing": "Рост",
     "levelThriving": "Процветание",
     "levelLegendary": "Легендарный"
+  },
+  "flowersPage": {
+    "title": "Сад Качающихся Цветов",
+    "subtitle": "Интерактивная 2D Анимация Цветов",
+    "description": "Почувствуйте естественную красоту цветов, качающихся на ветру, с помощью p5.js",
+    "instructionsTitle": "Как Взаимодействовать",
+    "instructions": {
+      "wind": "Двигайте мышью влево/вправо, чтобы создать ветер и посмотреть, как цветы естественно качаются",
+      "click": "Нажмите на любой цветок, чтобы увидеть, как он расцветает и меняет цвет"
+    },
+    "technology": "Построено на p5.js • Естественная физическая симуляция • 40 уникальных цветов"
   }
 }

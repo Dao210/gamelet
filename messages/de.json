@@ -1,6 +1,6 @@
 {
   "common": {
-    "logo": "Chimii",
+    "logo": "Gamelet",
     "backToNerdle": "Back to Nerdle"
   },
   "navigation": {
@@ -186,7 +186,7 @@
     "cookies": "Cookie Policy",
     "contact": "Contact Us",
     "language": "Language",
-    "copyright": "© {year} Chimii.com • Mit ❤️ für deine Jugend gemacht",
+    "copyright": "© {year} Gamelet.app • Mit ❤️ für deine Jugend gemacht",
     "poweredBy": "topzeal.com"
   },
   "nerdLanding": {
@@ -287,5 +287,16 @@
     "levelGrowing": "Wachsend",
     "levelThriving": "Gedeihend",
     "levelLegendary": "Legendär"
+  },
+  "flowersPage": {
+    "title": "Schwingender Blumengarten",
+    "subtitle": "Interaktive 2D-Blumenanimation",
+    "description": "Erleben Sie die natürliche Schönheit von Blumen, die im Wind schwingen, mit p5.js",
+    "instructionsTitle": "Wie man interagiert",
+    "instructions": {
+      "wind": "Bewegen Sie die Maus nach links/rechts, um Wind zu erzeugen und beobachten Sie, wie die Blumen natürlich schwingen",
+      "click": "Klicken Sie auf eine beliebige Blume, um sie blühen und ihre Farbe ändern zu sehen"
+    },
+    "technology": "Gebaut mit p5.js • Natürliche physikalische Simulation • 40 einzigartige Blumen"
   }
 }

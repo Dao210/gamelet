@@ -1,12 +1,12 @@
 # Brand Command - Multi-Brand Management System
 
 ## Overview
-This command provides comprehensive brand name management for the Chimii ecosystem, supporting multiple brands (Chimii, Nerdle, Global Trellis) with SEO optimization, internationalization, and consistency validation.
+This command provides comprehensive brand name management for the Gamelet ecosystem, supporting multiple brands (Gamelet, Nerdle, Global Trellis) with SEO optimization, internationalization, and consistency validation.
 
 ## Core Features
 
 ### 1. Brand Name Management
-- **Primary Brand**: Chimii (platform/company)
+- **Primary Brand**: Gamelet (platform/company)
 - **Game Brand**: Nerdle (math puzzle game)
 - **Creative Brand**: Global Trellis (garden/social platform)
 - **SEO-Optimized**: All brand names include relevant keywords
@@ -36,7 +36,7 @@ This command provides comprehensive brand name management for the Chimii ecosyst
 
 ### Brand Validation
 ```
-/brand validate --name="Chimii" --context=seo
+/brand validate --name="Gamelet" --context=seo
 /brand validate --name="Nerdle Daily Math" --context=app-store
 /brand validate --name="Global Trellis Garden" --context=social
 ```
@@ -57,7 +57,7 @@ This command provides comprehensive brand name management for the Chimii ecosyst
 
 ## Brand Architecture
 
-### Primary Brand (Chimii)
+### Primary Brand (Gamelet)
 - **Mission**: Creative technology platform
 - **Values**: Innovation, Accessibility, Community
 - **Tone**: Professional yet approachable
@@ -132,7 +132,7 @@ const seoData = generateSEO('primary', 'en', {
 import BrandLogo from '@/components/BrandLogo'
 import BrandHeader from '@/components/BrandHeader'
 
-<BrandLogo brand="chimii" variant="horizontal" theme="dark" />
+<BrandLogo brand="gamelet" variant="horizontal" theme="dark" />
 <BrandHeader brand="nerdle" includeTagline={true} />
 ```
 
@@ -192,4 +192,4 @@ import BrandHeader from '@/components/BrandHeader'
 - Recommend SEO best practices
 - Offer brand audit services
 
-This command system ensures professional, consistent, and effective brand management across the entire Chimii ecosystem while maintaining SEO optimization and cultural sensitivity.
+This command system ensures professional, consistent, and effective brand management across the entire Gamelet ecosystem while maintaining SEO optimization and cultural sensitivity.

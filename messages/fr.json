@@ -1,6 +1,6 @@
 {
   "common": {
-    "logo": "Chimii",
+    "logo": "Gamelet",
     "backToNerdle": "Back to Nerdle"
   },
   "navigation": {
@@ -186,7 +186,7 @@
     "cookies": "Cookie Policy",
     "contact": "Contact Us",
     "language": "Language",
-    "copyright": "© {year} Chimii.com • Fait avec ❤️ pour votre jeunesse",
+    "copyright": "© {year} Gamelet.app • Fait avec ❤️ pour votre jeunesse",
     "poweredBy": "topzeal.com"
   },
   "nerdLanding": {
@@ -287,5 +287,16 @@
     "levelGrowing": "Croissance",
     "levelThriving": "Prospère",
     "levelLegendary": "Légendaire"
+  },
+  "flowersPage": {
+    "title": "Jardin de Fleurs Balancantes",
+    "subtitle": "Animation Interactive de Fleurs 2D",
+    "description": "Découvrez la beauté naturelle des fleurs balancées par le vent avec p5.js",
+    "instructionsTitle": "Comment Interagir",
+    "instructions": {
+      "wind": "Déplacez la souris gauche/droite pour créer du vent et regarder les fleurs se balancer naturellement",
+      "click": "Cliquez sur n'importe quelle fleur pour la voir fleurir et changer de couleur"
+    },
+    "technology": "Construit avec p5.js • Simulation physique naturelle • 40 fleurs uniques"
   }
 }

@@ -1,10 +1,10 @@
 {
   "common": {
-    "logo": "Chimii",
+    "logo": "Gamelet",
     "backToNerdle": "Back to Nerdle",
     "brand": {
-      "chimii": "Chimii",
-      "chimiiTagline": "Creative Technology Platform",
+      "gamelet": "Gamelet",
+      "gameletTagline": "Creative Technology Platform",
       "nerdle": "Nerdle",
       "nerdleTagline": "Daily Math Equation Puzzle Game",
       "globalTrellis": "Global Trellis",
@@ -194,7 +194,7 @@
     "cookies": "Cookie Policy",
     "contact": "Contact Us",
     "language": "Language",
-    "copyright": "© {year} Chimii.com • Built with ❤️ for youthful you",
+    "copyright": "© {year} Gamelet.app • Built with ❤️ for youthful you",
     "poweredBy": "topzeal.com"
   },
   "nerdLanding": {
@@ -295,5 +295,16 @@
     "levelGrowing": "Growing",
     "levelThriving": "Thriving",
     "levelLegendary": "Legendary"
+  },
+  "flowersPage": {
+    "title": "Swaying Flowers Garden",
+    "subtitle": "Interactive 2D Flower Animation",
+    "description": "Experience the natural beauty of flowers swaying in the wind with p5.js",
+    "instructionsTitle": "How to Interact",
+    "instructions": {
+      "wind": "Move your mouse left/right to create wind and watch the flowers sway naturally",
+      "click": "Click on any flower to see it bloom and change colors"
+    },
+    "technology": "Built with p5.js • Natural physics simulation • 40 unique flowers"
   }
 }

@@ -37,7 +37,7 @@ export default function GameResult({ className = '' }: GameResultProps) {
   }
   
   const getShareUrl = (): string => {
-    return typeof window !== 'undefined' ? window.location.origin : 'https://chimii.com'
+    return typeof window !== 'undefined' ? window.location.origin : 'https://gamelet.app'
   }
   
   const getShareImageUrl = (): string => {

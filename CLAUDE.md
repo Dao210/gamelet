@@ -33,7 +33,7 @@ pnpm install         # Install dependencies (uses pnpm as package manager)
 - **State Management**: Zustand with persistence
 - **Animations**: Framer Motion
 - **SEO**: Next-SEO with comprehensive meta tags
-- **Deployment**: Vercel (production at chimii.com)
+- **Deployment**: Vercel (production at gamelet.app)
 
 ### Planned (Global Trellis Expansion)
 - **Router**: Migration to App Router (/garden route)

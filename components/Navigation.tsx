@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import { Link, usePathname } from '@/i18n/routing'
 import { motion } from 'framer-motion'
 import LanguageSelector from './LanguageSelector'
-import ChimiiLogo from './ChimiiLogo'
+import GameletLogo from './GameletLogo'
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -36,9 +36,14 @@ export default function Navigation() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <ChimiiLogo width={100} height={32} className="transition-opacity hover:opacity-80" />
-          </Link>
+          <GameletLogo
+            width={40}
+            height={40}
+            className="transition-opacity hover:opacity-80 w-8 h-8 md:w-10 md:h-10"
+            linkClassName="flex items-center"
+            showBrandName={true}
+            brandNameClassName="text-lg font-semibold text-gray-900 dark:text-white hidden sm:block"
+          />
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">

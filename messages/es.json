@@ -1,6 +1,6 @@
 {
   "common": {
-    "logo": "Chimii",
+    "logo": "Gamelet",
     "backToNerdle": "Volver a Nerdle"
   },
   "navigation": {
@@ -186,7 +186,7 @@
     "cookies": "Política de Cookies",
     "contact": "Contacto",
     "language": "Idioma",
-    "copyright": "© {year} Chimii.com • Hecho con ❤️ para tu juventud",
+    "copyright": "© {year} Gamelet.app • Hecho con ❤️ para tu juventud",
     "poweredBy": "Desarrollado con Next.js"
   },
   "nerdLanding": {
@@ -287,5 +287,16 @@
     "levelGrowing": "Creciendo",
     "levelThriving": "Próspero",
     "levelLegendary": "Legendario"
+  },
+  "flowersPage": {
+    "title": "Jardín de Flores Mecidas",
+    "subtitle": "Animación Interactiva de Flores 2D",
+    "description": "Experimenta la belleza natural de las flores meciéndose al viento con p5.js",
+    "instructionsTitle": "Cómo Interactuar",
+    "instructions": {
+      "wind": "Mueve el ratón izquierda/derecha para crear viento y ver las flores mecerse naturalmente",
+      "click": "Haz clic en cualquier flor para verla florecer y cambiar de color"
+    },
+    "technology": "Construido con p5.js • Simulación física natural • 40 flores únicas"
   }
 }

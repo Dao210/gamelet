@@ -20,13 +20,13 @@ export function WebSiteSchema({ locale }: JsonLdProps) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Chimii - Nerdle Math Game',
+    name: 'Gamelet - Nerdle Math Game',
     url: url,
     description: 'Daily math equation puzzle game for enthusiasts',
     inLanguage: locale,
     publisher: {
       '@type': 'Organization',
-      name: 'Chimii',
+      name: 'Gamelet',
       url: baseUrl
     }
   }
@@ -81,9 +81,9 @@ export function OrganizationSchema() {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Chimii',
+    name: 'Gamelet',
     url: baseUrl,
-    logo: `${baseUrl}/logo.png`,
+    logo: `${baseUrl}/gamelet.png`,
     sameAs: [
       'https://twitter.com/nerdlemathgame',
       // Add other social media URLs as needed

@@ -1,6 +1,6 @@
 {
   "common": {
-    "logo": "Chimii",
+    "logo": "Gamelet",
     "backToNerdle": "Nerdleに戻る"
   },
   "navigation": {
@@ -186,7 +186,7 @@
     "cookies": "Cookie ポリシー",
     "contact": "お問い合わせ",
     "language": "言語",
-    "copyright": "© {year} Chimii.com • 若き日のあなたのために❤️を込めて作成",
+    "copyright": "© {year} Gamelet.app • 若き日のあなたのために❤️を込めて作成",
     "poweredBy": "Next.js で構築"
   },
   "nerdLanding": {
@@ -287,5 +287,16 @@
     "levelGrowing": "成長中",
     "levelThriving": "繁栄",
     "levelLegendary": "伝説"
+  },
+  "flowersPage": {
+    "title": "揺れる花の庭",
+    "subtitle": "インタラクティブ2Dフラワーアニメーション",
+    "description": "p5.jsで風に揺れる花の自然な美しさを体験してください",
+    "instructionsTitle": "操作方法",
+    "instructions": {
+      "wind": "マウスを左右に動かして風を作り、花が自然に揺れるのを見てください",
+      "click": "花をクリックして咲いたり色が変わったりするのを見てください"
+    },
+    "technology": "p5.jsで構築 • 自然な物理シミュレーション • 40種類の一意な花"
   }
 }

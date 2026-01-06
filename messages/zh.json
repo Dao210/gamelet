@@ -1,6 +1,6 @@
 {
   "common": {
-    "logo": "Chimii",
+    "logo": "Gamelet",
     "backToNerdle": "返回 Nerdle"
   },
   "navigation": {
@@ -186,7 +186,7 @@
     "cookies": "Cookie政策",
     "contact": "联系我们",
     "language": "语言",
-    "copyright": "© {year} Chimii.com • 用❤️为青春年少的你打造",
+    "copyright": "© {year} Gamelet.app • 用❤️为青春年少的你打造",
     "poweredBy": "topzeal.com"
   },
   "nerdLanding": {
@@ -287,5 +287,16 @@
     "levelGrowing": "成长中",
     "levelThriving": "繁茂",
     "levelLegendary": "传说"
+  },
+  "flowersPage": {
+    "title": "摇曳花朵花园",
+    "subtitle": "互动式2D花朵动画",
+    "description": "使用p5.js体验花朵在风中自然摇曳的美丽",
+    "instructionsTitle": "如何互动",
+    "instructions": {
+      "wind": "左右移动鼠标创建风场，观看花朵自然摇曳",
+      "click": "点击任何花朵看它绽放并改变颜色"
+    },
+    "technology": "使用 p5.js 构建 • 自然物理模拟 • 40朵独特花朵"
   }
 }
