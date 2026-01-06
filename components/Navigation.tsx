@@ -15,7 +15,7 @@ export default function Navigation() {
   // Main navigation with icons and descriptions (displayed prominently)
   const mainNavigation = [
     { name: t('nerdle'), href: '/nerd', icon: '🧮', description: t('nerdleDescription') },
-    { name: t('garden'), href: '/garden', icon: '🌱', description: t('gardenDescription') },
+
   ]
 
   // Secondary navigation (text-only links)
