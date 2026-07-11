@@ -27,7 +27,7 @@ export default function GameletLogo({
   const logoContent = (
     <div className="flex items-center gap-2">
       <Image
-        src="/gamelet.png"
+        src="/gamelet-logo.svg"
         alt="Gamelet"
         width={width}
         height={height}

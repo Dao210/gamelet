@@ -42,7 +42,7 @@ export const metadata = {
     follow: true,
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: '/gamelet-logo.svg',
     apple: '/favicon.ico',
   },
   verification: {
