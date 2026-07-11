@@ -25,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/mirror-maze',
     '/glyph-garden',
     '/word-cipher-box',
+    '/orbit-sum',
     '/garden',
     '/garden/flowers',
     '/grassland',
