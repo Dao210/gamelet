@@ -22,6 +22,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/nerd',
     '/nerd/game',
     '/nerd/nerdle-answer-today',
+    '/mirror-maze',
+    '/glyph-garden',
     '/garden',
     '/garden/flowers',
     '/grassland',

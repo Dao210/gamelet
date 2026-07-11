@@ -60,7 +60,8 @@ const games: Game[] = [
   {
     id: 'glyphGarden',
     title: 'Glyph Garden',
-    filters: ['observation'],
+    href: '/glyph-garden',
+    filters: ['observation', 'playable'],
     accent: '#7c5cff',
     surface: '#f3f0ff',
     glyph: '△ ◇ ✦',
@@ -166,7 +167,7 @@ export default function GameCollectionHome() {
               </div>
               <div className="flex min-w-24 flex-col border-l border-black/10 pl-6">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.playable')}</dt>
-                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">3</dd>
+                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">4</dd>
               </div>
               <div className="flex min-w-24 flex-col border-l border-black/10 pl-6">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.styles')}</dt>
