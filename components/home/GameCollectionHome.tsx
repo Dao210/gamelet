@@ -126,67 +126,69 @@ export default function GameCollectionHome() {
 
   return (
     <div className="gamelet-arcade min-h-screen bg-[#f8faf6] text-[#171711]">
-      <section className="relative overflow-hidden border-b border-black/10 bg-[#f7f8ee]">
-        <div className="arcade-grid-bg absolute inset-0 opacity-70" aria-hidden="true" />
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:px-8 lg:py-16">
-          <div className="flex min-h-[520px] flex-col justify-center">
-            <p className="mb-5 inline-flex w-fit items-center gap-2 border border-black/15 bg-white px-3 py-1 text-xs font-bold uppercase tracking-[0.28em] text-[#2f2f22] shadow-[3px_3px_0_#171711]">
+      <section className="relative isolate overflow-hidden border-b border-black/[0.06] bg-[#f7f8f2]">
+        <div className="absolute -right-32 -top-48 -z-10 h-[560px] w-[560px] rounded-full bg-[#d9f3e7]/70 blur-3xl" aria-hidden="true" />
+        <div className="absolute -bottom-64 left-[18%] -z-10 h-[480px] w-[480px] rounded-full bg-[#fff0bc]/50 blur-3xl" aria-hidden="true" />
+        <div className="relative mx-auto grid max-w-7xl gap-14 px-5 py-16 sm:px-8 sm:py-20 lg:min-h-[680px] lg:grid-cols-[minmax(0,1.25fr)_minmax(340px,0.75fr)] lg:items-center lg:gap-20 lg:px-10 lg:py-24">
+          <div className="flex flex-col justify-center">
+            <p className="mb-7 inline-flex w-fit items-center gap-3 text-[11px] font-bold uppercase tracking-[0.3em] text-[#4d554e]">
+              <span className="h-2 w-2 rounded-full bg-[#00a676]" aria-hidden="true" />
               Gamelet Puzzle Arcade
             </p>
-            <h1 className="arcade-display max-w-4xl text-5xl font-black leading-[0.96] text-[#11110d] sm:text-6xl lg:text-7xl">
+            <h1 className="arcade-display max-w-4xl text-[clamp(3.5rem,7vw,6.8rem)] font-black leading-[0.92] tracking-[-0.045em] text-[#151713]">
               {t('hero.title')}
-              <span className="block text-[#db3f5d]">{t('hero.titleAccent')}</span>
+              <span className="block text-[#008f66]">{t('hero.titleAccent')}</span>
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-[#424235]">
+            <p className="mt-8 max-w-xl text-base leading-7 text-[#5e655f] sm:text-lg sm:leading-8">
               {t('hero.description')}
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/nerd/game"
-                className="inline-flex min-h-12 items-center justify-center border border-[#171711] bg-[#171711] px-5 py-3 text-sm font-bold text-white shadow-[4px_4px_0_#00a676] transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#171711] focus:ring-offset-2"
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#171a17] px-6 py-3 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-[#008f66] focus:outline-none focus:ring-2 focus:ring-[#008f66] focus:ring-offset-2"
               >
                 {t('hero.playNerdle')}
               </Link>
               <a
                 href="#games"
-                className="inline-flex min-h-12 items-center justify-center border border-[#171711] bg-[#ffe66d] px-5 py-3 text-sm font-bold text-[#171711] shadow-[4px_4px_0_#171711] transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#171711] focus:ring-offset-2"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-black/10 bg-white/70 px-6 py-3 text-sm font-bold text-[#242924] transition-all hover:-translate-y-0.5 hover:border-black/20 hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#171711] focus:ring-offset-2"
               >
                 {t('hero.browseGames')}
               </a>
             </div>
 
-            <dl className="mt-10 grid max-w-2xl grid-cols-3 border-y border-black/10 py-5 text-sm">
-              <div>
-                <dt className="text-[#6c6b5b]">{t('stats.games')}</dt>
-                <dd className="arcade-display mt-1 text-3xl font-black">6</dd>
+            <dl className="mt-12 flex max-w-xl items-center text-sm">
+              <div className="flex min-w-24 flex-col">
+                <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.games')}</dt>
+                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">6</dd>
               </div>
-              <div>
-                <dt className="text-[#6c6b5b]">{t('stats.playable')}</dt>
-                <dd className="arcade-display mt-1 text-3xl font-black">2</dd>
+              <div className="flex min-w-24 flex-col border-l border-black/10 pl-6">
+                <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.playable')}</dt>
+                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">2</dd>
               </div>
-              <div>
-                <dt className="text-[#6c6b5b]">{t('stats.styles')}</dt>
-                <dd className="arcade-display mt-1 text-3xl font-black">4</dd>
+              <div className="flex min-w-24 flex-col border-l border-black/10 pl-6">
+                <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.styles')}</dt>
+                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">4</dd>
               </div>
             </dl>
           </div>
 
-          <aside className="self-center border border-[#171711] bg-[#10100d] p-4 text-white shadow-[8px_8px_0_#db3f5d]">
-            <div className="mb-4 flex items-center justify-between border-b border-white/20 pb-3">
-              <span className="text-xs font-bold uppercase tracking-[0.24em] text-[#ffe66d]">
+          <aside className="self-center rounded-[2rem] border border-black/[0.07] bg-white/75 p-5 text-[#20241f] shadow-[0_24px_80px_rgba(39,64,48,0.10)] backdrop-blur-md sm:p-7">
+            <div className="mb-5 flex items-center justify-between">
+              <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-[#008f66]">
                 Daily Spark
               </span>
-              <span className="text-xs text-white/60">#{puzzleIndex + 1}</span>
+              <span className="rounded-full bg-[#eef3ee] px-2.5 py-1 text-xs text-[#747c74]">#{puzzleIndex + 1}</span>
             </div>
-            <h2 className="arcade-display text-3xl font-black leading-tight">
+            <h2 className="arcade-display text-3xl font-black leading-[1.05] tracking-[-0.02em]">
               {t(`puzzles.${currentPuzzle.id}.prompt`)}
             </h2>
             <div className="my-6 grid grid-cols-3 gap-2" aria-label={t('puzzles.ariaLabel')}>
               {currentPuzzle.tiles.map((tile, index) => (
                 <div
                   key={`${tile}-${index}`}
-                  className="flex aspect-square items-center justify-center border border-white/15 bg-white text-2xl font-black text-[#171711]"
+                  className="flex aspect-square items-center justify-center rounded-xl border border-black/[0.06] bg-[#f3f5f1] text-2xl font-black text-[#20241f]"
                 >
                   {tile}
                 </div>
@@ -202,12 +204,12 @@ export default function GameCollectionHome() {
                     key={option}
                     type="button"
                     onClick={() => setSelectedAnswer(option)}
-                    className={`min-h-12 border px-3 text-lg font-black transition-colors focus:outline-none focus:ring-2 focus:ring-[#ffe66d] focus:ring-offset-2 focus:ring-offset-[#10100d] ${
+                    className={`min-h-12 rounded-xl border px-3 text-lg font-black transition-all focus:outline-none focus:ring-2 focus:ring-[#008f66] focus:ring-offset-2 ${
                       isSelected && isAnswer
                         ? 'border-[#00a676] bg-[#00a676] text-white'
                         : isSelected
                           ? 'border-[#db3f5d] bg-[#db3f5d] text-white'
-                          : 'border-white/30 bg-white/5 text-white hover:bg-white/15'
+                        : 'border-black/[0.08] bg-white text-[#343a34] hover:border-[#008f66]/40 hover:bg-[#f3faf6]'
                     }`}
                     aria-pressed={isSelected}
                   >
@@ -216,7 +218,7 @@ export default function GameCollectionHome() {
                 )
               })}
             </div>
-            <p className="mt-4 min-h-6 text-sm text-white/75">
+            <p className="mt-4 min-h-6 text-sm text-[#747c74]">
               {selectedAnswer
                 ? selectedAnswer === currentPuzzle.answer
                   ? t('puzzles.correct', { note: t(`puzzles.${currentPuzzle.id}.note`) })
@@ -226,7 +228,7 @@ export default function GameCollectionHome() {
             <button
               type="button"
               onClick={goToNextPuzzle}
-              className="mt-5 min-h-11 w-full border border-white/25 bg-[#ffe66d] px-4 py-2 text-sm font-black text-[#171711] transition-colors hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#ffe66d] focus:ring-offset-2 focus:ring-offset-[#10100d]"
+              className="mt-5 min-h-11 w-full rounded-xl bg-[#171a17] px-4 py-2 text-sm font-black text-white transition-colors hover:bg-[#008f66] focus:outline-none focus:ring-2 focus:ring-[#008f66] focus:ring-offset-2"
             >
               {t('puzzles.next')}
             </button>
