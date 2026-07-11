@@ -18,6 +18,7 @@ import { waterings } from '@/db/schema/waterings'
 import { eq, and, sql } from 'drizzle-orm'
 import { validateWatering } from '@/lib/services/validationService'
 import { calculateLevel, willLevelUp, XP_PER_WATERING } from '@/lib/services/levelService'
+import { ensureAnonymousUser } from '@/lib/services/anonymousUserService'
 
 /**
  * POST /api/grassland/water
@@ -38,6 +39,12 @@ export async function POST(request: NextRequest) {
         { error: 'plantId and userId are required' },
         { status: 400 }
       )
+    }
+
+    try {
+      await ensureAnonymousUser(userId)
+    } catch {
+      return NextResponse.json({ error: 'Invalid userId' }, { status: 400 })
     }
 
     // Fetch plant with author info

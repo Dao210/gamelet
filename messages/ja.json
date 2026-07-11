@@ -1,7 +1,15 @@
 {
   "common": {
     "logo": "Gamelet",
-    "backToNerdle": "Nerdleに戻る"
+    "backToNerdle": "Nerdleに戻る",
+    "brand": {
+      "gamelet": "Gamelet",
+      "gameletTagline": "Creative Technology Platform",
+      "nerdle": "Nerdle",
+      "nerdleTagline": "Daily Math Equation Puzzle Game",
+      "globalTrellis": "Global Trellis",
+      "globalTrellisTagline": "Creative Garden Social Platform"
+    }
   },
   "navigation": {
     "nerdle": "Nerdle",

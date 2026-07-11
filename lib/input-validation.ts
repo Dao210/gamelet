@@ -3,7 +3,7 @@
  * Provides detailed feedback and validation rules for mathematical equations
  */
 
-import { TileState } from './game-engine'
+import { evaluateExpression, isValidEquation } from './game-engine'
 
 export interface ValidationResult {
   isValid: boolean
@@ -149,21 +149,18 @@ export function validateEquationMath(equation: string): ValidationResult {
       }
     }
 
-    // Check if both sides are valid mathematical expressions
-    if (!isValidMathExpression(leftSide) || !isValidMathExpression(rightSide)) {
+    if (!/^\d+$/.test(rightSide.trim())) {
       return {
         isValid: false,
-        error: 'Invalid mathematical expression',
-        category: 'math'
+        error: 'Right side must be a positive integer',
+        category: 'structure'
       }
     }
 
-    // Evaluate both sides
-    const leftResult = evaluateMathExpression(leftSide)
-    const rightResult = evaluateMathExpression(rightSide)
+    if (!isValidEquation(equation)) {
+      const leftResult = evaluateExpression(leftSide.trim())
+      const rightResult = parseInt(rightSide.trim())
 
-    // Check if results are equal
-    if (leftResult !== rightResult) {
       return {
         isValid: false,
         error: 'Equation is not mathematically correct',
@@ -172,15 +169,6 @@ export function validateEquationMath(equation: string): ValidationResult {
           `Left side equals ${leftResult}, right side equals ${rightResult}`,
           'Check your calculations and try again'
         ]
-      }
-    }
-
-    // Check if result is positive integer
-    if (leftResult <= 0 || !Number.isInteger(leftResult)) {
-      return {
-        isValid: false,
-        error: 'Result must be a positive integer',
-        category: 'math'
       }
     }
 
@@ -297,32 +285,6 @@ export function validatePartialEquation(equation: string, maxLength: number): Eq
       canBeValid: true,
       missingElements: ['=', 'result']
     }
-  }
-}
-
-/**
- * Check if a string is a valid mathematical expression
- */
-function isValidMathExpression(expr: string): boolean {
-  // Check if it's a valid format (numbers and operators only, no consecutive operators)
-  if (!/^[0-9+\-*/]+$/.test(expr)) return false
-  if (/[+\-*/]{2,}/.test(expr)) return false
-  if (/[+\-*/]$/.test(expr)) return false
-  if (/^[+\-*/]/.test(expr)) return false
-
-  return true
-}
-
-/**
- * Safely evaluate a mathematical expression
- */
-function evaluateMathExpression(expr: string): number {
-  // Simple evaluation - in production, you might want a more robust solution
-  try {
-    // Use Function constructor for safer evaluation than eval
-    return Function('"use strict"; return (' + expr + ')')();
-  } catch (error) {
-    throw new Error('Invalid mathematical expression')
   }
 }
 

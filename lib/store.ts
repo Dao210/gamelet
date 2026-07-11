@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { GameState, GameMode, initializeGame, makeAttempt, getGameStats } from './game-engine'
+import { GameState, GameMode, initializeGame, makeAttempt } from './game-engine'
 import { trackGameStart, trackGameCompletion, trackModeSwitch } from './analytics'
 
 interface GameStore {
@@ -109,42 +109,80 @@ export const useGameStore = create<GameStore>()(
         if (!gameState || gameState.status !== 'playing') return
         
         const newGameState = makeAttempt(gameState, currentAttempt)
+        const acceptedAttempt = newGameState.attempts.length > gameState.attempts.length
+        if (!acceptedAttempt) return
         
-        // Update statistics
-        const newStats = { ...stats }
-        newStats.gamesPlayed++
-        newStats.modeStats[gameState.mode].gamesPlayed++
+        const finishedGame = newGameState.status !== 'playing'
+        let newStats = stats
         
-        if (newGameState.status === 'won') {
-          newStats.gamesWon++
-          newStats.currentStreak++
-          newStats.bestStreak = Math.max(newStats.bestStreak, newStats.currentStreak)
-          newStats.modeStats[gameState.mode].gamesWon++
-        } else if (newGameState.status === 'lost') {
-          newStats.currentStreak = 0
-        }
-        
-        // Track game completion
-        if (newGameState.status === 'won' || newGameState.status === 'lost') {
+        if (finishedGame) {
+          const previousGamesPlayed = stats.gamesPlayed
+          const previousModeGamesPlayed = stats.modeStats[gameState.mode].gamesPlayed
+          const modeStats = stats.modeStats[gameState.mode]
+          const attempts = newGameState.attempts.length
+
+          newStats = {
+            ...stats,
+            gamesPlayed: previousGamesPlayed + 1,
+            modeStats: {
+              ...stats.modeStats,
+              [gameState.mode]: {
+                ...modeStats,
+                gamesPlayed: previousModeGamesPlayed + 1
+              }
+            }
+          }
+
+          if (newGameState.status === 'won') {
+            const currentStreak = stats.currentStreak + 1
+            newStats = {
+              ...newStats,
+              gamesWon: stats.gamesWon + 1,
+              currentStreak,
+              bestStreak: Math.max(stats.bestStreak, currentStreak),
+              modeStats: {
+                ...newStats.modeStats,
+                [gameState.mode]: {
+                  ...newStats.modeStats[gameState.mode],
+                  gamesWon: modeStats.gamesWon + 1
+                }
+              }
+            }
+          } else {
+            newStats = {
+              ...newStats,
+              currentStreak: 0
+            }
+          }
+
+          newStats = {
+            ...newStats,
+            averageAttempts:
+              (stats.averageAttempts * previousGamesPlayed + attempts) / newStats.gamesPlayed,
+            modeStats: {
+              ...newStats.modeStats,
+              [gameState.mode]: {
+                ...newStats.modeStats[gameState.mode],
+                averageAttempts:
+                  (modeStats.averageAttempts * previousModeGamesPlayed + attempts) /
+                  newStats.modeStats[gameState.mode].gamesPlayed
+              }
+            }
+          }
+
           const duration = newGameState.endTime 
             ? Math.floor((newGameState.endTime.getTime() - newGameState.startTime.getTime()) / 1000)
             : undefined
           
-          trackGameCompletion(
-            gameState.mode,
-            newGameState.attempts.length,
-            newGameState.status,
-            duration
-          )
+          if (newGameState.status === 'won' || newGameState.status === 'lost') {
+            trackGameCompletion(
+              gameState.mode,
+              newGameState.attempts.length,
+              newGameState.status,
+              duration
+            )
+          }
         }
-        
-        // Update average attempts
-        const totalAttempts = newStats.gamesPlayed * newStats.averageAttempts + newGameState.attempts.length
-        newStats.averageAttempts = totalAttempts / newStats.gamesPlayed
-        
-        const modeStats = newStats.modeStats[gameState.mode]
-        const modeTotalAttempts = modeStats.gamesPlayed * modeStats.averageAttempts + newGameState.attempts.length
-        newStats.modeStats[gameState.mode].averageAttempts = modeTotalAttempts / modeStats.gamesPlayed
         
         set({ 
           gameState: newGameState,

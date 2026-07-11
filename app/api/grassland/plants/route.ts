@@ -21,6 +21,7 @@ import {
   generateSinglePlantPosition,
   calculatePrairieBounds
 } from '@/lib/services/layoutService'
+import { ensureAnonymousUser } from '@/lib/services/anonymousUserService'
 
 /**
  * GET /api/grassland/plants
@@ -154,6 +155,12 @@ export async function POST(request: NextRequest) {
     // Parse request body
     const body = await request.json()
     const { imageUrl, width, height, authorId } = body
+
+    try {
+      await ensureAnonymousUser(authorId)
+    } catch {
+      return NextResponse.json({ error: 'Invalid authorId' }, { status: 400 })
+    }
 
     // Get all existing plants for layout calculation
     const existingPlants = await db.select().from(plants)

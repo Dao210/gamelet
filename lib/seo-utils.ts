@@ -1,6 +1,16 @@
-import { locales, defaultLocale, type Locale } from '@/i18n/config'
+import { locales, defaultLocale, type Locale, openGraphLocaleMap } from '@/i18n/config'
 
 const baseUrl = 'https://gamelet.app'
+
+export function getLocalizedPath(pathname: string, locale: Locale): string {
+  const normalizedPath = pathname === '/'
+    ? ''
+    : pathname.startsWith('/')
+      ? pathname
+      : `/${pathname}`
+
+  return `/${locale}${normalizedPath}`
+}
 
 /**
  * Generate language alternates for all supported locales
@@ -11,14 +21,11 @@ export function generateLanguageAlternates(pathname: string): Record<string, str
   const languages: Record<string, string> = {}
 
   locales.forEach(locale => {
-    const path = locale === defaultLocale
-      ? pathname
-      : `/${locale}${pathname}`
-    languages[locale] = `${baseUrl}${path}`
+    languages[locale] = `${baseUrl}${getLocalizedPath(pathname, locale)}`
   })
 
   // Add x-default (defaults to English)
-  languages['x-default'] = `${baseUrl}${pathname}`
+  languages['x-default'] = `${baseUrl}${getLocalizedPath(pathname, defaultLocale)}`
 
   return languages
 }
@@ -30,10 +37,7 @@ export function generateLanguageAlternates(pathname: string): Record<string, str
  * @returns Full canonical URL
  */
 export function getCanonicalUrl(pathname: string, locale: Locale): string {
-  const path = locale === defaultLocale
-    ? pathname
-    : `/${locale}${pathname}`
-  return `${baseUrl}${path}`
+  return `${baseUrl}${getLocalizedPath(pathname, locale)}`
 }
 
 /**
@@ -44,13 +48,18 @@ export function getCanonicalUrl(pathname: string, locale: Locale): string {
 export function getChangeFrequency(
   route: string
 ): 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never' {
-  // Homepage and main game pages change daily
-  if (route === '/' || route === '/nerd' || route === '/nerd/game') {
+  // Daily puzzle game page
+  if (route === '/nerd/game' || route === '/2584' || route.includes('nerdle-answer-today')) {
     return 'daily'
   }
 
-  // Tips and strategies page updates weekly
-  if (route.includes('nerdle-answer-today')) {
+  // Homepage and main landing pages update weekly
+  if (route === '/' || route === '/nerd') {
+    return 'weekly'
+  }
+
+  // Garden pages (plants, flowers) update weekly
+  if (route.startsWith('/garden/')) {
     return 'weekly'
   }
 
@@ -65,11 +74,15 @@ export function getChangeFrequency(
  */
 export function getPriority(route: string): number {
   if (route === '/' || route === '/nerd') return 1.0
+  if (route === '/2584') return 0.9
   if (route === '/nerd/game') return 0.9
   if (route.includes('nerdle-answer-today')) return 0.8
-  if (route.includes('/garden')) return 0.7
-  if (route === '/about') return 0.6
-  return 0.5
+  if (route === '/garden') return 0.7
+  if (route === '/garden/create' || route === '/garden/flowers') return 0.6
+  if (route === '/about') return 0.5
+  // Dynamic plant pages: /garden/[plantId]
+  if (route.match(/^\/garden\/[^/]+$/)) return 0.5
+  return 0.4
 }
 
 /**
@@ -85,16 +98,5 @@ export function getBaseUrl(): string {
  * @returns OpenGraph locale code (e.g., 'en_US', 'es_ES')
  */
 export function getOpenGraphLocale(locale: Locale): string {
-  const localeMap: Record<Locale, string> = {
-    en: 'en_US',
-    es: 'es_ES',
-    fr: 'fr_FR',
-    de: 'de_DE',
-    it: 'it_IT',
-    ru: 'ru_RU',
-    ja: 'ja_JP',
-    zh: 'zh_CN'
-  }
-
-  return localeMap[locale] || 'en_US'
+  return openGraphLocaleMap[locale] || 'en_US'
 }

@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { immer } from 'zustand/middleware/immer'
 import * as fabric from 'fabric'
-import type { Canvas } from 'fabric/fabric-impl'
+import type { Canvas } from 'fabric'
 
 // Tool Types
 export type ToolType =

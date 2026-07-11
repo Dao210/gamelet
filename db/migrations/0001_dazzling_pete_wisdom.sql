@@ -1,0 +1,1 @@
+ALTER TABLE "waterings" DROP CONSTRAINT "unique_user_plant_per_day";

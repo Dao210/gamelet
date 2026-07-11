@@ -13,6 +13,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import { validatePlantImage } from '@/lib/services/validationService'
+import { isUuid } from '@/lib/grassland-anonymous-user'
 
 // Initialize Supabase client lazily to avoid build-time errors
 function getSupabaseClient(): SupabaseClient {
@@ -49,6 +50,10 @@ export async function POST(request: NextRequest) {
 
     if (!userId) {
       return NextResponse.json({ error: 'userId is required' }, { status: 400 })
+    }
+
+    if (!isUuid(userId)) {
+      return NextResponse.json({ error: 'Invalid userId' }, { status: 400 })
     }
 
     // Validate file type

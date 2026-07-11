@@ -11,6 +11,7 @@ import { plants } from '@/db/schema/plants'
 import { waterings } from '@/db/schema/waterings'
 import { eq, desc, sql } from 'drizzle-orm'
 import { validatePagination } from '@/lib/services/validationService'
+import { isUuid } from '@/lib/grassland-anonymous-user'
 
 /**
  * GET /api/grassland/my-plants
@@ -33,6 +34,10 @@ export async function GET(request: NextRequest) {
 
     if (!userId) {
       return NextResponse.json({ error: 'userId is required' }, { status: 400 })
+    }
+
+    if (!isUuid(userId)) {
+      return NextResponse.json({ error: 'Invalid userId' }, { status: 400 })
     }
 
     // Validate pagination

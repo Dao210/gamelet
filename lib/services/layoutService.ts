@@ -7,7 +7,6 @@
  */
 
 import {
-  generatePlantLayout,
   type PlantPosition,
   type PoissonDiskOptions
 } from '../poisson-disk-sampling'
@@ -25,21 +24,34 @@ export function generatePlantPositions(
   newPlants: Array<{ id: string; level: 1 | 2 | 3 | 4 }>,
   existingPlants: PlantWithPosition[],
   bounds: { width: number; height: number },
-  options?: Partial<PoissonDiskOptions>
+  _options?: Partial<PoissonDiskOptions>
 ): PlantPosition[] {
-  // Convert existing plants to PlantPosition format
-  const existingPositions: PlantPosition[] = existingPlants.map((plant) => ({
-    x: plant.positionX,
-    y: plant.positionY,
-    radius: plant.radius,
-    plantId: plant.id
-  }))
+  const positions: PlantPosition[] = []
+  const occupiedPlants: PlantWithPosition[] = [...existingPlants]
 
-  // Generate layout for new plants
-  // TODO: In future, pass existingPositions to avoid overlaps
-  const newPositions = generatePlantLayout(newPlants, bounds, 50)
+  for (const plant of newPlants) {
+    const position = generateSinglePlantPosition(plant.id, plant.level, occupiedPlants, bounds)
+    if (!position) continue
 
-  return newPositions
+    positions.push(position)
+    occupiedPlants.push({
+      id: plant.id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      imageUrl: '',
+      width: 0,
+      height: 0,
+      xp: 0,
+      level: plant.level,
+      waterCount: 0,
+      positionX: position.x,
+      positionY: position.y,
+      radius: position.radius,
+      authorId: ''
+    })
+  }
+
+  return positions
 }
 
 /**
@@ -51,9 +63,30 @@ export function generateSinglePlantPosition(
   existingPlants: PlantWithPosition[],
   bounds: { width: number; height: number }
 ): PlantPosition | null {
-  const positions = generatePlantPositions([{ id: plantId, level }], existingPlants, bounds)
+  const radius = getLevelRadius(level)
+  const maxAttempts = 300
+  const minX = radius
+  const maxX = Math.max(radius, bounds.width - radius)
+  const minY = radius
+  const maxY = Math.max(radius, bounds.height - radius)
 
-  return positions.length > 0 ? positions[0] : null
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    const candidate = {
+      x: minX + Math.random() * (maxX - minX),
+      y: minY + Math.random() * (maxY - minY),
+      radius
+    }
+
+    if (validatePlantPosition(candidate, existingPlants).valid) {
+      return {
+        ...candidate,
+        plantId,
+        growthLevel: level
+      }
+    }
+  }
+
+  return null
 }
 
 /**

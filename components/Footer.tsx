@@ -36,10 +36,12 @@ export default function Footer() {
 
   // Footer link data structure
   const productLinks = [
+    { name: 'Puzzle Arcade', href: '/' },
     { name: t('nerdle'), href: '/nerd' },
+    { name: 'Fibonacci 2584', href: '/2584' },
     { name: t('playGame'), href: '/nerd/game' },
     { name: t('howToPlay'), href: '/nerd' },
-    { name: t('garden'), href: '/garden' }
+    { name: t('garden'), href: '/grassland' }
   ]
 
   const resourceLinks = [
@@ -255,7 +257,7 @@ export default function Footer() {
             </motion.p>
 
             <motion.a
-              href="https://topzeal.com"
+              href="https://agentpage.io"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors group"

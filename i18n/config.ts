@@ -31,6 +31,18 @@ export const localeFlags: Record<Locale, string> = {
   zh: '🇨🇳'
 }
 
+// OpenGraph locale mapping for SEO
+export const openGraphLocaleMap: Record<Locale, string> = {
+  en: 'en_US',
+  es: 'es_ES',
+  fr: 'fr_FR',
+  de: 'de_DE',
+  it: 'it_IT',
+  ru: 'ru_RU',
+  ja: 'ja_JP',
+  zh: 'zh_CN'
+}
+
 /**
  * Check if a given string is a valid locale
  */
@@ -57,8 +69,6 @@ export function getLocaleFromPathname(pathname: string): Locale {
  * Remove locale prefix from pathname
  */
 export function removeLocalePrefix(pathname: string, locale: Locale): string {
-  if (locale === defaultLocale) return pathname
-
   const localePrefix = `/${locale}`
   if (pathname.startsWith(localePrefix)) {
     return pathname.slice(localePrefix.length) || '/'
@@ -71,6 +81,5 @@ export function removeLocalePrefix(pathname: string, locale: Locale): string {
  * Add locale prefix to pathname
  */
 export function addLocalePrefix(pathname: string, locale: Locale): string {
-  if (locale === defaultLocale) return pathname
   return `/${locale}${pathname === '/' ? '' : pathname}`
 }

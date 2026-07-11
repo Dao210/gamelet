@@ -1,6 +1,6 @@
 {
-  "name": "Nerdle Game",
-  "short_name": "AI Games",
+  "name": "Gamelet Puzzle Arcade",
+  "short_name": "Gamelet",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#4F46E5",
+  "theme_color": "#171711",
   "background_color": "#ffffff",
   "display": "standalone"
-} 
+}

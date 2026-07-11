@@ -1,5 +1,7 @@
 import '@testing-library/jest-dom'
 
+const mockReact = require('react')
+
 // Mock next/router
 jest.mock('next/router', () => ({
   useRouter() {
@@ -43,13 +45,43 @@ jest.mock('next/navigation', () => ({
   },
 }))
 
-// Mock framer-motion
+// Mock framer-motion without leaking motion-only props to DOM nodes.
+const mockMotionProps = new Set([
+  'animate',
+  'exit',
+  'initial',
+  'layout',
+  'layoutId',
+  'transition',
+  'variants',
+  'viewport',
+  'whileHover',
+  'whileInView',
+  'whileTap'
+])
+
+const mockMotionComponentCache = new Map()
+
+const mockCreateMotionComponent = (tag) => {
+  if (mockMotionComponentCache.has(tag)) {
+    return mockMotionComponentCache.get(tag)
+  }
+
+  const MotionComponent = ({ children, ...props }) => {
+    const domProps = Object.fromEntries(
+      Object.entries(props).filter(([key]) => !mockMotionProps.has(key))
+    )
+    return mockReact.createElement(tag, domProps, children)
+  }
+  MotionComponent.displayName = `MockMotion.${tag}`
+  mockMotionComponentCache.set(tag, MotionComponent)
+  return MotionComponent
+}
+
 jest.mock('framer-motion', () => ({
-  motion: {
-    div: ({ children, ...props }) => <div {...props}>{children}</div>,
-    button: ({ children, ...props }) => <button {...props}>{children}</button>,
-    span: ({ children, ...props }) => <span {...props}>{children}</span>,
-  },
+  motion: new Proxy({}, {
+    get: (_target, tag) => mockCreateMotionComponent(tag)
+  }),
   AnimatePresence: ({ children }) => children,
 }))
 

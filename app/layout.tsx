@@ -5,43 +5,39 @@ import { ReactNode } from 'react'
 
 export const metadata = {
   title: {
-    default: 'Nerdle - Daily Math Equation Puzzle Game',
-    template: '%s | Nerdle Math Game'
+    default: 'Gamelet Puzzle Arcade - Brainy Mini Games',
+    template: '%s | Gamelet'
   },
-  description: 'Play Nerdle, the addictive daily math equation guessing game! Challenge your mathematical skills with our free online puzzle game.',
-  keywords: 'nerdle, mathle, math game, equation puzzle, daily challenge, mathematical puzzle, number game',
+  description: 'Play clever, quick, and fun puzzle mini games on Gamelet, including math games, pattern challenges, logic games, and new brain teasers.',
+  keywords: 'gamelet, mini games, puzzle games, math games, logic games, brain teasers, nerdle, fibonacci 2584',
   authors: [{ name: 'Gamelet.app' }],
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://gamelet.app',
-    siteName: 'Nerdle Math Game',
-    title: 'Nerdle - Daily Math Equation Puzzle Game',
-    description: 'Play Nerdle, the addictive daily math equation guessing game!',
+    siteName: 'Gamelet',
+    title: 'Gamelet Puzzle Arcade - Brainy Mini Games',
+    description: 'Play clever, quick, and fun puzzle mini games for curious minds.',
     images: [
       {
-        url: 'https://gamelet.app/og-image.png',
+        url: 'https://gamelet.app/og.png',
         width: 1200,
         height: 630,
-        alt: 'Nerdle Math Game - Daily Equation Puzzle',
+        alt: 'Gamelet Puzzle Arcade',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nerdle - Daily Math Equation Puzzle Game',
-    description: 'Play Nerdle, the addictive daily math equation guessing game!',
-    site: '@nerdlemathgame',
-    creator: '@nerdlemathgame',
-    images: ['https://gamelet.app/og-image.png'],
+    title: 'Gamelet Puzzle Arcade - Brainy Mini Games',
+    description: 'Play clever, quick, and fun puzzle mini games for curious minds.',
+    site: '@gameletapp',
+    creator: '@gameletapp',
+    images: ['https://gamelet.app/og.png'],
   },
   robots: {
     index: true,
     follow: true,
-  },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
   },
   icons: {
     icon: '/favicon.ico',
@@ -52,6 +48,11 @@ export const metadata = {
   },
 }
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
+
 type Props = {
   children: ReactNode
 }
@@ -60,7 +61,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <html className="h-full">
       <head>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script

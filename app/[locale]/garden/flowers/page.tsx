@@ -173,7 +173,6 @@ class Flower {
     const p = this.p;
 
     this.leaves.forEach(leaf => {
-      const stemTopIndex = this.segments - 1;
       const t = p.frameCount * this.swaySpeed + (leaf.y / this.height) * this.segments * 0.2;
       const baseSway = p.sin(t) * this.swayAmplitude * (leaf.y / this.height);
       const windSway = windForce * this.windInfluence * (leaf.y / this.height);
@@ -412,11 +411,10 @@ export default function FlowersPage() {
 
     const sketch = (p: any) => {
       // 花朵数组
-      let flowers: Flower[] = [];
+      const flowers: Flower[] = [];
 
       // 风场参数
       let windForce = 0;
-      let mouseInfluence = 0;
 
       // 花朵数量
       const flowerCount = 40;
@@ -518,7 +516,7 @@ export default function FlowersPage() {
        */
       p.mousePressed = () => {
         // 检查是否点击了花朵
-        for (let flower of flowers) {
+        for (const flower of flowers) {
           if (flower.checkClick(p.mouseX, p.mouseY, windForce)) {
             flower.triggerBloom();
             break; // 只触发一朵花

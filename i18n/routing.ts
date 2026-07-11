@@ -13,12 +13,10 @@ export const routing = defineRouting({
   // Default locale (used when no locale prefix is present)
   defaultLocale: defaultLocale,
 
-  // Locale prefix strategy
-  // - 'as-needed': Default locale ('/') has no prefix, others do ('/es', '/fr')
-  localePrefix: 'as-needed'
+  // Locale prefix strategy: every public page uses an explicit locale prefix.
+  localePrefix: 'always'
 })
 
 // Type-safe navigation utilities
 export const { Link, redirect, usePathname, useRouter, getPathname } =
   createNavigation(routing)
-

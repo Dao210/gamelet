@@ -12,6 +12,7 @@
 'use client'
 
 import { useState } from 'react'
+import { getGrasslandAnonymousUserId } from '@/lib/grassland-anonymous-user'
 
 interface GrasslandPlantCreationFormProps {
   /** Canvas image data (base64 PNG) */
@@ -57,6 +58,8 @@ export default function GrasslandPlantCreationForm({
     setIsSubmitting(true)
 
     try {
+      const userId = getGrasslandAnonymousUserId()
+
       // Step 1: Convert canvas data to Blob
       setUploadProgress('Preparing image...')
       const blob = dataURLtoBlob(imageData)
@@ -66,7 +69,7 @@ export default function GrasslandPlantCreationForm({
       setUploadProgress('Uploading image...')
       const formData = new FormData()
       formData.append('file', file)
-      formData.append('userId', 'temp-user-id') // TODO: Replace with real user ID from auth
+      formData.append('userId', userId)
 
       const uploadResponse = await fetch('/api/grassland/upload', {
         method: 'POST',
@@ -90,7 +93,7 @@ export default function GrasslandPlantCreationForm({
           imageUrl,
           width: canvasWidth,
           height: canvasHeight,
-          authorId: 'temp-user-id' // TODO: Replace with real user ID from auth
+          authorId: userId
         })
       })
 

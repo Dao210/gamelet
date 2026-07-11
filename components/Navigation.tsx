@@ -14,7 +14,9 @@ export default function Navigation() {
 
   // Main navigation with icons and descriptions (displayed prominently)
   const mainNavigation = [
+    { name: 'Arcade', href: '/', icon: '◆', description: 'Puzzle mini-game collection' },
     { name: t('nerdle'), href: '/nerd', icon: '🧮', description: t('nerdleDescription') },
+    { name: 'Fibonacci 2584', href: '/2584', icon: '🐚', description: 'Fibonacci sequence puzzle game' },
 
   ]
 

@@ -1,7 +1,15 @@
 {
   "common": {
     "logo": "Gamelet",
-    "backToNerdle": "Back to Nerdle"
+    "backToNerdle": "Back to Nerdle",
+    "brand": {
+      "gamelet": "Gamelet",
+      "gameletTagline": "Creative Technology Platform",
+      "nerdle": "Nerdle",
+      "nerdleTagline": "Daily Math Equation Puzzle Game",
+      "globalTrellis": "Global Trellis",
+      "globalTrellisTagline": "Creative Garden Social Platform"
+    }
   },
   "navigation": {
     "nerdle": "Nerdle",
@@ -187,7 +195,7 @@
     "contact": "Contact Us",
     "language": "Language",
     "copyright": "© {year} Gamelet.app • Fatto con ❤️ per te giovane",
-    "poweredBy": "topzeal.com"
+    "poweredBy": "agentpage.io"
   },
   "nerdLanding": {
     "heroTitle": "Nerdle",

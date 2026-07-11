@@ -59,13 +59,13 @@ export default function GardenPage() {
         {/* 行动按钮 */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
-            href="/garden/create"
+            href="/grassland/create"
             className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-xl transition-colors text-center"
           >
             🎨 开始创作
           </Link>
           <Link
-            href="/garden/feed"
+            href="/grassland"
             className="bg-white border-2 border-green-600 text-green-600 hover:bg-green-50 font-semibold py-3 px-8 rounded-xl transition-colors text-center"
           >
             🌿 探索花园

@@ -60,4 +60,34 @@
     margin-right: auto;
     padding: 1rem;
   }
-} 
+}
+
+@layer components {
+  .gamelet-arcade {
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .gamelet-arcade .arcade-display {
+    font-family: "Fraunces", Georgia, serif;
+    letter-spacing: 0;
+  }
+
+  .arcade-grid-bg {
+    background-image:
+      linear-gradient(rgba(23, 23, 17, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(23, 23, 17, 0.08) 1px, transparent 1px),
+      repeating-linear-gradient(135deg, rgba(0, 166, 118, 0.12) 0 10px, transparent 10px 22px);
+    background-size: 56px 56px, 56px 56px, 160px 160px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gamelet-arcade *,
+    .gamelet-arcade *::before,
+    .gamelet-arcade *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 1ms !important;
+      animation-duration: 1ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+}

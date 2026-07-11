@@ -1,10 +1,11 @@
 import { MetadataRoute } from 'next'
-import { locales, defaultLocale } from '@/i18n/config'
+import { locales } from '@/i18n/config'
 import {
   getBaseUrl,
   getChangeFrequency,
   getPriority,
-  generateLanguageAlternates
+  generateLanguageAlternates,
+  getLocalizedPath
 } from '@/lib/seo-utils'
 
 /**
@@ -14,15 +15,22 @@ import {
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = getBaseUrl()
 
-  // Define all routes in the application
+  // Define all static routes in the application
   const routes = [
     '/',
+    '/2584',
     '/nerd',
     '/nerd/game',
     '/nerd/nerdle-answer-today',
     '/garden',
-    '/garden/create',
-    '/about'
+    '/garden/flowers',
+    '/grassland',
+    '/grassland/create',
+    '/grassland/my-plants',
+    '/about',
+    '/privacy',
+    '/terms',
+    '/contact'
   ]
 
   // Generate sitemap entries for all combinations of routes and locales
@@ -30,16 +38,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   routes.forEach(route => {
     locales.forEach(locale => {
-      // Construct the full path with locale prefix (except for default locale on root)
-      const path = locale === defaultLocale
-        ? route
-        : `/${locale}${route}`
-
       // Generate language alternates for this route
       const languages = generateLanguageAlternates(route)
 
       entries.push({
-        url: `${baseUrl}${path}`,
+        url: `${baseUrl}${getLocalizedPath(route, locale)}`,
         lastModified: new Date(),
         changeFrequency: getChangeFrequency(route),
         priority: getPriority(route),

@@ -1,4 +1,4 @@
-import type { NextSeoProps } from 'next-seo/dist/pages'
+import type { NextSeoProps } from 'next-seo/pages'
 
 export const defaultSEO: NextSeoProps = {
   title: 'Nerdle - Daily Math Equation Puzzle Game | Play Free Online',

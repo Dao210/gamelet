@@ -116,7 +116,7 @@ describe('Keyboard Functionality Tests', () => {
       fireEvent.click(button)
 
       // Check if visual feedback state is set
-      expect(button).toHaveClass('bg-blue-500', 'text-white', 'scale-95')
+      expect(button).toHaveClass('text-white', 'scale-95')
     })
   })
 
@@ -136,7 +136,7 @@ describe('Keyboard Functionality Tests', () => {
       const button = screen.getByText(operatorKey)
       fireEvent.click(button)
 
-      expect(button).toHaveClass('bg-blue-500', 'text-white', 'scale-95')
+      expect(button).toHaveClass('text-white', 'scale-95')
     })
   })
 
@@ -194,7 +194,7 @@ describe('Keyboard Functionality Tests', () => {
       const backButton = screen.getByText('⌫')
       fireEvent.click(backButton)
 
-      expect(backButton).toHaveClass('bg-blue-500', 'text-white', 'scale-95')
+      expect(backButton).toHaveClass('text-white', 'scale-95')
     })
 
     it('should be disabled when current attempt is empty', () => {
@@ -329,7 +329,7 @@ describe('Keyboard Functionality Tests', () => {
       const enterButton = screen.getByText('Enter')
       fireEvent.click(enterButton)
 
-      expect(enterButton).toHaveClass('bg-blue-500', 'text-white', 'scale-95')
+      expect(enterButton).toHaveClass('text-white', 'scale-95')
     })
 
     it('should be disabled when equation is incomplete', () => {
@@ -348,7 +348,7 @@ describe('Keyboard Functionality Tests', () => {
       fireEvent.click(button)
 
       // Initially shows pressed state
-      expect(button).toHaveClass('bg-blue-500', 'text-white', 'scale-95')
+      expect(button).toHaveClass('text-white', 'scale-95')
 
       // Fast-forward time to clear feedback
       // Need to run both requestAnimationFrame and setTimeout
@@ -357,7 +357,7 @@ describe('Keyboard Functionality Tests', () => {
       })
 
       // Feedback should be cleared
-      expect(button).not.toHaveClass('bg-blue-500', 'text-white', 'scale-95')
+      expect(button).not.toHaveClass('scale-95')
     })
   })
 

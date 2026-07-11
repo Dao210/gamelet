@@ -1,6 +1,5 @@
-// TODO: Implement Garden Feed API
-// This API route will be implemented after Prisma setup is complete
+// Legacy Garden API placeholder. Grassland is the active persisted plant experience.
 
 export async function GET() {
-  return Response.json({ message: 'Garden feed API coming soon!' });
+  return Response.json({ error: 'Garden feed is not implemented. Use /api/grassland/plants.' }, { status: 501 });
 }

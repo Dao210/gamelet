@@ -14,6 +14,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import PlantCard, { PlantData } from '../plant/PlantCard'
+import { getGrasslandAnonymousUserId } from '@/lib/grassland-anonymous-user'
 
 interface PlantLayerProps {
   /** 初始植物数据 (可选，用于SSR) */
@@ -147,12 +148,14 @@ export default function PlantLayer({
    */
   const handleWater = useCallback(async (plantId: string) => {
     try {
+      const userId = getGrasslandAnonymousUserId()
+
       const response = await fetch('/api/grassland/water', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           plantId,
-          userId: 'temp-user-id' // TODO: 集成真实用户认证
+          userId
         })
       })
 

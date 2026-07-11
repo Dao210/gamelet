@@ -105,6 +105,7 @@ export function isValidEquation(equation: string): boolean {
     // Evaluate the left side and compare with right side
     const result = evaluateExpression(leftSide.trim())
     const expected = parseInt(rightSide.trim())
+    if (expected <= 0) return false
     
     return result === expected
   } catch {
@@ -141,7 +142,7 @@ function validateTokens(tokens: string[]): boolean {
 }
 
 // Expression evaluator with operator precedence and integer-only division
-function evaluateExpression(expr: string): number {
+export function evaluateExpression(expr: string): number {
   const tokens = tokenize(expr)
   if (!validateTokens(tokens)) throw new Error('Invalid tokens')
   

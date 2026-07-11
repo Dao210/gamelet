@@ -1,10 +1,9 @@
-// TODO: Implement Plant API
-// This API route will be implemented after Prisma setup is complete
+// Legacy Garden API placeholder. Grassland is the active persisted plant experience.
 
 export async function GET() {
-  return Response.json({ message: 'Plant API coming soon!' });
+  return Response.json({ error: 'Garden API is not implemented. Use /api/grassland/plants.' }, { status: 501 });
 }
 
 export async function POST() {
-  return Response.json({ message: 'Plant creation API coming soon!' });
+  return Response.json({ error: 'Garden creation is not implemented. Use /api/grassland/plants.' }, { status: 501 });
 }
