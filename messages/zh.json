@@ -244,6 +244,45 @@
     "finalCtaTrust2": "永久免费",
     "finalCtaTrust3": "每日谜题"
   },
+  "homePage": {
+    "hero": {
+      "title": "聪明一点，",
+      "titleAccent": "也快乐一点。",
+      "description": "一个轻量益智小游戏集合：数学推理、空间合成、图形观察和文字密码都在这里。先玩现有佳作，再等一批更怪、更短、更上头的新游戏上线。",
+      "playNerdle": "先玩 Nerdle",
+      "browseGames": "浏览游戏馆"
+    },
+    "stats": { "games": "游戏", "playable": "可玩", "styles": "风格" },
+    "filters": {
+      "ariaLabel": "游戏类型筛选",
+      "all": "全部", "playable": "可玩", "math": "数学", "spatial": "空间", "observation": "观察", "word": "文字"
+    },
+    "puzzles": {
+      "ariaLabel": "今日益智题",
+      "correct": "答对了，{note}",
+      "incorrect": "差一点，再观察一下规律。",
+      "choose": "选一个答案试试看。",
+      "next": "换一题",
+      "sequence": { "prompt": "补齐这一组数列", "note": "每一格是前两格相加。" },
+      "shape": { "prompt": "下一个图形是哪一个", "note": "图形按一短一长的节奏交替。" },
+      "equation": { "prompt": "让等式成立", "note": "9 + 5 = 14。" }
+    },
+    "shelf": { "title": "今天想挑战哪一种脑回路？" },
+    "card": { "duration": "单局", "difficulty": "难度", "play": "开始玩", "planned": "加入开发排期" },
+    "games": {
+      "nerdle": { "kicker": "方程侦探", "description": "用 6 次猜测拆开隐藏算式，颜色反馈会一点点暴露答案。", "status": "现在可玩", "time": "4 分钟", "level": "中等" },
+      "fibonacci": { "kicker": "数列合成", "description": "像 2048 一样滑动方块，但只有相邻斐波那契数字才能合并。", "status": "现在可玩", "time": "7 分钟", "level": "进阶" },
+      "mirrorMaze": { "kicker": "反射迷宫", "description": "旋转镜面，让一束光绕过陷阱抵达目标出口。", "status": "新游戏设计中", "time": "5 分钟", "level": "中等" },
+      "glyphGarden": { "kicker": "图形生长", "description": "观察符号的成长规则，选择下一朵会出现的图形。", "status": "新游戏设计中", "time": "3 分钟", "level": "轻松" },
+      "cipherBento": { "kicker": "文字密码盒", "description": "用极短线索破解词组，像拆便当一样一格一格打开。", "status": "新游戏设计中", "time": "6 分钟", "level": "烧脑" },
+      "orbitSum": { "kicker": "轨道加法", "description": "把数字推入轨道，让每一圈都刚好配平目标和。", "status": "新游戏设计中", "time": "8 分钟", "level": "高手" }
+    },
+    "nextDrop": {
+      "title": "小游戏会持续上新",
+      "description": "每个游戏都适合碎片时间，但保留一点值得琢磨的策略空间。",
+      "items": { "short": "短局制", "fresh": "规则新鲜", "mobile": "手机友好" }
+    }
+  },
   "grassland": {
     "welcomeTitle": "全球草原花园",
     "welcomeDescription": "观看来自世界各地用户的植物在变幻的天空下共同成长。",

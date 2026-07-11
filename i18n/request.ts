@@ -4,6 +4,24 @@
 
 import { getRequestConfig } from 'next-intl/server'
 import { defaultLocale, isValidLocale } from './config'
+import englishMessages from '../messages/en.json'
+
+interface Messages {
+  [key: string]: string | Messages
+}
+
+function mergeMessages(fallback: Messages, localized: Messages): Messages {
+  const merged: Messages = { ...fallback }
+
+  for (const [key, value] of Object.entries(localized)) {
+    const fallbackValue = fallback[key]
+    merged[key] = typeof value === 'object' && typeof fallbackValue === 'object'
+      ? mergeMessages(fallbackValue, value)
+      : value
+  }
+
+  return merged
+}
 
 export default getRequestConfig(async ({ requestLocale }) => {
   // This typically corresponds to the `[locale]` segment
@@ -12,9 +30,13 @@ export default getRequestConfig(async ({ requestLocale }) => {
     ? requestedLocale
     : defaultLocale
 
+  const localizedMessages = (await import(`../messages/${locale}.json`)).default
+
   return {
     locale,
-    messages: (await import(`../messages/${locale}.json`)).default,
+    messages: locale === defaultLocale
+      ? englishMessages
+      : mergeMessages(englishMessages, localizedMessages),
     timeZone: 'UTC'
   }
 })

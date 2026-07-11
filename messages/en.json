@@ -244,6 +244,45 @@
     "finalCtaTrust2": "Free forever",
     "finalCtaTrust3": "Daily puzzles"
   },
+  "homePage": {
+    "hero": {
+      "title": "Think smarter,",
+      "titleAccent": "play happier.",
+      "description": "A lightweight collection of puzzle games spanning mathematical reasoning, spatial merging, visual patterns, and wordplay. Play our current favorites, then watch for stranger, shorter, and delightfully addictive new games.",
+      "playNerdle": "Play Nerdle first",
+      "browseGames": "Browse the arcade"
+    },
+    "stats": { "games": "Games", "playable": "Playable", "styles": "Styles" },
+    "filters": {
+      "ariaLabel": "Filter games by type",
+      "all": "All", "playable": "Playable", "math": "Math", "spatial": "Spatial", "observation": "Observation", "word": "Word"
+    },
+    "puzzles": {
+      "ariaLabel": "Daily puzzle",
+      "correct": "Correct! {note}",
+      "incorrect": "Almost—take another look at the pattern.",
+      "choose": "Choose an answer to give it a try.",
+      "next": "Next puzzle",
+      "sequence": { "prompt": "Complete the sequence", "note": "Each number is the sum of the previous two." },
+      "shape": { "prompt": "Which shape comes next?", "note": "The shapes alternate in a short-long rhythm." },
+      "equation": { "prompt": "Complete the equation", "note": "9 + 5 = 14." }
+    },
+    "shelf": { "title": "What kind of thinking will you challenge today?" },
+    "card": { "duration": "Round", "difficulty": "Difficulty", "play": "Play now", "planned": "Planned for development" },
+    "games": {
+      "nerdle": { "kicker": "Equation Detective", "description": "Uncover the hidden equation in six guesses as color feedback gradually reveals the answer.", "status": "Playable now", "time": "4 min", "level": "Medium" },
+      "fibonacci": { "kicker": "Sequence Merge", "description": "Slide tiles like 2048, but only neighboring Fibonacci numbers can merge.", "status": "Playable now", "time": "7 min", "level": "Advanced" },
+      "mirrorMaze": { "kicker": "Reflection Maze", "description": "Rotate mirrors to guide a beam of light past traps and into the target.", "status": "In design", "time": "5 min", "level": "Medium" },
+      "glyphGarden": { "kicker": "Growing Patterns", "description": "Observe how symbols grow and choose the shape that should bloom next.", "status": "In design", "time": "3 min", "level": "Relaxed" },
+      "cipherBento": { "kicker": "Word Cipher Box", "description": "Crack phrases from tiny clues, opening the puzzle one compartment at a time.", "status": "In design", "time": "6 min", "level": "Challenging" },
+      "orbitSum": { "kicker": "Orbital Addition", "description": "Push numbers into orbit until every ring balances to its target sum.", "status": "In design", "time": "8 min", "level": "Expert" }
+    },
+    "nextDrop": {
+      "title": "New mini-games are always on the way",
+      "description": "Every game fits into a spare moment while leaving just enough strategic depth to think about.",
+      "items": { "short": "Quick rounds", "fresh": "Fresh rules", "mobile": "Mobile friendly" }
+    }
+  },
   "grassland": {
     "welcomeTitle": "Global Prairie Garden",
     "welcomeDescription": "Watch plants from users around the world grow together under the changing sky.",
