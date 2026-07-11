@@ -50,6 +50,7 @@ const games: Game[] = [
   {
     id: 'mirrorMaze',
     title: 'Mirror Maze',
+    href: '/mirror-maze',
     filters: ['spatial', 'observation'],
     accent: '#2f7df0',
     surface: '#edf5ff',
@@ -165,7 +166,7 @@ export default function GameCollectionHome() {
               </div>
               <div className="flex min-w-24 flex-col border-l border-black/10 pl-6">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.playable')}</dt>
-                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">2</dd>
+                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">3</dd>
               </div>
               <div className="flex min-w-24 flex-col border-l border-black/10 pl-6">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.styles')}</dt>

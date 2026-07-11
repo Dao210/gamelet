@@ -17,6 +17,7 @@ export default function Navigation() {
     { name: 'Arcade', href: '/', icon: '◆', description: 'Puzzle mini-game collection' },
     { name: t('nerdle'), href: '/nerd', icon: '🧮', description: t('nerdleDescription') },
     { name: 'Fibonacci 2584', href: '/2584', icon: '🐚', description: 'Fibonacci sequence puzzle game' },
+    { name: 'Mirror Maze', href: '/mirror-maze', icon: '◩', description: 'Optical reflection puzzle' },
 
   ]
 
