@@ -3,8 +3,9 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useFibonacciGameStore } from '@/lib/fibonacci-game-store'
+import type { FibonacciCopy } from './fibonacci-copy'
 
-function FibonacciGameOverInner() {
+function FibonacciGameOverInner({ copy }: { copy: FibonacciCopy }) {
   const { gameState, startNewGame, continueAfterWin } = useFibonacciGameStore()
   
   const isVisible = gameState?.over || (gameState?.won && gameState?.canContinue)
@@ -43,14 +44,14 @@ function FibonacciGameOverInner() {
                   🏆
                 </motion.div>
                 <h2 className="text-3xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-2">
-                  You Win!
+                  {copy.win}
                 </h2>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  Amazing! You reached <span className="font-bold text-2xl text-amber-600">2584</span>!
+                  {copy.winDetail}
                 </p>
                 
                 <div className="bg-amber-50 dark:bg-amber-900/30 rounded-xl p-4 mb-6">
-                  <div className="text-sm text-amber-700 dark:text-amber-400 mb-1">Final Score</div>
+                  <div className="text-sm text-amber-700 dark:text-amber-400 mb-1">{copy.finalScore}</div>
                   <div className="text-4xl font-bold text-amber-600 dark:text-amber-300">
                     {gameState?.score}
                   </div>
@@ -61,13 +62,13 @@ function FibonacciGameOverInner() {
                     onClick={continueAfterWin}
                     className="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-bold rounded-xl shadow-lg transition-all duration-200 active:scale-95"
                   >
-                    Continue Playing
+                    {copy.continue}
                   </button>
                   <button
                     onClick={startNewGame}
                     className="w-full px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl shadow-lg transition-all duration-200 active:scale-95"
                   >
-                    New Game
+                    {copy.newGame}
                   </button>
                 </div>
               </>
@@ -83,14 +84,14 @@ function FibonacciGameOverInner() {
                   😢
                 </motion.div>
                 <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
-                  Game Over
+                  {copy.gameOver}
                 </h2>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  No more moves available!
+                  {copy.gameOverDetail}
                 </p>
                 
                 <div className="bg-orange-50 dark:bg-orange-900/30 rounded-xl p-4 mb-6">
-                  <div className="text-sm text-orange-700 dark:text-orange-400 mb-1">Final Score</div>
+                  <div className="text-sm text-orange-700 dark:text-orange-400 mb-1">{copy.finalScore}</div>
                   <div className="text-4xl font-bold text-orange-600 dark:text-orange-300">
                     {gameState?.score}
                   </div>
@@ -100,7 +101,7 @@ function FibonacciGameOverInner() {
                   onClick={startNewGame}
                   className="w-full px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl shadow-lg transition-all duration-200 active:scale-95"
                 >
-                  Play Again
+                  {copy.playAgain}
                 </button>
               </>
             )}

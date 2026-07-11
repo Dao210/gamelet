@@ -1,55 +1,53 @@
 'use client'
 
-import React, { useMemo } from 'react'
+import React, { useRef } from 'react'
 import { motion } from 'framer-motion'
 import { useFibonacciGameStore } from '@/lib/fibonacci-game-store'
-import { getTileColor, getTextColor, getFontSize, getTileAt, GRID_SIZE } from '@/lib/fibonacci-game-engine'
+import { getTileColor, getTextColor, getFontSize } from '@/lib/fibonacci-game-engine'
+import type { FibonacciCopy } from './fibonacci-copy'
 
-function FibonacciGameBoardInner() {
-  const { gameState } = useFibonacciGameStore()
-
-  // Create GRID_SIZE x GRID_SIZE grid with memoization
-  const cells = useMemo(() => {
-    const tiles = gameState?.tiles ?? []
-    return Array(GRID_SIZE).fill(null).map((_, row) =>
-      Array(GRID_SIZE).fill(null).map((_, col) => getTileAt(tiles, row, col))
-    )
-  }, [gameState?.tiles])
+function FibonacciGameBoardInner({ copy }: { copy: FibonacciCopy }) {
+  const { gameState, move } = useFibonacciGameStore()
+  const touchStart = useRef<{ x: number; y: number } | null>(null)
   
   if (!gameState) return null
   
   return (
-    <div className="grid grid-cols-4 gap-2 p-4 bg-gradient-to-br from-amber-100 to-orange-100 dark:from-amber-900 dark:to-orange-900 rounded-2xl shadow-lg">
+    <div
+      aria-label={copy.boardLabel}
+      className="relative grid aspect-square w-full touch-none grid-cols-4 grid-rows-4 gap-2.5 rounded-[1.75rem] border border-amber-950/10 bg-[#a87645] p-3 shadow-[0_30px_80px_-35px_rgba(87,48,14,.75),inset_0_1px_0_rgba(255,255,255,.35)] sm:gap-3 sm:p-4"
+      onPointerDown={(event) => { touchStart.current = { x: event.clientX, y: event.clientY } }}
+      onPointerUp={(event) => {
+        if (!touchStart.current) return
+        const dx = event.clientX - touchStart.current.x
+        const dy = event.clientY - touchStart.current.y
+        touchStart.current = null
+        if (Math.max(Math.abs(dx), Math.abs(dy)) < 24) return
+        move(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up'))
+      }}
+    >
       {/* Background cells */}
       {Array(16).fill(null).map((_, i) => (
         <div 
           key={`bg-${i}`}
-          className="w-16 h-16 md:w-20 md:h-20 bg-amber-200 dark:bg-amber-800 rounded-lg opacity-50"
+          className="aspect-square min-w-0 rounded-2xl bg-amber-950/15 shadow-inner"
         />
       ))}
       
       {/* Tiles */}
-      {cells.flat().map((tile) => {
-        if (!tile) return null
-        
-        return (
+      {gameState.tiles.map((tile) => (
           <motion.div
             key={tile.id}
             className={`
-              absolute w-16 h-16 md:w-20 md:h-20
-              rounded-lg flex items-center justify-center
-              font-bold shadow-md
+              z-10 flex min-w-0 items-center justify-center rounded-2xl
+              font-black tabular-nums shadow-[0_6px_16px_rgba(65,35,9,.22)]
               ${getTileColor(tile.value)}
               ${getTextColor(tile.value)}
               ${getFontSize(tile.value)}
             `}
             style={{
-              left: `calc(${tile.col * 25}% + ${tile.col * 0.5}rem + 1rem)`,
-              top: `calc(${tile.row * 25}% + ${tile.row * 0.5}rem + 1rem)`,
-              width: '4rem',
-              height: '4rem',
-              marginLeft: '0.25rem',
-              marginTop: '0.25rem'
+              gridColumn: tile.col + 1,
+              gridRow: tile.row + 1
             }}
             initial={tile.isNew ? { scale: 0 } : false}
             animate={{ scale: 1 }}
@@ -61,8 +59,7 @@ function FibonacciGameBoardInner() {
           >
             {tile.value}
           </motion.div>
-        )
-      })}
+      ))}
     </div>
   )
 }

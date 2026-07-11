@@ -20,12 +20,6 @@ export default function Navigation() {
 
   ]
 
-  // Secondary navigation (text-only links)
-  const secondaryNavigation = [
-    { name: t('about'), href: '/about' },
-    { name: t('tipsStrategies'), href: '/nerd/nerdle-answer-today' },
-  ]
-
   const isActive = (href: string) => {
     if (href === '/') {
       return pathname === '/'
@@ -71,23 +65,6 @@ export default function Navigation() {
                       initial={false}
                     />
                   )}
-                </Link>
-              ))}
-
-              {/* Secondary navigation links */}
-              {secondaryNavigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`
-                    px-3 py-2 text-sm font-medium rounded-lg transition-colors
-                    ${isActive(item.href)
-                      ? 'text-blue-600 dark:text-blue-400'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400'
-                    }
-                  `}
-                >
-                  {item.name}
                 </Link>
               ))}
             </div>
@@ -157,28 +134,6 @@ export default function Navigation() {
                   </div>
                 </Link>
               ))}
-            </div>
-
-            {/* Secondary navigation items */}
-            <div className="py-4 border-t border-gray-200 dark:border-gray-700">
-              <div className="space-y-2">
-                {secondaryNavigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`
-                      block px-3 py-2 text-sm rounded-lg transition-colors
-                      ${isActive(item.href)
-                        ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                        : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
-                      }
-                    `}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
             </div>
           </motion.div>
         )}

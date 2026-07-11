@@ -2,8 +2,9 @@
 
 import React from 'react'
 import { useFibonacciGameStore } from '@/lib/fibonacci-game-store'
+import type { FibonacciCopy } from './fibonacci-copy'
 
-function FibonacciControlsInner() {
+function FibonacciControlsInner({ copy }: { copy: FibonacciCopy }) {
   const { startNewGame, resetGame, gameState } = useFibonacciGameStore()
 
   return (
@@ -12,7 +13,7 @@ function FibonacciControlsInner() {
         onClick={resetGame}
         className="px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-xl shadow-lg transition-all duration-200 active:scale-95"
       >
-        🔄 New Game
+        ↻ {copy.newGame}
       </button>
 
       {(gameState?.over || gameState?.won) && !gameState?.canContinue && (
@@ -20,7 +21,7 @@ function FibonacciControlsInner() {
           onClick={startNewGame}
           className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-bold rounded-xl shadow-lg transition-all duration-200 active:scale-95"
         >
-          ✨ Play Again
+          ✨ {copy.playAgain}
         </button>
       )}
     </div>

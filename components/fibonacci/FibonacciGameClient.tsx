@@ -1,15 +1,19 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useLocale } from 'next-intl'
 import { motion } from 'framer-motion'
 import { useFibonacciGameStore } from '@/lib/fibonacci-game-store'
 import FibonacciGameBoard from '@/components/fibonacci/FibonacciGameBoard'
 import FibonacciScore from '@/components/fibonacci/FibonacciScore'
 import FibonacciControls from '@/components/fibonacci/FibonacciControls'
 import FibonacciGameOver from '@/components/fibonacci/FibonacciGameOver'
+import { fibonacciCopy } from '@/components/fibonacci/fibonacci-copy'
 
 export default function FibonacciGameClient() {
   const { gameState, startNewGame } = useFibonacciGameStore()
+  const locale = useLocale()
+  const copy = locale === 'zh' ? fibonacciCopy.zh : fibonacciCopy.en
   
   // Initialize game on mount
   useEffect(() => {
@@ -50,7 +54,7 @@ export default function FibonacciGameClient() {
   }, [gameState, gameState?.over])
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950 dark:via-orange-950 dark:to-yellow-950 relative overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden bg-[#f7f1e5] text-stone-900 dark:bg-[#17130f] dark:text-stone-100">
       {/* Animated gradient background */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <motion.div
@@ -82,81 +86,78 @@ export default function FibonacciGameClient() {
         />
       </div>
       
-      <div className="container mx-auto px-4 py-8 relative z-10">
+      <div className="relative z-10 mx-auto w-full max-w-5xl px-4 py-10 sm:px-6 sm:py-14">
         {/* Header */}
         <motion.div
-          className="text-center mb-8"
+          className="mx-auto mb-7 max-w-xl text-center"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-amber-600 via-orange-600 to-yellow-600 bg-clip-text text-transparent mb-2">
-            Fibonacci 2584
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.28em] text-amber-700 dark:text-amber-400">{copy.eyebrow}</p>
+          <h1 className="mb-3 text-4xl font-black tracking-tight text-stone-900 dark:text-stone-50 md:text-6xl">
+            {copy.title}
           </h1>
-          <p className="text-gray-600 dark:text-gray-300 text-sm">
-            Join Fibonacci numbers to reach 2584!
+          <p className="text-sm leading-6 text-stone-600 dark:text-stone-300 sm:text-base">
+            {copy.subtitle}
           </p>
         </motion.div>
         
         {/* Score Board */}
-        <FibonacciScore />
+        <FibonacciScore copy={copy} />
         
         {/* Game Board */}
         <motion.div
-          className="max-w-sm mx-auto"
+          className="mx-auto w-full max-w-[420px]"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <div className="relative">
-            <FibonacciGameBoard />
+            <FibonacciGameBoard copy={copy} />
           </div>
         </motion.div>
         
         {/* Controls */}
-        <FibonacciControls />
+        <FibonacciControls copy={copy} />
         
         {/* Game Over Modal */}
-        <FibonacciGameOver />
+        <FibonacciGameOver copy={copy} />
         
         {/* Instructions */}
         <motion.div
-          className="max-w-sm mx-auto mt-8"
+          className="mx-auto mt-10 max-w-2xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
         >
-          <div className="backdrop-blur-xl bg-white/60 dark:bg-gray-900/60 rounded-3xl shadow-lg border border-white/20 dark:border-gray-700/30 p-6">
-            <h2 className="text-lg font-bold text-amber-700 dark:text-amber-400 mb-4">
-              How to Play
+          <div className="rounded-[2rem] border border-stone-200/80 bg-white/65 p-6 shadow-[0_20px_70px_-45px_rgba(78,46,13,.55)] backdrop-blur-xl dark:border-white/10 dark:bg-white/5 sm:p-8">
+            <h2 className="mb-5 text-lg font-black text-stone-900 dark:text-stone-100">
+              {copy.howToPlay}
             </h2>
-            <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
+            <div className="grid gap-4 text-sm text-stone-700 dark:text-stone-300 sm:grid-cols-2">
               <div className="flex items-start gap-3">
                 <span className="text-2xl">🔢</span>
                 <div>
-                  <strong>Fibonacci Sequence:</strong>
-                  <p className="text-xs mt-1">1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89...</p>
+                  <strong>{copy.sequence}</strong><p className="mt-1 text-xs leading-5">{copy.sequenceDetail}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-2xl">⬆️</span>
                 <div>
-                  <strong>Swipe or Arrow Keys:</strong>
-                  <p className="text-xs mt-1">Use arrow keys or swipe to move tiles</p>
+                  <strong>{copy.move}</strong><p className="mt-1 text-xs leading-5">{copy.moveDetail}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-2xl">🔀</span>
                 <div>
-                  <strong>Merge Rule:</strong>
-                  <p className="text-xs mt-1">Adjacent same Fibonacci numbers merge (1+1=2, 2+3=5, etc.)</p>
+                  <strong>{copy.merge}</strong><p className="mt-1 text-xs leading-5">{copy.mergeDetail}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-2xl">🏆</span>
                 <div>
-                  <strong>Goal:</strong>
-                  <p className="text-xs mt-1">Reach 2584 to win!</p>
+                  <strong>{copy.goal}</strong><p className="mt-1 text-xs leading-5">{copy.goalDetail}</p>
                 </div>
               </div>
             </div>
