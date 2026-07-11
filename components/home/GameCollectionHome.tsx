@@ -3,13 +3,16 @@
 import { useMemo, useState, type CSSProperties } from 'react'
 import { Link } from '@/i18n/routing'
 import { useTranslations } from 'next-intl'
+import { useLocale } from 'next-intl'
 
 const filters = ['all', 'playable', 'math', 'spatial', 'observation', 'word'] as const
 
 type Filter = (typeof filters)[number]
+type TranslationGameId = 'nerdle' | 'fibonacci' | 'mirrorMaze' | 'glyphGarden' | 'cipherBento' | 'orbitSum'
 
 type Game = {
-  id: 'nerdle' | 'fibonacci' | 'mirrorMaze' | 'glyphGarden' | 'cipherBento' | 'orbitSum'
+  id: string
+  translationId?: TranslationGameId
   title: string
   href?: string
   filters: Filter[]
@@ -17,6 +20,10 @@ type Game = {
   surface: string
   glyph: string
   pattern: string[]
+  details?: {
+    en: { kicker: string; description: string; status: string; time: string; level: string }
+    zh: { kicker: string; description: string; status: string; time: string; level: string }
+  }
 }
 
 type SparkPuzzle = {
@@ -29,6 +36,7 @@ type SparkPuzzle = {
 const games: Game[] = [
   {
     id: 'nerdle',
+    translationId: 'nerdle',
     title: 'Nerdle',
     href: '/nerd/game',
     filters: ['math', 'playable'],
@@ -39,6 +47,7 @@ const games: Game[] = [
   },
   {
     id: 'fibonacci',
+    translationId: 'fibonacci',
     title: 'Fibonacci 2584',
     href: '/2584',
     filters: ['math', 'spatial', 'playable'],
@@ -49,6 +58,7 @@ const games: Game[] = [
   },
   {
     id: 'mirrorMaze',
+    translationId: 'mirrorMaze',
     title: 'Mirror Maze',
     href: '/mirror-maze',
     filters: ['spatial', 'observation'],
@@ -59,6 +69,7 @@ const games: Game[] = [
   },
   {
     id: 'glyphGarden',
+    translationId: 'glyphGarden',
     title: 'Glyph Garden',
     href: '/glyph-garden',
     filters: ['observation', 'playable'],
@@ -69,6 +80,7 @@ const games: Game[] = [
   },
   {
     id: 'cipherBento',
+    translationId: 'cipherBento',
     title: 'Word Cipher Box',
     href: '/word-cipher-box',
     filters: ['word', 'observation', 'playable'],
@@ -79,6 +91,7 @@ const games: Game[] = [
   },
   {
     id: 'orbitSum',
+    translationId: 'orbitSum',
     title: 'Orbit Sum',
     href: '/orbit-sum',
     filters: ['math', 'spatial', 'playable'],
@@ -86,6 +99,30 @@ const games: Game[] = [
     surface: '#e9fbfd',
     glyph: '9 + ? = 14',
     pattern: ['9', '5', '4', '◎', '7', '2', '6', '3']
+  },
+  {
+    id: 'sequenceForge', title: 'Sequence Forge', href: '/sequence-forge', filters: ['math', 'playable'], accent: '#ff6b35', surface: '#fff1e9', glyph: '2 · 4 · 8 · ?', pattern: ['2', '4', '8', '16', '1', '4', '9', '?'],
+    details: { en: { kicker: 'Number Workshop', description: 'Read layered number rhythms and forge the missing value before the pattern cools.', status: 'Playable now', time: '4 min', level: 'Medium' }, zh: { kicker: '数字工坊', description: '读懂层层递进的数字节奏，在规律冷却前锻造出缺失数值。', status: '现已可玩', time: '4 分钟', level: '中等' } }
+  },
+  {
+    id: 'patternLoom', title: 'Pattern Loom', href: '/pattern-loom', filters: ['observation', 'playable'], accent: '#e95d9b', surface: '#fff0f7', glyph: '▲ ○ ▲ ◆', pattern: ['▲', '○', '▲', '○', '◆', '◆', '○', '?'],
+    details: { en: { kicker: 'Symbol Textile', description: 'Follow alternating, mirrored and growing symbol threads to finish each visual weave.', status: 'Playable now', time: '4 min', level: 'Relaxed' }, zh: { kicker: '符号织物', description: '追踪交替、镜像与生长的符号丝线，完成每一段视觉编织。', status: '现已可玩', time: '4 分钟', level: '轻松' } }
+  },
+  {
+    id: 'equationVault', title: 'Equation Vault', href: '/equation-vault', filters: ['math', 'playable'], accent: '#b59618', surface: '#fff9dc', glyph: '7 × ? = 42', pattern: ['7', '×', '?', '42', '8', '+', '12', '20'],
+    details: { en: { kicker: 'Secure Arithmetic', description: 'Resolve missing values, operation order and compact equations to open every lock.', status: 'Playable now', time: '5 min', level: 'Advanced' }, zh: { kicker: '安全算术', description: '处理缺失值、运算顺序与紧凑等式，逐一打开数字保险锁。', status: '现已可玩', time: '5 分钟', level: '进阶' } }
+  },
+  {
+    id: 'wordBridge', title: 'Word Bridge', href: '/word-bridge', filters: ['word', 'playable'], accent: '#238cb4', surface: '#eaf8ff', glyph: 'COLD → CORD', pattern: ['C', 'O', 'L', 'D', 'C', 'O', 'R', 'D'],
+    details: { en: { kicker: 'Lexical Crossing', description: 'Change one letter at a time and find the word that safely connects both banks.', status: 'Playable now', time: '5 min', level: 'Challenging' }, zh: { kicker: '词汇桥梁', description: '每次只改变一个字母，找到能够安全连接两个单词的桥梁。', status: '现已可玩', time: '5 分钟', level: '烧脑' } }
+  },
+  {
+    id: 'logicSwitch', title: 'Logic Switch', href: '/logic-switch', filters: ['math', 'observation', 'playable'], accent: '#4d9b17', surface: '#effbe8', glyph: 'ON · OFF · ON', pattern: ['1', '∧', '0', '0', '0', '∨', '1', '1'],
+    details: { en: { kicker: 'Binary Control', description: 'Trace AND, OR, NOT and XOR rules to keep a compact control circuit true.', status: 'Playable now', time: '5 min', level: 'Medium' }, zh: { kicker: '二进制控制', description: '推导 AND、OR、NOT 与 XOR 规则，让控制电路保持正确状态。', status: '现已可玩', time: '5 分钟', level: '中等' } }
+  },
+  {
+    id: 'shapeSignal', title: 'Shape Signal', href: '/shape-signal', filters: ['spatial', 'observation', 'playable'], accent: '#8b66d6', surface: '#f5f0ff', glyph: '△ ↻ ▷', pattern: ['▲', '→', '▶', '◤', '→', '◢', '●', '○'],
+    details: { en: { kicker: 'Spatial Transmission', description: 'Infer rotations, reflections, fill changes and geometric transformations.', status: 'Playable now', time: '4 min', level: 'Medium' }, zh: { kicker: '空间传输', description: '推断旋转、镜像、填充变化与几何图形的空间变换。', status: '现已可玩', time: '4 分钟', level: '中等' } }
   }
 ]
 
@@ -112,6 +149,7 @@ const sparkPuzzles: SparkPuzzle[] = [
 
 export default function GameCollectionHome() {
   const t = useTranslations('homePage')
+  const locale = useLocale()
   const [activeFilter, setActiveFilter] = useState<Filter>('all')
   const [puzzleIndex, setPuzzleIndex] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null)
@@ -165,15 +203,15 @@ export default function GameCollectionHome() {
             <dl className="mt-12 flex max-w-xl items-center text-sm">
               <div className="flex min-w-24 flex-col">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.games')}</dt>
-                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">6</dd>
+                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">12</dd>
               </div>
               <div className="flex min-w-24 flex-col border-l border-black/10 pl-6">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.playable')}</dt>
-                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">6</dd>
+                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">12</dd>
               </div>
               <div className="flex min-w-24 flex-col border-l border-black/10 pl-6">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.styles')}</dt>
-                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">4</dd>
+                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">10</dd>
               </div>
             </dl>
           </div>
@@ -283,14 +321,14 @@ export default function GameCollectionHome() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--game-accent)]">
-                    {t(`games.${game.id}.kicker`)}
+                    {game.details ? game.details[locale === 'zh' ? 'zh' : 'en'].kicker : t(`games.${game.translationId!}.kicker`)}
                   </p>
                   <h3 className="arcade-display mt-2 text-3xl font-black leading-tight">
                     {game.title}
                   </h3>
                 </div>
                 <span className="border border-black/10 bg-white/70 px-2 py-1 text-xs font-bold text-[#34342a]">
-                  {t(`games.${game.id}.status`)}
+                  {game.details ? game.details[locale === 'zh' ? 'zh' : 'en'].status : t(`games.${game.translationId!}.status`)}
                 </span>
               </div>
 
@@ -316,17 +354,17 @@ export default function GameCollectionHome() {
               </div>
 
               <p className="min-h-20 text-base leading-7 text-[#424235]">
-                {t(`games.${game.id}.description`)}
+                {game.details ? game.details[locale === 'zh' ? 'zh' : 'en'].description : t(`games.${game.translationId!}.description`)}
               </p>
 
               <dl className="mt-auto grid grid-cols-2 gap-2 pt-5 text-sm">
                 <div className="border-t border-black/10 pt-3">
                   <dt className="text-[#6c6b5b]">{t('card.duration')}</dt>
-                  <dd className="font-black">{t(`games.${game.id}.time`)}</dd>
+                  <dd className="font-black">{game.details ? game.details[locale === 'zh' ? 'zh' : 'en'].time : t(`games.${game.translationId!}.time`)}</dd>
                 </div>
                 <div className="border-t border-black/10 pt-3">
                   <dt className="text-[#6c6b5b]">{t('card.difficulty')}</dt>
-                  <dd className="font-black">{t(`games.${game.id}.level`)}</dd>
+                  <dd className="font-black">{game.details ? game.details[locale === 'zh' ? 'zh' : 'en'].level : t(`games.${game.translationId!}.level`)}</dd>
                 </div>
               </dl>
 
