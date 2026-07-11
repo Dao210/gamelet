@@ -14,10 +14,10 @@ export default function Navigation() {
 
   // Main navigation with icons and descriptions (displayed prominently)
   const mainNavigation = [
-    { name: 'Arcade', href: '/', icon: '◆', description: 'Puzzle mini-game collection' },
+    { name: t('arcade'), href: '/', icon: '◆', description: t('arcadeDescription') },
     { name: t('nerdle'), href: '/nerd', icon: '🧮', description: t('nerdleDescription') },
-    { name: 'Fibonacci 2584', href: '/2584', icon: '🐚', description: 'Fibonacci sequence puzzle game' },
-    { name: 'Mirror Maze', href: '/mirror-maze', icon: '◩', description: 'Optical reflection puzzle' },
+    { name: 'Fibonacci 2584', href: '/2584', icon: '🐚', description: t('fibonacciDescription') },
+    { name: t('mirrorMaze'), href: '/mirror-maze', icon: '◩', description: t('mirrorMazeDescription') },
 
   ]
 
@@ -80,7 +80,7 @@ export default function Navigation() {
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-              aria-label="Toggle menu"
+              aria-label={t('toggleMenu')}
             >
               <div className="w-6 h-6 flex flex-col justify-center items-center">
                 <div

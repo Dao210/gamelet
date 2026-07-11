@@ -96,8 +96,8 @@ export default function MirrorMazeGame() {
         <header className="grid gap-7 border-b border-[#8fbdba]/20 pb-8 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <p className="mb-4 font-mono text-[11px] tracking-[.32em] text-[#81c8c2]">{t.eyebrow}</p>
-            <h1 className="font-mono text-[clamp(3.2rem,8vw,7.5rem)] font-black leading-[.78] tracking-[-.09em] text-white">
-              {t.title}<span className="block text-[#ffc857]">{t.titleAccent}</span>
+            <h1 className="whitespace-nowrap font-mono text-[clamp(2.75rem,8vw,7.5rem)] font-black leading-[.85] tracking-[-.09em] text-white">
+              {t.title}<span className="text-[#ffc857]">{t.titleAccent}</span>
             </h1>
           </div>
           <p className="max-w-md border-l-2 border-[#ffc857] pl-5 text-sm leading-7 text-[#a8bfbd] sm:text-base">{t.intro}</p>

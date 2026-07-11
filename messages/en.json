@@ -12,8 +12,15 @@
     }
   },
   "navigation": {
+    "arcade": "Arcade",
+    "arcadeDescription": "Puzzle mini-game collection",
     "nerdle": "Nerdle",
     "nerdleDescription": "Math equation guessing game",
+    "fibonacciDescription": "Fibonacci sequence puzzle game",
+    "mirrorMaze": "Mirror Maze",
+    "mirrorMazeDescription": "Optical reflection puzzle",
+    "toggleMenu": "Toggle menu",
+    "selectLanguage": "Select language",
     "garden": "Garden",
     "gardenDescription": "Creative plant social platform",
     "about": "About",

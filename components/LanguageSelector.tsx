@@ -1,13 +1,14 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { usePathname, useRouter } from '@/i18n/routing'
 import { locales, localeNames, localeFlags, type Locale } from '@/i18n/config'
 
 export default function LanguageSelector() {
   const [isOpen, setIsOpen] = useState(false)
   const locale = useLocale() as Locale
+  const t = useTranslations('navigation')
   const router = useRouter()
   const pathname = usePathname()
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -44,7 +45,7 @@ export default function LanguageSelector() {
         onClick={() => setIsOpen(!isOpen)}
         onKeyDown={handleKeyDown}
         className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-        aria-label="Select language"
+        aria-label={t('selectLanguage')}
         aria-expanded={isOpen}
         aria-haspopup="true"
       >

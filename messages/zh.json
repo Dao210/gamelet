@@ -12,8 +12,15 @@
     }
   },
   "navigation": {
+    "arcade": "游戏厅",
+    "arcadeDescription": "益智小游戏合集",
     "nerdle": "Nerdle",
     "nerdleDescription": "数学方程猜谜游戏",
+    "fibonacciDescription": "斐波那契数列合成游戏",
+    "mirrorMaze": "镜面迷宫",
+    "mirrorMazeDescription": "光学反射益智游戏",
+    "toggleMenu": "打开或关闭导航菜单",
+    "selectLanguage": "选择语言",
     "garden": "花园",
     "gardenDescription": "创意植物社交平台",
     "about": "关于",
