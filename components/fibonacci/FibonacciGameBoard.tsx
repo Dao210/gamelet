@@ -15,7 +15,7 @@ function FibonacciGameBoardInner({ copy }: { copy: FibonacciCopy }) {
   return (
     <div
       aria-label={copy.boardLabel}
-      className="relative grid aspect-square w-full touch-none grid-cols-4 grid-rows-4 gap-2.5 rounded-[1.75rem] border border-amber-950/10 bg-[#a87645] p-3 shadow-[0_30px_80px_-35px_rgba(87,48,14,.75),inset_0_1px_0_rgba(255,255,255,.35)] sm:gap-3 sm:p-4"
+      className="relative aspect-square w-full touch-none rounded-[1.75rem] border border-amber-950/10 bg-[#a87645] p-3 shadow-[0_30px_80px_-35px_rgba(87,48,14,.75),inset_0_1px_0_rgba(255,255,255,.35)] sm:p-4"
       onPointerDown={(event) => { touchStart.current = { x: event.clientX, y: event.clientY } }}
       onPointerUp={(event) => {
         if (!touchStart.current) return
@@ -26,20 +26,21 @@ function FibonacciGameBoardInner({ copy }: { copy: FibonacciCopy }) {
         move(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up'))
       }}
     >
-      {/* Background cells */}
-      {Array(16).fill(null).map((_, i) => (
-        <div 
-          key={`bg-${i}`}
-          className="aspect-square min-w-0 rounded-2xl bg-amber-950/15 shadow-inner"
-        />
-      ))}
-      
-      {/* Tiles */}
-      {gameState.tiles.map((tile) => (
+      <div aria-hidden="true" className="grid h-full w-full grid-cols-4 grid-rows-4 gap-2.5 sm:gap-3">
+        {Array(16).fill(null).map((_, i) => (
+          <div
+            key={`bg-${i}`}
+            className="min-h-0 min-w-0 rounded-2xl bg-amber-950/15 shadow-[inset_0_2px_5px_rgba(65,35,9,.1)]"
+          />
+        ))}
+      </div>
+
+      <div className="pointer-events-none absolute inset-3 grid grid-cols-4 grid-rows-4 gap-2.5 sm:inset-4 sm:gap-3">
+        {gameState.tiles.map((tile) => (
           <motion.div
             key={tile.id}
             className={`
-              z-10 flex min-w-0 items-center justify-center rounded-2xl
+              z-10 flex min-h-0 min-w-0 items-center justify-center rounded-2xl
               font-black tabular-nums shadow-[0_6px_16px_rgba(65,35,9,.22)]
               ${getTileColor(tile.value)}
               ${getTextColor(tile.value)}
@@ -59,7 +60,8 @@ function FibonacciGameBoardInner({ copy }: { copy: FibonacciCopy }) {
           >
             {tile.value}
           </motion.div>
-      ))}
+        ))}
+      </div>
     </div>
   )
 }
