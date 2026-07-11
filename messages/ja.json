@@ -35,6 +35,7 @@
     "expert": "エキスパート"
   },
   "gameKeyboard": {
+    "ariaKeyboard": "数式入力用の仮想キーボード",
     "enter": "Enter",
     "backspace": "⌫",
     "ariaEnterNumber": "数字{key}を入力",

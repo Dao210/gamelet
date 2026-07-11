@@ -3,6 +3,21 @@ import { render, screen, fireEvent, act } from '@testing-library/react'
 import { useGameStore } from '../../lib/store'
 import GameKeyboard from '../../components/GameKeyboard'
 
+jest.mock('next-intl', () => ({
+  useTranslations: () => (key: string, values?: { key?: string }) => {
+    const messages: Record<string, string> = {
+      enter: 'Enter',
+      ariaKeyboard: 'Virtual keyboard for math equation input',
+      ariaEnterNumber: `Enter ${values?.key} number`,
+      ariaEnterOperator: `Enter ${values?.key} operator`,
+      ariaBackspace: 'Backspace delete last character',
+      ariaSubmitEnabled: 'Submit equation',
+      ariaSubmitDisabled: 'Submit equation (disabled - equation incomplete)'
+    }
+    return messages[key]
+  }
+}))
+
 // Mock the game store
 jest.mock('../../lib/store')
 const mockUseGameStore = useGameStore as jest.MockedFunction<typeof useGameStore>

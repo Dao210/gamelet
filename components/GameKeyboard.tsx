@@ -4,12 +4,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useGameStore } from '../lib/store'
 import { isValidChar } from '../lib/game-engine'
+import { useTranslations } from 'next-intl'
 
 interface GameKeyboardProps {
   className?: string
 }
 
 export default function GameKeyboard({ className = '' }: GameKeyboardProps) {
+  const t = useTranslations('gameKeyboard')
   const { gameState, currentAttempt, addCharToAttempt, removeCharFromAttempt, submitAttempt } = useGameStore()
   const keyboardRef = useRef<HTMLDivElement>(null)
   const [pressedKey, setPressedKey] = useState<string | null>(null)
@@ -92,7 +94,7 @@ export default function GameKeyboard({ className = '' }: GameKeyboardProps) {
       data-keyboard-container
       data-game-area
       role="application"
-      aria-label="Virtual keyboard for math equation input"
+      aria-label={t('ariaKeyboard')}
       className={`
         flex flex-col gap-2 select-none
         outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg
@@ -134,7 +136,7 @@ export default function GameKeyboard({ className = '' }: GameKeyboardProps) {
               disabled={gameState?.status !== 'playing'}
               whileHover={{ scale: gameState?.status === 'playing' ? 1.05 : 1 }}
               whileTap={{ scale: gameState?.status === 'playing' ? 0.95 : 1 }}
-              aria-label={`Enter ${key} ${'+-*/='.includes(key) ? 'operator' : 'number'}`}
+              aria-label={t('+-*/='.includes(key) ? 'ariaEnterOperator' : 'ariaEnterNumber', { key })}
               aria-disabled={gameState?.status !== 'playing'}
             >
               {key}
@@ -167,7 +169,7 @@ export default function GameKeyboard({ className = '' }: GameKeyboardProps) {
           disabled={gameState?.status !== 'playing' || currentAttempt.length === 0}
           whileHover={{ scale: (gameState?.status === 'playing' && currentAttempt.length > 0) ? 1.05 : 1 }}
           whileTap={{ scale: (gameState?.status === 'playing' && currentAttempt.length > 0) ? 0.95 : 1 }}
-          aria-label="Backspace delete last character"
+          aria-label={t('ariaBackspace')}
           aria-disabled={gameState?.status !== 'playing' || currentAttempt.length === 0}
         >
           ⌫
@@ -196,10 +198,10 @@ export default function GameKeyboard({ className = '' }: GameKeyboardProps) {
           disabled={!canSubmit}
           whileHover={{ scale: canSubmit ? 1.05 : 1 }}
           whileTap={{ scale: canSubmit ? 0.95 : 1 }}
-          aria-label={`Submit equation ${canSubmit ? '' : '(disabled - equation incomplete)'}`}
+          aria-label={t(canSubmit ? 'ariaSubmitEnabled' : 'ariaSubmitDisabled')}
           aria-disabled={!canSubmit}
         >
-          Enter
+          {t('enter')}
         </motion.button>
       </div>
     </div>

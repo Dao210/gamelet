@@ -2,7 +2,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
-import { type Locale } from '@/i18n/config'
+import { isValidLocale } from '@/i18n/config'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import { setRequestLocale } from 'next-intl/server'
@@ -19,13 +19,14 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
+  if (!isValidLocale(locale)) notFound()
 
   // Get current pathname (defaults to root for layout)
   const pathname = '/'
 
   return {
     alternates: {
-      canonical: getCanonicalUrl(pathname, locale as Locale),
+      canonical: getCanonicalUrl(pathname, locale),
       languages: generateLanguageAlternates(pathname)
     }
   }
@@ -41,7 +42,7 @@ export default async function LocaleLayout({
   const { locale } = await params
 
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as Locale)) {
+  if (!isValidLocale(locale)) {
     notFound()
   }
 
@@ -53,7 +54,7 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <WebSiteSchema locale={locale as Locale} />
+      <WebSiteSchema locale={locale} />
       <OrganizationSchema />
       <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
         <Navigation />
@@ -63,5 +64,4 @@ export default async function LocaleLayout({
     </NextIntlClientProvider>
   )
 }
-
 

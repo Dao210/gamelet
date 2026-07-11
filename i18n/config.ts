@@ -3,9 +3,9 @@
  * Central configuration for internationalization settings
  */
 
-export type Locale = 'en' | 'es' | 'fr' | 'de' | 'it' | 'ru' | 'ja' | 'zh'
+export const locales = ['en', 'es', 'fr', 'de', 'it', 'ru', 'ja', 'zh'] as const
 
-export const locales: Locale[] = ['en', 'es', 'fr', 'de', 'it', 'ru', 'ja', 'zh']
+export type Locale = (typeof locales)[number]
 
 export const defaultLocale: Locale = 'en'
 
@@ -47,7 +47,7 @@ export const openGraphLocaleMap: Record<Locale, string> = {
  * Check if a given string is a valid locale
  */
 export function isValidLocale(locale: string): locale is Locale {
-  return locales.includes(locale as Locale)
+  return (locales as readonly string[]).includes(locale)
 }
 
 /**
@@ -70,7 +70,7 @@ export function getLocaleFromPathname(pathname: string): Locale {
  */
 export function removeLocalePrefix(pathname: string, locale: Locale): string {
   const localePrefix = `/${locale}`
-  if (pathname.startsWith(localePrefix)) {
+  if (pathname === localePrefix || pathname.startsWith(`${localePrefix}/`)) {
     return pathname.slice(localePrefix.length) || '/'
   }
 
@@ -81,5 +81,6 @@ export function removeLocalePrefix(pathname: string, locale: Locale): string {
  * Add locale prefix to pathname
  */
 export function addLocalePrefix(pathname: string, locale: Locale): string {
-  return `/${locale}${pathname === '/' ? '' : pathname}`
+  const normalizedPath = pathname.startsWith('/') ? pathname : `/${pathname}`
+  return `/${locale}${normalizedPath === '/' ? '' : normalizedPath}`
 }

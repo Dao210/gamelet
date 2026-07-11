@@ -3,23 +3,18 @@
  */
 
 import { getRequestConfig } from 'next-intl/server'
-import { routing } from './routing'
+import { defaultLocale, isValidLocale } from './config'
 
 export default getRequestConfig(async ({ requestLocale }) => {
   // This typically corresponds to the `[locale]` segment
-  let locale = await requestLocale
-
-  // Ensure that the incoming locale is valid
-  if (!locale || !routing.locales.includes(locale as any)) {
-    locale = routing.defaultLocale
-  }
+  const requestedLocale = await requestLocale
+  const locale = requestedLocale && isValidLocale(requestedLocale)
+    ? requestedLocale
+    : defaultLocale
 
   return {
     locale,
     messages: (await import(`../messages/${locale}.json`)).default,
-    // Configure time zone (optional)
-    timeZone: 'UTC',
-    // Now configuration (optional)
-    now: new Date()
+    timeZone: 'UTC'
   }
 })

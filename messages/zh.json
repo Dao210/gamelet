@@ -35,6 +35,7 @@
     "expert": "专家"
   },
   "gameKeyboard": {
+    "ariaKeyboard": "用于输入数学方程的虚拟键盘",
     "enter": "输入",
     "backspace": "⌫",
     "ariaEnterNumber": "输入数字 {key}",

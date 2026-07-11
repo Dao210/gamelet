@@ -35,6 +35,7 @@
     "expert": "Expert"
   },
   "gameKeyboard": {
+    "ariaKeyboard": "Virtual keyboard for math equation input",
     "enter": "Enter",
     "backspace": "⌫",
     "ariaEnterNumber": "Enter {key} number",

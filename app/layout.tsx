@@ -2,6 +2,8 @@ import '../styles/globals.css'
 import { GoogleAnalytics } from '../components/GoogleAnalytics'
 import MobileOptimization from '../components/MobileOptimization'
 import { ReactNode } from 'react'
+import { getLocale } from 'next-intl/server'
+import { defaultLocale, isValidLocale } from '@/i18n/config'
 
 export const metadata = {
   title: {
@@ -57,9 +59,12 @@ type Props = {
   children: ReactNode
 }
 
-export default function RootLayout({ children }: Props) {
+export default async function RootLayout({ children }: Props) {
+  const requestedLocale = await getLocale()
+  const locale = isValidLocale(requestedLocale) ? requestedLocale : defaultLocale
+
   return (
-    <html className="h-full">
+    <html lang={locale} className="h-full">
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
