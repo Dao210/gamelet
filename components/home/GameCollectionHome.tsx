@@ -69,8 +69,9 @@ const games: Game[] = [
   },
   {
     id: 'cipherBento',
-    title: 'Cipher Bento',
-    filters: ['word', 'observation'],
+    title: 'Word Cipher Box',
+    href: '/word-cipher-box',
+    filters: ['word', 'observation', 'playable'],
     accent: '#db3f5d',
     surface: '#fff0f3',
     glyph: 'A1 B2 C3',
@@ -167,7 +168,7 @@ export default function GameCollectionHome() {
               </div>
               <div className="flex min-w-24 flex-col border-l border-black/10 pl-6">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.playable')}</dt>
-                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">4</dd>
+                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">5</dd>
               </div>
               <div className="flex min-w-24 flex-col border-l border-black/10 pl-6">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.styles')}</dt>

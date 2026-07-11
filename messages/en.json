@@ -280,8 +280,8 @@
       "nerdle": { "kicker": "Equation Detective", "description": "Uncover the hidden equation in six guesses as color feedback gradually reveals the answer.", "status": "Playable now", "time": "4 min", "level": "Medium" },
       "fibonacci": { "kicker": "Sequence Merge", "description": "Slide tiles like 2048, but only neighboring Fibonacci numbers can merge.", "status": "Playable now", "time": "7 min", "level": "Advanced" },
       "mirrorMaze": { "kicker": "Reflection Maze", "description": "Rotate mirrors to guide a beam of light past traps and into the target.", "status": "Playable now", "time": "5 min", "level": "Medium" },
-      "glyphGarden": { "kicker": "Growing Patterns", "description": "Observe how symbols grow and choose the shape that should bloom next.", "status": "In design", "time": "3 min", "level": "Relaxed" },
-      "cipherBento": { "kicker": "Word Cipher Box", "description": "Crack phrases from tiny clues, opening the puzzle one compartment at a time.", "status": "In design", "time": "6 min", "level": "Challenging" },
+      "glyphGarden": { "kicker": "Growing Patterns", "description": "Spot the one unusual symbol and grow a collection of rare blooms.", "status": "Playable now", "time": "3 min", "level": "Relaxed" },
+      "cipherBento": { "kicker": "Substitution Archive", "description": "Crack phrases from tiny clues, opening the puzzle one compartment at a time.", "status": "Playable now", "time": "6 min", "level": "Challenging" },
       "orbitSum": { "kicker": "Orbital Addition", "description": "Push numbers into orbit until every ring balances to its target sum.", "status": "In design", "time": "8 min", "level": "Expert" }
     },
     "nextDrop": {

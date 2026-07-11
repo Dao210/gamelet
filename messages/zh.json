@@ -280,8 +280,8 @@
       "nerdle": { "kicker": "方程侦探", "description": "用 6 次猜测拆开隐藏算式，颜色反馈会一点点暴露答案。", "status": "现在可玩", "time": "4 分钟", "level": "中等" },
       "fibonacci": { "kicker": "数列合成", "description": "像 2048 一样滑动方块，但只有相邻斐波那契数字才能合并。", "status": "现在可玩", "time": "7 分钟", "level": "进阶" },
       "mirrorMaze": { "kicker": "反射迷宫", "description": "旋转镜面，让一束光绕过陷阱抵达目标出口。", "status": "现已可玩", "time": "5 分钟", "level": "中等" },
-      "glyphGarden": { "kicker": "图形生长", "description": "观察符号的成长规则，选择下一朵会出现的图形。", "status": "新游戏设计中", "time": "3 分钟", "level": "轻松" },
-      "cipherBento": { "kicker": "文字密码盒", "description": "用极短线索破解词组，像拆便当一样一格一格打开。", "status": "新游戏设计中", "time": "6 分钟", "level": "烧脑" },
+      "glyphGarden": { "kicker": "图形生长", "description": "找出唯一不同的符号，收集一座稀有花朵园。", "status": "现已可玩", "time": "3 分钟", "level": "轻松" },
+      "cipherBento": { "kicker": "替换密码档案", "description": "根据简短线索破解词组，一格一格打开机密密码盒。", "status": "现已可玩", "time": "6 分钟", "level": "烧脑" },
       "orbitSum": { "kicker": "轨道加法", "description": "把数字推入轨道，让每一圈都刚好配平目标和。", "status": "新游戏设计中", "time": "8 分钟", "level": "高手" }
     },
     "nextDrop": {
