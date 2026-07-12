@@ -8,8 +8,10 @@ import GameBoard from '@/components/GameBoard'
 import GameKeyboard from '@/components/GameKeyboard'
 import GameResult from '@/components/GameResult'
 import ValidationFeedback from '@/components/ValidationFeedback'
+import { useTranslations } from 'next-intl'
 
 export default function GamePageClient() {
+  const instructions = useTranslations('gameInstructions')
   const { gameState, startNewGame, currentAttempt } = useGameStore();
 
   // Start a classic game if no game is active
@@ -109,25 +111,21 @@ export default function GamePageClient() {
         >
           <div className="backdrop-blur-xl bg-white/60 dark:bg-gray-900/60 rounded-3xl shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] border border-white/20 dark:border-gray-700/30 p-6">
             <h2 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
-              How to Play Nerdle
+              {instructions('howToPlay')}
             </h2>
             <div className="grid md:grid-cols-2 gap-6 text-sm text-gray-700 dark:text-gray-300">
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Rules:</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{instructions('rules')}</h3>
                 <ul className="space-y-1">
-                  <li>• Guess the equation in 6 tries</li>
-                  <li>• Each guess must be a valid equation</li>
-                  <li>• Use numbers 0-9 and +,-,*,/</li>
-                  <li>• Must contain exactly one =</li>
-                  <li>• Result must be a positive integer</li>
+                  {(['rule1', 'rule2', 'rule3', 'rule4', 'rule5'] as const).map(key => <li key={key}>• {instructions(key)}</li>)}
                 </ul>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Colors:</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{instructions('colors')}</h3>
                 <ul className="space-y-1">
-                  <li>• <span className="text-green-600 dark:text-green-400 font-semibold">Green</span>: Correct position</li>
-                  <li>• <span className="text-yellow-600 dark:text-yellow-400 font-semibold">Yellow</span>: Wrong position</li>
-                  <li>• <span className="text-gray-600 dark:text-gray-400 font-semibold">Gray</span>: Not in equation</li>
+                  <li className="text-green-600 dark:text-green-400">• {instructions('colorGreen')}</li>
+                  <li className="text-yellow-600 dark:text-yellow-400">• {instructions('colorYellow')}</li>
+                  <li className="text-gray-600 dark:text-gray-400">• {instructions('colorGray')}</li>
                 </ul>
               </div>
             </div>

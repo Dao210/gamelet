@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { locales } from '@/i18n/config'
+import { publicLocales } from '@/i18n/config'
 import {
   getBaseUrl,
   getChangeFrequency,
@@ -54,7 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = []
 
   routes.forEach(route => {
-    locales.forEach(locale => {
+    publicLocales.forEach(locale => {
       // Generate language alternates for this route
       const languages = generateLanguageAlternates(route)
 

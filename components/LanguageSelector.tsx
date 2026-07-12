@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import { usePathname, useRouter } from '@/i18n/routing'
-import { locales, localeNames, localeFlags, type Locale } from '@/i18n/config'
+import { publicLocales, localeNames, localeFlags, type Locale } from '@/i18n/config'
 
 export default function LanguageSelector() {
   const [isOpen, setIsOpen] = useState(false)
@@ -67,7 +67,7 @@ export default function LanguageSelector() {
 
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50">
-          {locales.map((loc) => (
+          {publicLocales.map((loc) => (
             <button
               key={loc}
               onClick={() => handleLocaleChange(loc)}

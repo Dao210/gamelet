@@ -28,6 +28,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "type-check": "tsc --noEmit",
+    "i18n:check": "node scripts/check-i18n.mjs",
     "preview": "next build && next start",
     "test": "jest",
     "test:watch": "jest --watch",

@@ -251,6 +251,43 @@
     "finalCtaTrust2": "Free forever",
     "finalCtaTrust3": "Daily puzzles"
   },
+  "legalPages": {
+    "privacy": {
+      "title": "Privacy Policy",
+      "description": "Learn how Gamelet handles analytics, local game progress, and creative content data.",
+      "intro": "Gamelet is built for lightweight play. We keep data collection narrow and use it to operate games, remember local progress, understand aggregate usage, and protect creative community features.",
+      "storageTitle": "What We Store",
+      "storageText": "Puzzle progress, settings, streaks, and best scores may be stored in your browser. Grassland artwork and watering activity may be stored on our servers when you choose to publish a plant.",
+      "analyticsTitle": "Analytics and Advertising",
+      "analyticsText": "We use analytics to understand aggregate product performance. Pages may load Google services for analytics or advertising, which can process device and usage signals under their own policies.",
+      "contentTitle": "User Content",
+      "contentText": "Published plant artwork is public by design. Do not upload private, sensitive, or copyrighted material unless you have the right to share it.",
+      "contactTitle": "Contact",
+      "contactText": "For privacy questions or content removal requests, contact us through the contact page."
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "description": "The basic rules for playing Gamelet puzzle games and publishing creative content.",
+      "intro": "By using Gamelet, you agree to play fairly, respect other people's creative work, and avoid using the service in ways that damage the games or community.",
+      "fairPlayTitle": "Fair Play",
+      "fairPlayText": "Do not automate gameplay, abuse sharing features, attack APIs, or manipulate scoring and growth systems.",
+      "contentTitle": "Creative Content",
+      "contentText": "You are responsible for artwork you publish. Keep uploads lawful, respectful, and appropriate for a broad audience.",
+      "availabilityTitle": "Availability",
+      "availabilityText": "Gamelet is an evolving game platform. Features may change as we improve gameplay, safety, performance, and community tools.",
+      "moderationTitle": "Moderation",
+      "moderationText": "We may remove content or restrict access when needed to protect users, comply with the law, or keep the games reliable."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Contact Gamelet for product feedback, privacy requests, and creative content concerns.",
+      "intro": "Send product feedback, report creative content, or ask about privacy and data requests. We keep this simple while the arcade grows.",
+      "email": "Email",
+      "emailHint": "Include the page URL, game name, and any relevant plant or puzzle details so we can understand your request quickly.",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    }
+  },
   "homePage": {
     "hero": {
       "title": "Think smarter,",

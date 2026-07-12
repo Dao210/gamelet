@@ -251,6 +251,43 @@
     "finalCtaTrust2": "永久免费",
     "finalCtaTrust3": "每日谜题"
   },
+  "legalPages": {
+    "privacy": {
+      "title": "隐私政策",
+      "description": "了解 Gamelet 如何处理分析数据、本地游戏进度与创作内容。",
+      "intro": "Gamelet 专注于轻量、愉快的游戏体验。我们仅收集维持游戏运行、保存本地进度、了解整体使用情况以及保护创作社区所必需的数据。",
+      "storageTitle": "我们保存的信息",
+      "storageText": "游戏进度、偏好设置、连续记录和最高分可能保存在你的浏览器中。只有当你主动发布植物时，草原作品和浇水记录才会保存在我们的服务器上。",
+      "analyticsTitle": "数据分析与广告",
+      "analyticsText": "我们使用汇总数据了解产品的整体表现。部分页面可能加载 Google 的分析或广告服务，并依据其各自的政策处理设备与使用信息。",
+      "contentTitle": "用户内容",
+      "contentText": "发布的植物作品默认公开展示。请勿上传隐私、敏感或无权分享的受版权保护内容。",
+      "contactTitle": "联系我们",
+      "contactText": "如有隐私问题或内容删除请求，请通过联系页面与我们沟通。"
+    },
+    "terms": {
+      "title": "服务条款",
+      "description": "了解使用 Gamelet 游戏和发布创作内容时需要遵守的基本规则。",
+      "intro": "使用 Gamelet 即表示你同意公平游戏、尊重他人的创作，并避免以损害游戏或社区的方式使用本服务。",
+      "fairPlayTitle": "公平游戏",
+      "fairPlayText": "请勿使用自动化程序进行游戏、滥用分享功能、攻击 API，或操纵计分与成长系统。",
+      "contentTitle": "创作内容",
+      "contentText": "你需要对自己发布的作品负责。上传内容应合法、尊重他人，并适合广泛受众浏览。",
+      "availabilityTitle": "服务可用性",
+      "availabilityText": "Gamelet 是一个持续演进的游戏平台。为了改善玩法、安全性、性能和社区工具，部分功能可能随时调整。",
+      "moderationTitle": "内容管理",
+      "moderationText": "为保护用户、遵守法律或维持游戏稳定，我们可能删除内容或限制相关访问。"
+    },
+    "contact": {
+      "title": "联系我们",
+      "description": "就产品建议、隐私请求或创作内容问题联系 Gamelet。",
+      "intro": "你可以向我们提交产品建议、举报创作内容，或咨询隐私和数据相关问题。随着游戏馆成长，我们仍会保持沟通方式简单直接。",
+      "email": "电子邮箱",
+      "emailHint": "请附上页面地址、游戏名称，以及相关植物或谜题信息，帮助我们快速理解并处理你的请求。",
+      "privacy": "隐私政策",
+      "terms": "服务条款"
+    }
+  },
   "homePage": {
     "hero": {
       "title": "聪明一点，",

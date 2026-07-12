@@ -30,13 +30,14 @@ export default getRequestConfig(async ({ requestLocale }) => {
     ? requestedLocale
     : defaultLocale
 
-  const localizedMessages = (await import(`../messages/${locale}.json`)).default
+  if (locale === defaultLocale) {
+    return { locale, messages: englishMessages, timeZone: 'UTC' }
+  }
 
+  const localizedMessages = (await import(`../messages/${locale}.json`)).default
   return {
     locale,
-    messages: locale === defaultLocale
-      ? englishMessages
-      : mergeMessages(englishMessages, localizedMessages),
+    messages: mergeMessages(englishMessages, localizedMessages),
     timeZone: 'UTC'
   }
 })

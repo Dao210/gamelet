@@ -1,4 +1,4 @@
-import { locales, defaultLocale, type Locale, openGraphLocaleMap } from '@/i18n/config'
+import { publicLocales, defaultLocale, type Locale, openGraphLocaleMap } from '@/i18n/config'
 
 const baseUrl = 'https://gamelet.app'
 
@@ -20,7 +20,7 @@ export function getLocalizedPath(pathname: string, locale: Locale): string {
 export function generateLanguageAlternates(pathname: string): Record<string, string> {
   const languages: Record<string, string> = {}
 
-  locales.forEach(locale => {
+  publicLocales.forEach(locale => {
     languages[locale] = `${baseUrl}${getLocalizedPath(pathname, locale)}`
   })
 

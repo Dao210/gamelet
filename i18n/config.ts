@@ -7,7 +7,31 @@ export const locales = ['en', 'es', 'fr', 'de', 'it', 'ru', 'ja', 'zh'] as const
 
 export type Locale = (typeof locales)[number]
 
+export type LocaleStatus = 'complete' | 'beta' | 'hidden'
+
 export const defaultLocale: Locale = 'en'
+
+export const localeConfig: Record<Locale, { status: LocaleStatus; fallback: Locale | null }> = {
+  en: { status: 'complete', fallback: null },
+  zh: { status: 'complete', fallback: 'en' },
+  es: { status: 'hidden', fallback: 'en' },
+  ja: { status: 'hidden', fallback: 'en' },
+  de: { status: 'hidden', fallback: 'en' },
+  fr: { status: 'hidden', fallback: 'en' },
+  it: { status: 'hidden', fallback: 'en' },
+  ru: { status: 'hidden', fallback: 'en' }
+}
+
+/** Locales that meet the quality bar for navigation, indexing and hreflang. */
+export const publicLocales = locales.filter(
+  locale => localeConfig[locale].status !== 'hidden'
+)
+
+export type PublicLocale = (typeof publicLocales)[number]
+
+export function isPublicLocale(locale: Locale): boolean {
+  return localeConfig[locale].status !== 'hidden'
+}
 
 export const localeNames: Record<Locale, string> = {
   en: 'English',
