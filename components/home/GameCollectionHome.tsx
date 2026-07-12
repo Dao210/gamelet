@@ -123,6 +123,30 @@ const games: Game[] = [
   {
     id: 'shapeSignal', title: 'Shape Signal', href: '/shape-signal', filters: ['spatial', 'observation', 'playable'], accent: '#8b66d6', surface: '#f5f0ff', glyph: '△ ↻ ▷', pattern: ['▲', '→', '▶', '◤', '→', '◢', '●', '○'],
     details: { en: { kicker: 'Spatial Transmission', description: 'Infer rotations, reflections, fill changes and geometric transformations.', status: 'Playable now', time: '4 min', level: 'Medium' }, zh: { kicker: '空间传输', description: '推断旋转、镜像、填充变化与几何图形的空间变换。', status: '现已可玩', time: '4 分钟', level: '中等' } }
+  },
+  {
+    id: 'shadowCartographer', title: 'Shadow Cartographer', href: '/shadow-cartographer', filters: ['spatial', 'observation', 'playable'], accent: '#b87822', surface: '#fff4df', glyph: '◐ / ◑', pattern: ['☀', '→', '■', '◼', '□', '◼', '×', '□'],
+    details: { en: { kicker: 'Impossible Instrument 13-A', description: 'Rotate the light source and draw a precise map using the absence of light.', status: 'Playable now', time: '6 min', level: 'Advanced' }, zh: { kicker: '不可能仪器 13-A', description: '旋转光源，用光的缺席绘制一张精确的阴影地图。', status: '现已可玩', time: '6 分钟', level: '进阶' } }
+  },
+  {
+    id: 'mobiusMailroom', title: 'Möbius Mailroom', href: '/mobius-mailroom', filters: ['spatial', 'playable'], accent: '#278f87', surface: '#eafbf8', glyph: 'A ∞ B', pattern: ['A', '→', '↩', 'B', 'B', '←', '↩', 'A'],
+    details: { en: { kicker: 'Impossible Instrument 13-B', description: 'Route a courier across both faces of a strip where every edge reverses space.', status: 'Playable now', time: '8 min', level: 'Expert' }, zh: { kicker: '不可能仪器 13-B', description: '在越过边缘就会反转空间的纸带正反面规划邮车路线。', status: '现已可玩', time: '8 分钟', level: '高手' } }
+  },
+  {
+    id: 'echoOrchard', title: 'Echo Orchard', href: '/echo-orchard', filters: ['observation', 'playable'], accent: '#67992c', surface: '#f2fae7', glyph: '♬ ↔ ♬', pattern: ['1', '2', '3', '→', '3', '2', '1', '♬'],
+    details: { en: { kicker: 'Impossible Instrument 13-C', description: 'Predict how a memory transforms itself instead of simply repeating it.', status: 'Playable now', time: '4 min', level: 'Medium' }, zh: { kicker: '不可能仪器 13-C', description: '预测一段记忆如何改变自身，而不是简单地重复序列。', status: '现已可玩', time: '4 分钟', level: '中等' } }
+  },
+  {
+    id: 'gravityGrammar', title: 'Gravity Grammar', href: '/gravity-grammar', filters: ['word', 'spatial', 'playable'], accent: '#c65330', surface: '#fff0e8', glyph: 'RED PULLS ↑', pattern: ['RED', 'IS', '↓', '●', 'BLUE', 'IS', '←', '●'],
+    details: { en: { kicker: 'Impossible Instrument 13-D', description: 'Rearrange type blocks to write the physical laws that move matter.', status: 'Playable now', time: '7 min', level: 'Advanced' }, zh: { kicker: '不可能仪器 13-D', description: '重新排列铅字，写出能够推动物质的物理定律。', status: '现已可玩', time: '7 分钟', level: '进阶' } }
+  },
+  {
+    id: 'ruleFossil', title: 'Rule Fossil', href: '/rule-fossil', filters: ['observation', 'playable'], accent: '#9b6a3d', surface: '#f9f0e5', glyph: '⌬ ✓ / ×', pattern: ['▲', '✓', '●', '×', '■■', '✓', '◆', '?'],
+    details: { en: { kicker: 'Impossible Instrument 13-E', description: 'Design your own experiments and excavate the hidden classification law.', status: 'Playable now', time: '6 min', level: 'Challenging' }, zh: { kicker: '不可能仪器 13-E', description: '主动设计实验标本，逐步发掘隐藏的分类规律。', status: '现已可玩', time: '6 分钟', level: '烧脑' } }
+  },
+  {
+    id: 'clockworkAlibi', title: 'Clockwork Alibi', href: '/clockwork-alibi', filters: ['observation', 'word', 'playable'], accent: '#b94363', surface: '#fff0f4', glyph: 'A < B < C', pattern: ['◷', 'A', '→', 'B', '×', 'C', '→', '?'],
+    details: { en: { kicker: 'Impossible Instrument 13-F', description: 'Reorder events until every changing witness statement becomes true at once.', status: 'Playable now', time: '10 min', level: 'Expert' }, zh: { kicker: '不可能仪器 13-F', description: '重新排列事件，直到所有随时间变化的证词同时成立。', status: '现已可玩', time: '10 分钟', level: '高手' } }
   }
 ]
 
@@ -203,11 +227,11 @@ export default function GameCollectionHome() {
             <dl className="mt-12 flex max-w-xl items-center text-sm">
               <div className="flex min-w-24 flex-col">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.games')}</dt>
-                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">12</dd>
+                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">18</dd>
               </div>
               <div className="flex min-w-24 flex-col border-l border-black/10 pl-6">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.playable')}</dt>
-                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">12</dd>
+                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">18</dd>
               </div>
               <div className="flex min-w-24 flex-col border-l border-black/10 pl-6">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.styles')}</dt>
