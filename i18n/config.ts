@@ -15,8 +15,8 @@ export const localeConfig: Record<Locale, { status: LocaleStatus; fallback: Loca
   en: { status: 'complete', fallback: null },
   zh: { status: 'complete', fallback: 'en' },
   es: { status: 'complete', fallback: 'en' },
-  ja: { status: 'hidden', fallback: 'en' },
-  de: { status: 'hidden', fallback: 'en' },
+  ja: { status: 'complete', fallback: 'en' },
+  de: { status: 'complete', fallback: 'en' },
   fr: { status: 'hidden', fallback: 'en' },
   it: { status: 'hidden', fallback: 'en' },
   ru: { status: 'hidden', fallback: 'en' }

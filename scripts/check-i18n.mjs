@@ -4,7 +4,7 @@ import process from 'node:process'
 
 const root = process.cwd()
 const messagesDirectory = path.join(root, 'messages')
-const publicLocales = ['en', 'es', 'zh']
+const publicLocales = ['de', 'en', 'es', 'ja', 'zh']
 const localeFiles = fs.readdirSync(messagesDirectory).filter(file => file.endsWith('.json')).sort()
 
 function flatten(value, prefix = '', result = {}) {
