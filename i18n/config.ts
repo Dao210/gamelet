@@ -14,7 +14,7 @@ export const defaultLocale: Locale = 'en'
 export const localeConfig: Record<Locale, { status: LocaleStatus; fallback: Locale | null }> = {
   en: { status: 'complete', fallback: null },
   zh: { status: 'complete', fallback: 'en' },
-  es: { status: 'hidden', fallback: 'en' },
+  es: { status: 'complete', fallback: 'en' },
   ja: { status: 'hidden', fallback: 'en' },
   de: { status: 'hidden', fallback: 'en' },
   fr: { status: 'hidden', fallback: 'en' },
