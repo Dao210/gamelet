@@ -146,7 +146,7 @@ export default function WordCipherBoxGame() {
   const usedLetters = new Set(Object.values(assignments))
 
   return (
-    <main className="relative min-h-[calc(100vh-4rem)] overflow-hidden bg-[#17191c] text-[#f2ead9]">
+    <main className="mobile-screen safe-bottom relative overflow-hidden bg-[#17191c] text-[#f2ead9]">
       <div className="pointer-events-none absolute inset-0 opacity-25" aria-hidden="true" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px), radial-gradient(circle at 75% 12%, #c24b36 0, transparent 26%)', backgroundSize: '24px 24px, 24px 24px, auto' }} />
       <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-7 lg:py-12">
         <header className="grid gap-6 border-b border-[#f2ead9]/15 pb-8 lg:grid-cols-[1fr_420px] lg:items-end">

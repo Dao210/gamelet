@@ -55,20 +55,23 @@ export default function ParticleLayer({
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    // 设置 Canvas 尺寸为视口尺寸
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+    // 设置 Canvas 尺寸为视口尺寸，并限制高 DPR 设备的填充率成本
     const resizeCanvas = () => {
       const rect = canvas.getBoundingClientRect()
-      canvas.width = rect.width
-      canvas.height = rect.height
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5)
+      canvas.width = Math.round(rect.width * pixelRatio)
+      canvas.height = Math.round(rect.height * pixelRatio)
+      canvas.style.width = `${rect.width}px`
+      canvas.style.height = `${rect.height}px`
+      ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
 
       // 更新粒子系统边界
       if (particleSystemRef.current) {
-        particleSystemRef.current.setBounds(canvas.width, canvas.height)
+        particleSystemRef.current.setBounds(rect.width, rect.height)
       }
     }
-
-    resizeCanvas()
-    window.addEventListener('resize', resizeCanvas)
 
     // 确定要使用的天气效果
     let activeEffect = weatherEffect
@@ -77,33 +80,38 @@ export default function ParticleLayer({
       activeEffect = getAutoWeatherEffect(hour)
     }
 
-    // 创建对应的粒子系统
-    if (activeEffect !== 'none') {
+    // 尊重用户的减少动态效果设置
+    if (activeEffect !== 'none' && !reducedMotionQuery.matches) {
+      const rect = canvas.getBoundingClientRect()
       switch (activeEffect) {
         case 'rain':
           particleSystemRef.current = new RainParticleSystem({
-            bounds: { width: canvas.width, height: canvas.height }
+            bounds: { width: rect.width, height: rect.height }
           })
           break
         case 'snow':
           particleSystemRef.current = new SnowParticleSystem({
-            bounds: { width: canvas.width, height: canvas.height }
+            bounds: { width: rect.width, height: rect.height }
           })
           break
         case 'stars':
           particleSystemRef.current = new StarParticleSystem({
-            bounds: { width: canvas.width, height: canvas.height }
+            bounds: { width: rect.width, height: rect.height }
           })
           break
       }
     }
 
+    // 无效果时完全不创建 resize 监听和动画循环
+    if (!particleSystemRef.current) return
+
+    resizeCanvas()
+    const resizeObserver = new ResizeObserver(resizeCanvas)
+    resizeObserver.observe(canvas)
+
     // 动画循环
     const animate = (currentTime: number) => {
-      if (!particleSystemRef.current) {
-        animationFrameRef.current = requestAnimationFrame(animate)
-        return
-      }
+      if (!particleSystemRef.current || document.hidden) return
 
       // 计算时间增量（秒）
       const deltaTime = lastFrameTimeRef.current
@@ -115,7 +123,8 @@ export default function ParticleLayer({
       const cappedDeltaTime = Math.min(deltaTime, 0.1)
 
       // 清空画布
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      const rect = canvas.getBoundingClientRect()
+      ctx.clearRect(0, 0, rect.width, rect.height)
 
       // 更新并渲染粒子系统
       particleSystemRef.current.update(cappedDeltaTime)
@@ -124,12 +133,26 @@ export default function ParticleLayer({
       animationFrameRef.current = requestAnimationFrame(animate)
     }
 
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animationFrameRef.current)
+        return
+      }
+
+      lastFrameTimeRef.current = 0
+      animationFrameRef.current = requestAnimationFrame(animate)
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
     // 启动动画循环
     animationFrameRef.current = requestAnimationFrame(animate)
 
     // 清理函数
     return () => {
-      window.removeEventListener('resize', resizeCanvas)
+      resizeObserver.disconnect()
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current)
       }

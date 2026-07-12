@@ -82,7 +82,7 @@ export default function GlyphGardenGame() {
   const visibleRound = Math.min(state.round, MAX_ROUNDS)
 
   return (
-    <main className="relative min-h-[calc(100vh-4rem)] overflow-hidden bg-[#f1eddf] text-[#25382b]">
+    <main className="mobile-screen safe-bottom relative overflow-hidden bg-[#f1eddf] text-[#25382b]">
       <div className="pointer-events-none absolute inset-0 opacity-35" aria-hidden="true" style={{ backgroundImage: 'radial-gradient(#49634f 0.7px, transparent 0.7px), linear-gradient(115deg, transparent 48%, rgba(91,74,46,.08) 49%, transparent 51%)', backgroundSize: '13px 13px, 180px 180px' }} />
       <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-7 lg:py-12">
         <header className="grid gap-6 border-b border-[#506652]/25 pb-8 lg:grid-cols-[1fr_440px] lg:items-end">

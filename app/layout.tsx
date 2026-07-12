@@ -1,6 +1,5 @@
 import '../styles/globals.css'
 import { GoogleAnalytics } from '../components/GoogleAnalytics'
-import MobileOptimization from '../components/MobileOptimization'
 import { ReactNode } from 'react'
 import { getLocale } from 'next-intl/server'
 import { defaultLocale, isValidLocale } from '@/i18n/config'
@@ -53,6 +52,8 @@ export const metadata = {
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: '#f8faf6',
 }
 
 type Props = {
@@ -66,9 +67,9 @@ export default async function RootLayout({ children }: Props) {
   return (
     <html lang={locale} className="h-full">
       <head>
-        <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8886185433147735"
@@ -76,7 +77,6 @@ export default async function RootLayout({ children }: Props) {
         />
       </head>
       <body className="h-full">
-        <MobileOptimization />
         <GoogleAnalytics />
         {children}
       </body>

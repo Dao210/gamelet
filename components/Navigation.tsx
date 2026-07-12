@@ -1,16 +1,50 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Link, usePathname } from '@/i18n/routing'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import LanguageSelector from './LanguageSelector'
 import GameletLogo from './GameletLogo'
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
   const t = useTranslations('navigation')
+  const shouldReduceMotion = useReducedMotion()
+
+  useEffect(() => {
+    setIsMenuOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    if (!isMenuOpen) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false)
+        menuButtonRef.current?.focus()
+      }
+    }
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target as Node
+      if (!menuRef.current?.contains(target) && !menuButtonRef.current?.contains(target)) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    document.addEventListener('pointerdown', handlePointerDown)
+    menuRef.current?.querySelector<HTMLAnchorElement>('a')?.focus()
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.removeEventListener('pointerdown', handlePointerDown)
+    }
+  }, [isMenuOpen])
 
   // Main navigation with icons and descriptions (displayed prominently)
   const mainNavigation = [
@@ -78,9 +112,13 @@ export default function Navigation() {
           <div className="flex items-center gap-2 justify-self-end md:hidden">
             <LanguageSelector />
             <button
+              ref={menuButtonRef}
+              type="button"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+              className="flex min-h-11 min-w-11 items-center justify-center rounded-lg p-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
               aria-label={t('toggleMenu')}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-navigation-menu"
             >
               <div className="w-6 h-6 flex flex-col justify-center items-center">
                 <div
@@ -104,13 +142,17 @@ export default function Navigation() {
         </div>
 
         {/* Mobile Menu */}
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-gray-200 dark:border-gray-700"
-          >
+        <AnimatePresence initial={false}>
+          {isMenuOpen && (
+            <motion.div
+              ref={menuRef}
+              id="mobile-navigation-menu"
+              initial={shouldReduceMotion ? false : { opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
+              className="safe-bottom border-t border-gray-200 md:hidden dark:border-gray-700"
+            >
             {/* Main navigation items */}
             <div className="py-4 space-y-2">
               {mainNavigation.map((item) => (
@@ -136,8 +178,9 @@ export default function Navigation() {
                 </Link>
               ))}
             </div>
-          </motion.div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   )

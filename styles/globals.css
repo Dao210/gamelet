@@ -1,9 +1,30 @@
 @import "tailwindcss";
 
 @layer base {
+  html {
+    min-height: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
   body {
+    min-height: 100%;
     background-color: #F3F4F6;
     color: #1F2937;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button,
+  a,
+  [role="button"] {
+    touch-action: manipulation;
+  }
+
+  :focus-visible {
+    outline: 2px solid #008f66;
+    outline-offset: 3px;
   }
 }
 
@@ -60,6 +81,20 @@
     margin-right: auto;
     padding: 1rem;
   }
+
+  .mobile-screen {
+    min-height: calc(100svh - 4rem);
+    min-height: calc(100dvh - 4rem);
+  }
+
+  .viewport-screen {
+    height: 100svh;
+    height: 100dvh;
+  }
+
+  .safe-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
 }
 
 @layer components {
@@ -80,14 +115,24 @@
     background-size: 56px 56px, 56px 56px, 160px 160px;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .gamelet-arcade *,
-    .gamelet-arcade *::before,
-    .gamelet-arcade *::after {
-      scroll-behavior: auto !important;
-      transition-duration: 1ms !important;
-      animation-duration: 1ms !important;
-      animation-iteration-count: 1 !important;
-    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (max-width: 767px), (pointer: coarse) {
+  .grass-blades > g:nth-child(n + 81) {
+    display: none;
   }
 }

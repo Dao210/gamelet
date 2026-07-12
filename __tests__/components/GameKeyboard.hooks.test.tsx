@@ -36,29 +36,6 @@ jest.mock('../../lib/keyboard-handler', () => ({
   }))
 }))
 
-jest.mock('../../lib/mobile-optimization', () => ({
-  getMobileDeviceInfo: jest.fn(() => ({
-    isMobile: false,
-    isTablet: false,
-    isTouch: false,
-    userAgent: 'test'
-  })),
-  getMobileKeyboardStyles: jest.fn(() => ({
-    buttonSize: 'auto',
-    fontSize: 'auto',
-    gap: 'auto',
-    padding: 'auto'
-  })),
-  shouldDisableMobileKeyboard: jest.fn(() => false),
-  addHapticFeedback: jest.fn(),
-  createMobileTouchHandler: jest.fn(() => ({
-    handleTouchStart: jest.fn(),
-    handleTouchMove: jest.fn(),
-    handleTouchEnd: jest.fn(),
-    cleanup: jest.fn()
-  }))
-}))
-
 // Mock timers
 jest.useFakeTimers()
 

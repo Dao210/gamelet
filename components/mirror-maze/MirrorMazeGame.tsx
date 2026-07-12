@@ -90,7 +90,7 @@ export default function MirrorMazeGame() {
   const best = progress.best[level.id]
 
   return (
-    <div className="mirror-maze relative min-h-[calc(100vh-4rem)] overflow-hidden bg-[#071018] text-[#edf7f6]">
+    <div className="mirror-maze mobile-screen safe-bottom relative overflow-hidden bg-[#071018] text-[#edf7f6]">
       <div className="pointer-events-none absolute inset-0 opacity-40" style={{ backgroundImage: 'radial-gradient(circle at 70% 15%, #174a55 0, transparent 32%), linear-gradient(rgba(100,220,220,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(100,220,220,.035) 1px, transparent 1px)', backgroundSize: 'auto, 32px 32px, 32px 32px' }} />
       <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-7 lg:py-12">
         <header className="grid gap-7 border-b border-[#8fbdba]/20 pb-8 lg:grid-cols-[1fr_auto] lg:items-end">

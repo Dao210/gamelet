@@ -66,7 +66,7 @@ export default function PuzzleArcadeGame({ gameId }: { gameId: PuzzleArcadeId })
   const theme = useMemo(() => ({ '--arcade-accent': game.accent, '--arcade-secondary': game.secondary, '--arcade-bg': game.background } as CSSProperties), [game])
 
   return (
-    <main className="relative min-h-[calc(100vh-4rem)] overflow-hidden bg-[var(--arcade-bg)] text-[#f7f3ea]" style={theme}>
+    <main className="mobile-screen safe-bottom relative overflow-hidden bg-[var(--arcade-bg)] text-[#f7f3ea]" style={theme}>
       <div className="pointer-events-none absolute inset-0 opacity-25" aria-hidden="true" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px), radial-gradient(circle at 78% 16%, var(--arcade-accent) 0, transparent 23%)', backgroundSize: '36px 36px, 36px 36px, auto' }} />
       <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-7 lg:py-12">
         <header className="grid gap-6 border-b border-white/15 pb-8 lg:grid-cols-[1fr_410px] lg:items-end">

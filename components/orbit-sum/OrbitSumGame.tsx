@@ -110,7 +110,7 @@ export default function OrbitSumGame() {
   }
 
   return (
-    <main className="relative min-h-[calc(100vh-4rem)] overflow-hidden bg-[#050812] text-[#eef6ff]">
+    <main className="mobile-screen safe-bottom relative overflow-hidden bg-[#050812] text-[#eef6ff]">
       <div className="pointer-events-none absolute inset-0 opacity-70" aria-hidden="true" style={{ backgroundImage: 'radial-gradient(circle at 20% 15%, #122e52 0, transparent 25%), radial-gradient(circle at 80% 70%, #30152f 0, transparent 28%), radial-gradient(#a9d8ff 0.6px, transparent 0.8px)', backgroundSize: 'auto, auto, 29px 29px' }} />
       <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-7 lg:py-12">
         <header className="grid gap-6 border-b border-[#8fcff5]/20 pb-8 lg:grid-cols-[1fr_410px] lg:items-end">

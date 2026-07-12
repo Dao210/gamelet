@@ -17,7 +17,7 @@ export default function GrasslandClient() {
   const [showStats, setShowStats] = useState(false)
 
   return (
-    <main className="relative w-full h-screen overflow-hidden">
+    <main className="viewport-screen relative w-full overflow-hidden">
       {/* Prairie Scene with all layers */}
       <PrairieScene
         autoTimeSystem={true}

@@ -56,7 +56,7 @@ export default async function LocaleLayout({
     <NextIntlClientProvider messages={messages}>
       <WebSiteSchema locale={locale} />
       <OrganizationSchema />
-      <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <div className="min-h-svh min-h-dvh flex flex-col bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
         <Navigation />
         <main className="flex-1">{children}</main>
         <Footer />
@@ -64,4 +64,3 @@ export default async function LocaleLayout({
     </NextIntlClientProvider>
   )
 }
-

@@ -125,7 +125,7 @@ export default function PrairieScene({
 
   return (
     <div
-      className={`relative w-full h-screen overflow-hidden bg-gradient-to-b from-sky-400 to-green-100 ${className}`}
+      className={`viewport-screen relative w-full overflow-hidden bg-gradient-to-b from-sky-400 to-green-100 ${className}`}
       data-time-period={currentTimePeriod}
       data-weather={weatherEffect}
     >

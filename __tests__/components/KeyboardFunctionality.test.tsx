@@ -3,6 +3,21 @@ import { render, screen, fireEvent, act } from '@testing-library/react'
 import { useGameStore } from '../../lib/store'
 import GameKeyboard from '../../components/GameKeyboard'
 
+jest.mock('next-intl', () => ({
+  useTranslations: () => (key: string, values?: { key?: string }) => {
+    const messages: Record<string, string> = {
+      enter: 'Enter',
+      ariaKeyboard: 'Virtual keyboard for math equation input',
+      ariaEnterNumber: `Enter ${values?.key} number`,
+      ariaEnterOperator: `Enter ${values?.key} operator`,
+      ariaBackspace: 'Backspace delete last character',
+      ariaSubmitEnabled: 'Submit equation',
+      ariaSubmitDisabled: 'Submit equation (disabled - equation incomplete)'
+    }
+    return messages[key]
+  }
+}))
+
 // Mock the game store
 jest.mock('../../lib/store')
 const mockUseGameStore = useGameStore as jest.MockedFunction<typeof useGameStore>
@@ -18,29 +33,6 @@ jest.mock('../../lib/keyboard-handler', () => ({
     stop: jest.fn(),
     updateOptions: jest.fn(),
     autoFocus: jest.fn()
-  }))
-}))
-
-jest.mock('../../lib/mobile-optimization', () => ({
-  getMobileDeviceInfo: jest.fn(() => ({
-    isMobile: false,
-    isTablet: false,
-    isTouch: false,
-    userAgent: 'test'
-  })),
-  getMobileKeyboardStyles: jest.fn(() => ({
-    buttonSize: 'auto',
-    fontSize: 'auto',
-    gap: 'auto',
-    padding: 'auto'
-  })),
-  shouldDisableMobileKeyboard: jest.fn(() => false),
-  addHapticFeedback: jest.fn(),
-  createMobileTouchHandler: jest.fn(() => ({
-    handleTouchStart: jest.fn(),
-    handleTouchMove: jest.fn(),
-    handleTouchEnd: jest.fn(),
-    cleanup: jest.fn()
   }))
 }))
 
