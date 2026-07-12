@@ -147,6 +147,18 @@ const games: Game[] = [
   {
     id: 'clockworkAlibi', title: 'Clockwork Alibi', href: '/clockwork-alibi', filters: ['observation', 'word', 'playable'], accent: '#b94363', surface: '#fff0f4', glyph: 'A < B < C', pattern: ['◷', 'A', '→', 'B', '×', 'C', '→', '?'],
     details: { en: { kicker: 'Impossible Instrument 13-F', description: 'Reorder events until every changing witness statement becomes true at once.', status: 'Playable now', time: '10 min', level: 'Expert' }, zh: { kicker: '不可能仪器 13-F', description: '重新排列事件，直到所有随时间变化的证词同时成立。', status: '现已可玩', time: '10 分钟', level: '高手' } }
+  },
+  {
+    id: 'proofHabitat', title: 'Proof Habitat', href: '/proof-habitat', filters: ['observation', 'playable'], accent: '#348c5a', surface: '#eaf8ef', glyph: '∴ ● / ×', pattern: ['2/3', '●', '?', '∴', '1/2', '×', '●', '✓'],
+    details: { en: { kicker: 'No-Guess Deduction', description: 'Classify a living grid where every accepted claim must carry a complete proof.', status: 'Playable now', time: '7 min', level: 'Expert' }, zh: { kicker: '禁止猜测的演绎', description: '判断生态格状态；每个被接受的结论都必须拥有完整证明。', status: '现已可玩', time: '7 分钟', level: '高手' } }
+  },
+  {
+    id: 'foldspaceAtelier', title: 'Foldspace Atelier', href: '/foldspace-atelier', filters: ['spatial', 'observation', 'playable'], accent: '#c47d25', surface: '#fff4e5', glyph: '□ → ▣', pattern: ['F', '◆', 'B', '●', '→', '▣', '◆●', '✓'],
+    details: { en: { kicker: 'Two-Sided Paper Space', description: 'Fold a layered paper world until distant marks occupy one physical position.', status: 'Playable now', time: '8 min', level: 'Advanced' }, zh: { kicker: '双面纸空间', description: '折叠拥有真实纸层的世界，让远隔的印记落在同一物理位置。', status: '现已可玩', time: '8 分钟', level: '进阶' } }
+  },
+  {
+    id: 'roomNineteen', title: 'Room Nineteen', href: '/room-nineteen', filters: ['math', 'word', 'observation', 'playable'], accent: '#a77b25', surface: '#fbf4df', glyph: '19 / ◆◇', pattern: ['⌘', '3+', '◉', '●●', '◷', '−4', '◇', '9−'],
+    details: { en: { kicker: 'Persistent Meta Puzzle', description: 'Combine fragments from across the archive and open a room that changes every day.', status: 'Playable now', time: '10 min', level: 'Expert' }, zh: { kicker: '长期元谜题', description: '组合整个游戏档案留下的残片，打开每天都会变化的第十九号房。', status: '现已可玩', time: '10 分钟', level: '高手' } }
   }
 ]
 
@@ -227,11 +239,11 @@ export default function GameCollectionHome() {
             <dl className="mt-12 flex max-w-xl items-center text-sm">
               <div className="flex min-w-24 flex-col">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.games')}</dt>
-                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">18</dd>
+                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">21</dd>
               </div>
               <div className="flex min-w-24 flex-col border-l border-black/10 pl-6">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.playable')}</dt>
-                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">18</dd>
+                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">21</dd>
               </div>
               <div className="flex min-w-24 flex-col border-l border-black/10 pl-6">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.styles')}</dt>
