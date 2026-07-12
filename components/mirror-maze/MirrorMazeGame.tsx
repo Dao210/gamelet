@@ -11,18 +11,20 @@ const copy = {
   en: {
     eyebrow: 'OPTICAL PUZZLE / 01', title: 'MIRROR', titleAccent: 'MAZE',
     intro: 'Turn the mirrors. Bend the beam. Find the only clean path through the dark.',
-    level: 'LEVEL', moves: 'MOVES', par: 'PAR', reset: 'Reset optics', hint: 'Field note',
+    level: 'LEVEL', moves: 'MOVES', par: 'PAR', difficulty: 'DIFFICULTY', reset: 'Reset optics', hint: 'Field note',
     target: 'TARGET ACQUIRED', continue: 'Next chamber', replay: 'Replay level', complete: 'All chambers cleared',
     locked: 'Complete the previous chamber first', status: { target: 'Target acquired', blocked: 'Beam absorbed', escaped: 'Light escaped', loop: 'Beam loop detected' },
-    help: 'Tap an unlocked mirror to rotate it 90°. Guide the amber beam into the circular receiver. Dark blocks absorb light.'
+    help: 'Tap an unlocked mirror to rotate it 90°. Guide the amber beam into the circular receiver. Dark blocks absorb light.',
+    difficulties: { calibration: 'CALIBRATION', tricky: 'TRICKY', expert: 'EXPERT', master: 'MASTER' }
   },
   zh: {
     eyebrow: '光学谜题 / 01', title: '镜面', titleAccent: '迷宫',
     intro: '旋转镜面，折射光束，在黑暗中找出唯一干净的通路。',
-    level: '关卡', moves: '步数', par: '标准', reset: '重置镜片', hint: '实验笔记',
+    level: '关卡', moves: '步数', par: '标准', difficulty: '难度', reset: '重置镜片', hint: '实验笔记',
     target: '目标已锁定', continue: '下一间暗室', replay: '重玩本关', complete: '所有暗室已通关',
     locked: '请先完成上一关', status: { target: '目标已锁定', blocked: '光束被吸收', escaped: '光束逸出', loop: '检测到光路循环' },
-    help: '点击未锁定的镜片可旋转 90°。将琥珀色光束引入圆形接收器；黑色障碍会吸收光线。'
+    help: '点击未锁定的镜片可旋转 90°。将琥珀色光束引入圆形接收器；黑色障碍会吸收光线。',
+    difficulties: { calibration: '校准', tricky: '进阶', expert: '专家', master: '大师' }
   }
 } as const
 
@@ -106,9 +108,10 @@ export default function MirrorMazeGame() {
         <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_310px] lg:items-start">
           <section>
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-              <div className="flex items-baseline gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <span className="font-mono text-xs tracking-[.25em] text-[#81c8c2]">{t.level} {String(level.id).padStart(2, '0')}</span>
                 <h2 className="text-xl font-bold tracking-tight">{level.name}</h2>
+                <span className={`border px-2 py-1 font-mono text-[9px] tracking-[.16em] ${level.difficulty === 'master' ? 'border-[#e76f51]/70 text-[#ff8a69]' : level.difficulty === 'expert' ? 'border-[#ffc857]/60 text-[#ffc857]' : 'border-[#81c8c2]/35 text-[#81c8c2]'}`}>{t.difficulty} · {t.difficulties[level.difficulty]}</span>
               </div>
               <button onClick={() => loadLevel(levelIndex)} className="border border-[#9ac8c4]/25 px-3 py-2 font-mono text-[11px] uppercase tracking-widest text-[#a9c7c4] transition hover:border-[#ffc857] hover:text-[#ffc857]">↻ {t.reset}</button>
             </div>

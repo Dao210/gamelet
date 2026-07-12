@@ -22,6 +22,7 @@ export interface MazeLevel {
   mirrors: Mirror[]
   blockers: Position[]
   par: number
+  difficulty: 'calibration' | 'tricky' | 'expert' | 'master'
 }
 
 export type BeamStatus = 'target' | 'blocked' | 'escaped' | 'loop'

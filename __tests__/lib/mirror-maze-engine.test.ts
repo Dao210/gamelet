@@ -27,7 +27,31 @@ describe('mirror-maze-engine', () => {
         ? mirror
         : { ...mirror, orientation: rotateMirror(mirror.orientation) })
 
-      expect(traceBeam(level, solution).status).toBe('target')
+      const result = traceBeam(level, solution)
+      expect(result.status).toBe('target')
+      expect(result.path.at(-1)).toEqual(level.target)
+    }
+  )
+
+  it.each(MIRROR_MAZE_LEVELS.map((level) => [level.name, level] as const))(
+    'uses the true minimum move count as par for %s',
+    (_, level) => {
+      const unlocked = level.mirrors.filter((mirror) => !mirror.locked)
+      let minimum = Infinity
+
+      for (let mask = 0; mask < 2 ** unlocked.length; mask += 1) {
+        const moves = mask.toString(2).replaceAll('0', '').length
+        if (moves >= minimum) continue
+        const mirrors = level.mirrors.map((mirror) => {
+          const index = unlocked.findIndex(({ id }) => id === mirror.id)
+          return index >= 0 && mask & (1 << index)
+            ? { ...mirror, orientation: rotateMirror(mirror.orientation) }
+            : mirror
+        })
+        if (traceBeam(level, mirrors).status === 'target') minimum = moves
+      }
+
+      expect(minimum).toBe(level.par)
     }
   )
 
