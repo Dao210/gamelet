@@ -1,15 +1,12 @@
-import { Metadata } from 'next';
 import GamePageClient from './GamePageClient';
+import { getTranslations } from 'next-intl/server'
+import { createPageMetadata } from '@/lib/seo-utils'
 
-export const metadata: Metadata = {
-  title: 'Play Nerdle Game - Daily Math Equation Challenge',
-  description: 'Play the daily Nerdle game! Guess the hidden mathematical equation in 6 tries. Features multiple difficulty levels, instant feedback, and brain-training puzzles.',
-  openGraph: {
-    title: 'Play Nerdle Game - Daily Math Equation Challenge',
-    description: 'Play the daily Nerdle game! Guess the hidden mathematical equation in 6 tries.',
-    type: 'website',
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'metadata' })
+  return createPageMetadata({ locale, pathname: '/nerd/game', title: t('gameTitle'), description: t('gameDescription') })
+}
 
 export default function GamePage() {
   return <GamePageClient />;

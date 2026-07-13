@@ -1,6 +1,16 @@
-import { publicLocales, defaultLocale, type Locale, openGraphLocaleMap } from '@/i18n/config'
+import type { Metadata } from 'next'
+import {
+  publicLocales,
+  defaultLocale,
+  isPublicLocale,
+  isValidLocale,
+  type Locale,
+  openGraphLocaleMap
+} from '@/i18n/config'
 
-const baseUrl = 'https://gamelet.app'
+export const siteName = 'Gamelet'
+export const baseUrl = 'https://gamelet.app'
+export const defaultSocialImage = '/og.png'
 
 export function getLocalizedPath(pathname: string, locale: Locale): string {
   const normalizedPath = pathname === '/'
@@ -99,4 +109,72 @@ export function getBaseUrl(): string {
  */
 export function getOpenGraphLocale(locale: Locale): string {
   return openGraphLocaleMap[locale] || 'en_US'
+}
+
+type PageMetadataOptions = {
+  locale: string
+  pathname: string
+  title: string
+  description: string
+  image?: string
+  index?: boolean
+}
+
+/**
+ * Build consistent, self-referencing metadata for a localized public page.
+ * Keeping this in one place prevents child routes from inheriting the homepage
+ * canonical URL through Next.js metadata merging.
+ */
+export function createPageMetadata({
+  locale: requestedLocale,
+  pathname,
+  title,
+  description,
+  image = defaultSocialImage,
+  index = true
+}: PageMetadataOptions): Metadata {
+  const locale = isValidLocale(requestedLocale) ? requestedLocale : defaultLocale
+  const canonical = getCanonicalUrl(pathname, locale)
+  const shouldIndex = index && isPublicLocale(locale)
+  const otherLocales = publicLocales
+    .filter(candidate => candidate !== locale)
+    .map(getOpenGraphLocale)
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical,
+      ...(shouldIndex ? { languages: generateLanguageAlternates(pathname) } : {})
+    },
+    robots: shouldIndex
+      ? {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+            'max-video-preview': -1
+          }
+        }
+      : { index: false, follow: true },
+    openGraph: {
+      type: 'website',
+      url: canonical,
+      siteName,
+      locale: getOpenGraphLocale(locale),
+      alternateLocale: otherLocales,
+      title,
+      description,
+      images: [{ url: image, width: 1200, height: 630, alt: `${title} — ${siteName}` }]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image]
+    }
+  }
 }

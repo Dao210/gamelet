@@ -2,8 +2,6 @@ import { MetadataRoute } from 'next'
 import { publicLocales } from '@/i18n/config'
 import {
   getBaseUrl,
-  getChangeFrequency,
-  getPriority,
   generateLanguageAlternates,
   getLocalizedPath
 } from '@/lib/seo-utils'
@@ -43,10 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/foldspace-atelier',
     '/room-nineteen',
     '/garden',
-    '/garden/flowers',
     '/grassland',
-    '/grassland/create',
-    '/grassland/my-plants',
     '/about',
     '/privacy',
     '/terms',
@@ -63,9 +58,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
       entries.push({
         url: `${baseUrl}${getLocalizedPath(route, locale)}`,
-        lastModified: new Date(),
-        changeFrequency: getChangeFrequency(route),
-        priority: getPriority(route),
         alternates: {
           languages
         }

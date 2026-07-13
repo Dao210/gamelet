@@ -4,7 +4,7 @@
  */
 
 import { type Locale } from '@/i18n/config'
-import { getBaseUrl } from '@/lib/seo-utils'
+import { getBaseUrl, getLocalizedPath } from '@/lib/seo-utils'
 
 interface JsonLdProps {
   locale: Locale
@@ -15,19 +15,19 @@ interface JsonLdProps {
  */
 export function WebSiteSchema({ locale }: JsonLdProps) {
   const baseUrl = getBaseUrl()
-  const url = locale === 'en' ? baseUrl : `${baseUrl}/${locale}`
+  const url = `${baseUrl}${getLocalizedPath('/', locale)}`
 
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Gamelet - Nerdle Math Game',
+    '@id': `${baseUrl}/#website`,
+    name: 'Gamelet Puzzle Arcade',
     url: url,
-    description: 'Daily math equation puzzle game for enthusiasts',
+    description: 'A collection of quick browser puzzle games spanning math, words, logic, patterns, and spatial reasoning.',
     inLanguage: locale,
     publisher: {
       '@type': 'Organization',
-      name: 'Gamelet',
-      url: baseUrl
+      '@id': `${baseUrl}/#organization`
     }
   }
 
@@ -44,15 +44,17 @@ export function WebSiteSchema({ locale }: JsonLdProps) {
  */
 export function GameSchema({ locale }: JsonLdProps) {
   const baseUrl = getBaseUrl()
-  const url = locale === 'en' ? `${baseUrl}/nerd` : `${baseUrl}/${locale}/nerd`
+  const url = `${baseUrl}${getLocalizedPath('/nerd', locale)}`
 
   const schema = {
     '@context': 'https://schema.org',
-    '@type': 'Game',
+    '@type': ['VideoGame', 'WebApplication'],
+    '@id': `${url}#game`,
     name: 'Nerdle - Math Equation Puzzle',
     description: 'Daily mathematical equation guessing game. Guess the hidden equation in 6 tries!',
     url: url,
-    gamePlatform: ['Web Browser', 'Desktop', 'Mobile'],
+    gamePlatform: 'Web browser',
+    operatingSystem: 'Any',
     genre: ['Puzzle', 'Educational', 'Math'],
     inLanguage: locale,
     offers: {
@@ -61,7 +63,8 @@ export function GameSchema({ locale }: JsonLdProps) {
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock'
     },
-    applicationCategory: 'GameApplication'
+    applicationCategory: 'GameApplication',
+    publisher: { '@id': `${baseUrl}/#organization` }
   }
 
   return (
@@ -81,13 +84,13 @@ export function OrganizationSchema() {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': `${baseUrl}/#organization`,
     name: 'Gamelet',
     url: baseUrl,
-    logo: `${baseUrl}/gamelet.png`,
-    sameAs: [
-      'https://twitter.com/nerdlemathgame',
-      // Add other social media URLs as needed
-    ]
+    logo: {
+      '@type': 'ImageObject',
+      url: `${baseUrl}/gamelet.png`
+    }
   }
 
   return (
@@ -109,7 +112,6 @@ export function BreadcrumbSchema({
   items: Array<{ name: string; path: string }>
 }) {
   const baseUrl = getBaseUrl()
-  const localePrefix = locale === 'en' ? '' : `/${locale}`
 
   const schema = {
     '@context': 'https://schema.org',
@@ -118,7 +120,7 @@ export function BreadcrumbSchema({
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: `${baseUrl}${localePrefix}${item.path}`
+      item: `${baseUrl}${getLocalizedPath(item.path, locale)}`
     }))
   }
 

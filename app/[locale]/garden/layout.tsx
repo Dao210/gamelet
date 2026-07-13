@@ -1,21 +1,11 @@
 import { ReactNode } from 'react'
 import { getTranslations } from 'next-intl/server'
-import { generateLanguageAlternates, getCanonicalUrl } from '@/lib/seo-utils'
-import { type Locale } from '@/i18n/config'
+import { createPageMetadata } from '@/lib/seo-utils'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'gardenMetadata' })
-  const pathname = '/garden'
-
-  return {
-    title: t('title'),
-    description: t('description'),
-    alternates: {
-      canonical: getCanonicalUrl(pathname, locale as Locale),
-      languages: generateLanguageAlternates(pathname)
-    }
-  }
+  return createPageMetadata({ locale, pathname: '/garden', title: t('title'), description: t('description') })
 }
 
 export default async function GardenLayout({

@@ -6,12 +6,17 @@
  * 全球草原花园主页：展示所有用户创建的植物，在广阔的草原上生长
  */
 
-import { Metadata } from 'next'
 import GrasslandClient from './GrasslandClient'
+import { createPageMetadata } from '@/lib/seo-utils'
 
-export const metadata: Metadata = {
-  title: 'Global Prairie Garden | Grassland',
-  description: 'Watch plants grow together in a global prairie garden. Water plants, gain XP, and watch them flourish under the sunshine and gentle breeze.'
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  return createPageMetadata({
+    locale,
+    pathname: '/grassland',
+    title: 'Global Prairie Garden - Grassland',
+    description: 'Watch plants grow together in a global prairie garden. Water plants, gain XP, and watch them flourish under the sunshine and gentle breeze.'
+  })
 }
 
 export default function GrasslandPage() {

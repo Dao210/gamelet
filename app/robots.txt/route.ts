@@ -4,34 +4,11 @@ export async function GET() {
   const robotsTxt = `User-agent: *
 Allow: /
 
-# Allow all language paths
-Allow: /es/
-Allow: /fr/
-Allow: /de/
-Allow: /it/
-Allow: /ru/
-Allow: /ja/
-Allow: /zh/
-
-# Allow main sections
-Allow: /nerd/
-Allow: /garden/
-Allow: /about/
-
 # Block admin and internal routes
 Disallow: /api/
-Disallow: /_next/
-Disallow: /static/
-Disallow: /*.json$
 
 # Sitemap
-Sitemap: https://gamelet.app/sitemap.xml
-
-# Crawl-delay for respectful crawling
-Crawl-delay: 1
-
-# Host (preferred domain)
-Host: https://gamelet.app`
+Sitemap: https://gamelet.app/sitemap.xml`
 
   return new NextResponse(robotsTxt, {
     headers: {

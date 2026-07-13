@@ -6,11 +6,11 @@
  * 显示当前用户创建的所有植物及统计信息
  */
 
-import { Metadata } from 'next'
+import { createPageMetadata } from '@/lib/seo-utils'
 
-export const metadata: Metadata = {
-  title: 'My Plants | Grassland',
-  description: 'View and manage your plants in the global prairie garden.'
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  return createPageMetadata({ locale, pathname: '/grassland/my-plants', title: 'My Plants - Grassland', description: 'View and manage your plants in the global prairie garden.', index: false })
 }
 
 export default function MyPlantsPage() {

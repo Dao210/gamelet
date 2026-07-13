@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import FibonacciGameClient from '@/components/fibonacci/FibonacciGameClient'
+import { createPageMetadata } from '@/lib/seo-utils'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -9,7 +10,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     ? '沿着斐波那契数列合成数字，挑战抵达 2584。支持键盘方向键与手机滑动操作。'
     : 'Join Fibonacci numbers to reach 2584 in this free mathematical puzzle game.'
 
-  return { title, description, openGraph: { title, description, type: 'website' } }
+  return createPageMetadata({ locale, pathname: '/2584', title, description })
 }
 
 export default function Fibonacci2584Page() {

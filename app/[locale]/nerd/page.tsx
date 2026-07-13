@@ -1,5 +1,4 @@
-import { generateLanguageAlternates, getCanonicalUrl } from '@/lib/seo-utils'
-import { type Locale } from '@/i18n/config'
+import { createPageMetadata } from '@/lib/seo-utils'
 import HeroSection from '@/components/nerd/HeroSection'
 import StatsBar from '@/components/nerd/StatsBar'
 import BentoFeatures from '@/components/nerd/BentoFeatures'
@@ -7,32 +6,23 @@ import RulesVisual from '@/components/nerd/RulesVisual'
 import FinalCTA from '@/components/nerd/FinalCTA'
 import { Link } from '@/i18n/routing'
 import { getTranslations } from 'next-intl/server'
+import { GameSchema } from '@/components/JsonLd'
+import type { Locale } from '@/i18n/config'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
-  const pathname = '/nerd'
-
-  return {
-    title: 'Nerdle - Daily Math Equation Puzzle Game',
-    description: 'Challenge your mathematical skills with our addictive daily puzzle game. Guess the hidden equation in 6 tries or less. Perfect for math enthusiasts and puzzle lovers!',
-    alternates: {
-      canonical: getCanonicalUrl(pathname, locale as Locale),
-      languages: generateLanguageAlternates(pathname)
-    },
-    openGraph: {
-      title: 'Nerdle - Daily Math Equation Puzzle Game',
-      description: 'Challenge your mathematical skills with our addictive daily puzzle game. Guess the hidden equation in 6 tries or less.',
-      type: 'website',
-    },
-  }
+  const t = await getTranslations({ locale, namespace: 'metadata' })
+  return createPageMetadata({ locale, pathname: '/nerd', title: t('siteTitle'), description: t('siteDescription') })
 }
 
-export default async function NerdleHomePage() {
+export default async function NerdleHomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
   const about = await getTranslations('about')
   const tips = await getTranslations('tips')
 
   return (
     <div className="relative">
+      <GameSchema locale={locale as Locale} />
       <HeroSection />
       <StatsBar />
       <BentoFeatures />

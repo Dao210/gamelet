@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/routing'
 import { isValidLocale } from '@/i18n/config'
-import { generateLanguageAlternates, getCanonicalUrl } from '@/lib/seo-utils'
+import { createPageMetadata } from '@/lib/seo-utils'
 
 type PageProps = { params: Promise<{ locale: string }> }
 
@@ -11,14 +11,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const locale = isValidLocale(requestedLocale) ? requestedLocale : 'en'
   const t = await getTranslations({ locale, namespace: 'metadata' })
 
-  return {
-    title: t('aboutTitle'),
-    description: t('aboutDescription'),
-    alternates: {
-      canonical: getCanonicalUrl('/about', locale),
-      languages: generateLanguageAlternates('/about')
-    }
-  }
+  return createPageMetadata({ locale, pathname: '/about', title: t('aboutTitle'), description: t('aboutDescription') })
 }
 
 export default async function AboutPage() {

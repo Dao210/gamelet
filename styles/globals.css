@@ -99,11 +99,11 @@
 
 @layer components {
   .gamelet-arcade {
-    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-ibm-plex-sans), ui-sans-serif, system-ui, sans-serif;
   }
 
   .gamelet-arcade .arcade-display {
-    font-family: "Fraunces", Georgia, serif;
+    font-family: var(--font-fraunces), Georgia, serif;
     letter-spacing: 0;
   }
 

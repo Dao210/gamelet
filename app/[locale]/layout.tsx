@@ -6,8 +6,8 @@ import { isValidLocale } from '@/i18n/config'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import { setRequestLocale } from 'next-intl/server'
-import { generateLanguageAlternates, getCanonicalUrl } from '@/lib/seo-utils'
-import { WebSiteSchema, OrganizationSchema } from '@/components/JsonLd'
+import { createPageMetadata } from '@/lib/seo-utils'
+import { OrganizationSchema } from '@/components/JsonLd'
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -21,15 +21,12 @@ export async function generateMetadata({
   const { locale } = await params
   if (!isValidLocale(locale)) notFound()
 
-  // Get current pathname (defaults to root for layout)
-  const pathname = '/'
-
-  return {
-    alternates: {
-      canonical: getCanonicalUrl(pathname, locale),
-      languages: generateLanguageAlternates(pathname)
-    }
-  }
+  return createPageMetadata({
+    locale,
+    pathname: '/',
+    title: 'Gamelet Puzzle Arcade - Brainy Mini Games',
+    description: 'Play clever, quick puzzle mini games spanning math, words, logic, patterns, and spatial reasoning.'
+  })
 }
 
 export default async function LocaleLayout({
@@ -54,7 +51,6 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <WebSiteSchema locale={locale} />
       <OrganizationSchema />
       <div className="min-h-svh min-h-dvh flex flex-col bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
         <Navigation />

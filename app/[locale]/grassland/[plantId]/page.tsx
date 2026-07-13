@@ -6,17 +6,17 @@
  * 显示单个植物的详细信息、成长历史、浇水记录
  */
 
-import { Metadata } from 'next'
+import { createPageMetadata } from '@/lib/seo-utils'
 
-export const metadata: Metadata = {
-  title: 'Plant Details | Grassland',
-  description: 'View detailed information about a plant in the global prairie garden.'
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; plantId: string }> }) {
+  const { locale, plantId } = await params
+  return createPageMetadata({ locale, pathname: `/grassland/${plantId}`, title: 'Plant Details - Grassland', description: 'View detailed information about a plant in the global prairie garden.', index: false })
 }
 
 export default async function PlantDetailPage({
   params
 }: {
-  params: Promise<{ plantId: string }>
+  params: Promise<{ locale: string; plantId: string }>
 }) {
   const { plantId } = await params
 
