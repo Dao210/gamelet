@@ -111,18 +111,26 @@
     "colorDescription1": "Grüne Kacheln zeigen: Zahl oder Operator stimmen und stehen an der richtigen Stelle"
   },
   "about": {
-    "title": "Über Nerdle",
-    "whatIsNerdle": "Was ist Nerdle?",
-    "basicRules": "Grundregeln",
-    "howToPlay": "Wie man spielt",
-    "basicRulesText": "Die Spieler müssen innerhalb von 6 Versuchen eine mathematische Gleichung erraten. Jeder Tipp muss eine gültige Gleichung mit Zahlen (0-9), Operatoren (+, -, *, /) und genau einem Gleichheitszeichen sein. Die Gleichung folgt der Standardreihenfolge von Operationen (PEMDAS).",
-    "colorFeedback": "Farb-Feedback",
-    "colorFeedbackText": "Nach jeder Vermutung ändern die Kacheln ihre Farbe: Grün zeigt die richtige Position an, Gelb bedeutet, dass das Element existiert, sich aber an der falschen Position befindet, und Grau bedeutet, dass es nicht in der Gleichung enthalten ist.",
-    "readyToPlay": "Bereit zum Spielen?",
-    "testSkills": "Stellen Sie Ihre mathematischen Fähigkeiten mit dem heutigen Nerdle-Rätsel auf die Probe!",
-    "subtitle": "Das tägliche Mathe-Gleichungs-Puzzlespiel",
-    "playNow": "Spielen Sie jetzt Nerdle",
-    "whatIsNerdleText": "Nerdle ist ein tägliches Ratespiel für mathematische Gleichungen, bei dem die Spieler herausgefordert werden, eine versteckte mathematische Gleichung in sechs Versuchen oder weniger zu lösen. Ähnlich wie Worträtselspiele, aber mit Zahlen und Operatoren anstelle von Buchstaben, testet Nerdle Ihr mathematisches Denken und Ihre Fähigkeiten zur Problemlösung."
+    "title": "About AI-native mini-games",
+    "subtitle": "Short games, strong thinking.",
+    "whatIsNerdle": "What is an AI-native mini-game?",
+    "whatIsNerdleText": "AI-native mini-games treat AI as part of the game loop itself. In Gamelet, AI generates, evaluates, and adapts each round in real time so puzzles remain mathematically rigorous while feeling fresh for return players.",
+    "howToPlay": "Core principles",
+    "basicRulesText": "We don't add AI as decoration. We use it inside the rule system to create dynamic scenes, valid challenge generation, and personalized pacing while keeping every outcome explainable.",
+    "principle1": "AI creates variation without breaking game rules.",
+    "principle2": "Every challenge keeps clear constraints that are easy to learn and verify.",
+    "principle3": "Sessions are concise and restartable so play fits real attention spans.",
+    "principle4": "Difficulty is adaptive to recent momentum, not random spikes.",
+    "principle5": "Feedback is immediate and actionable, so players can improve quickly.",
+    "colorFeedback": "What players experience",
+    "colorFeedbackText": "This is not one game only; it's the design direction of Gamelet: a catalog of AI-native micro-games where novelty, fairness, and replay value reinforce each other.",
+    "experience1": "Freshness in every run",
+    "experience2": "Transparent rules and clear signal feedback",
+    "experience3": "Easy progress from beginner to expert",
+    "experience4": "High replayability without content fatigue",
+    "readyToPlay": "Want to experience it?",
+    "testSkills": "Open a puzzle now and feel how AI-native design changes your next decision.",
+    "playNow": "Play an AI-native game now"
   },
   "tips": {
     "title": "Nerdle-Antwort heute",
@@ -154,11 +162,12 @@
     "siteTitle": "Nerdle – Tägliches Mathe-Gleichungs-Puzzlespiel",
     "siteDescription": "Spielen Sie Nerdle, das tägliche Rätsel mit mathematischen Gleichungen. Kostenlos, kurzweilig und jeden Tag neu.",
     "gameTitle": "Spielen Sie das Nerdle-Spiel – Tägliche Mathe-Gleichungs-Herausforderung",
-    "aboutDescription": "Erfahren Sie mehr über Nerdle, das beliebte Ratespiel für mathematische Gleichungen. Entdecken Sie Spielanleitungen, Spielregeln, Tipps und Strategien zum Lösen täglicher Mathe-Rätsel.",
+    "aboutDescription": "Discover Gamelet's AI-native mini-game philosophy: adaptive challenge loops, transparent rules, and compact gameplay designed for real attention spans.",
+    "aboutTitle": "About AI-native mini-games | Gamelet",
     "tipsTitle": "Nerdle heute – Tipps und Strategien",
     "tipsDescription": "Holen Sie sich Expertenstrategien und Tipps für das heutige Nerdle-Rätsel. Lernen Sie Gewinntechniken ohne Spoiler, um Ihre Fähigkeiten beim Lösen von Mathe-Rätseln zu verbessern.",
     "gameDescription": "Spielen Sie das tägliche Nerdle-Spiel! Errate die versteckte mathematische Gleichung in 6 Versuchen. Bietet mehrere Schwierigkeitsgrade, sofortiges Feedback und Rätsel zum Gehirntraining.",
-    "aboutTitle": "Über Nerdle – Das mathematische Gleichungs-Ratespiel"
+    "gameDescription": "Spielen Sie das tägliche Nerdle-Spiel! Errate die versteckte mathematische Gleichung in 6 Versuchen. Bietet mehrere Schwierigkeitsgrade, sofortiges Feedback und Rätsel zum Gehirntraining."
   },
   "gardenPage": {
     "welcomeDescription": "Hier wird jede Zeichnung lebendig. Gestalten Sie Ihre eigene Pflanze und sehen Sie zu, wie sie mit der Unterstützung der Community wächst.",
