@@ -8,7 +8,7 @@ import { useLocale } from 'next-intl'
 const filters = ['all', 'playable', 'math', 'spatial', 'observation', 'word'] as const
 
 type Filter = (typeof filters)[number]
-type TranslationGameId = 'nerdle' | 'fibonacci' | 'mirrorMaze' | 'glyphGarden' | 'cipherBento' | 'orbitSum'
+type TranslationGameId = 'nerdle' | 'fibonacci' | 'mirrorMaze' | 'glyphGarden' | 'cipherBento' | 'orbitSum' | 'pulsefront' | 'patches'
 
 type Game = {
   id: string
@@ -34,6 +34,28 @@ type SparkPuzzle = {
 }
 
 const games: Game[] = [
+  {
+    id: 'patches',
+    translationId: 'patches',
+    title: 'Patches',
+    href: '/patches',
+    filters: ['spatial', 'observation', 'playable'],
+    accent: '#285848',
+    surface: '#edf0df',
+    glyph: '4 □ 6 ▭',
+    pattern: ['4', '□', '6', '▭', '3', '▯', '·', '◇']
+  },
+  {
+    id: 'pulsefront',
+    translationId: 'pulsefront',
+    title: 'Pulsefront',
+    href: '/pulsefront',
+    filters: ['spatial', 'observation', 'playable'],
+    accent: '#247c89',
+    surface: '#e8f6f7',
+    glyph: '◆ → ◎',
+    pattern: ['34', '→', '17', '◆', '25%', '50%', '100%', '◎']
+  },
   {
     id: 'nerdle',
     translationId: 'nerdle',
@@ -239,11 +261,11 @@ export default function GameCollectionHome() {
             <dl className="mt-12 flex max-w-xl items-center text-sm">
               <div className="flex min-w-24 flex-col">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.games')}</dt>
-                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">21</dd>
+                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">{games.length}</dd>
               </div>
               <div className="flex min-w-24 flex-col border-l border-black/10 pl-6">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.playable')}</dt>
-                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">21</dd>
+                <dd className="arcade-display order-1 text-2xl font-black text-[#20241f]">{games.filter(game => game.href).length}</dd>
               </div>
               <div className="flex min-w-24 flex-col border-l border-black/10 pl-6">
                 <dt className="order-2 mt-0.5 text-xs text-[#7a817a]">{t('stats.styles')}</dt>

@@ -1,0 +1,3 @@
+import type { Puzzle } from '../types'
+
+export const starter: Puzzle = {"id":"patches-easy-0001","version":1,"rows":5,"cols":5,"difficulty":"easy","clues":[{"cell":6,"area":6,"shape":"any"},{"cell":8,"area":4,"shape":"square"},{"cell":15,"area":3,"shape":"tall"},{"cell":17,"area":8,"shape":"any"},{"cell":21,"area":2,"shape":"any"},{"cell":23,"area":2,"shape":"any"}],"solution":[[0,0,1,2],[0,3,1,4],[2,0,4,0],[2,1,3,4],[4,1,4,2],[4,3,4,4]],"hints":[{"clue":3,"rule":"single"},{"clue":0,"rule":"single"},{"clue":1,"rule":"single"},{"clue":2,"rule":"single"},{"clue":4,"rule":"single"},{"clue":5,"rule":"single"}],"score":11} satisfies Puzzle

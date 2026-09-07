@@ -315,5 +315,282 @@
       "click": "Нажмите на любой цветок, чтобы увидеть, как он расцветает и меняет цвет"
     },
     "technology": "Построено на p5.js • Естественная физическая симуляция • 40 уникальных цветов"
+  },
+  "homePage": {
+    "games": {
+      "patches": {"kicker": "Rectangle Studio", "description": "Fill every square with a patch that fits. Original logic puzzles, daily challenges and thoughtful hints.", "status": "Playable now", "time": "2–8 min", "level": "Three difficulties"},
+      "pulsefront": {
+        "kicker": "Fleet Command",
+        "description": "Build energy networks, dispatch fleets and conquer the stars against two AI rivals.",
+        "status": "Playable now",
+        "time": "5–15 min",
+        "level": "Strategic"
+      }
+    }
+  },
+  "pulsefront": {
+    "metaTitle": "Pulsefront - Real-Time Space Strategy",
+    "metaDescription": "Command fleets, capture energy cores and outmaneuver two AI rivals. Play classic arenas or 61-core star systems on Gamelet.",
+    "arcade": "Back to the arcade",
+    "eyebrow": "Tactical command / real-time strategy",
+    "intro": "A quiet galaxy. Three rival fleets. Every small decision changes the front.",
+    "tagline": "Expand carefully. Strike decisively.",
+    "solo": "SINGLE PLAYER · TWO AI RIVALS",
+    "battlefield": "Battlefield",
+    "energy": "energy",
+    "you": "YOU",
+    "ai": "AI",
+    "boardLabel": "Star map. Select a cyan core, then any target.",
+    "coreLabel": "Core {id}, {owner}, {energy} energy",
+    "sector": "Sector",
+    "cores": "cores",
+    "zoomOut": "Zoom out",
+    "zoomIn": "Zoom in",
+    "resetView": "Reset view",
+    "mission": "Mission briefing",
+    "howToPlay": "Flight instructions",
+    "victoryDetail": "Both rival fleets have been eliminated. This frontier belongs to you.",
+    "defeatDetail": "Your last core and fleet are gone. Regroup and try a different opening.",
+    "pauseDetail": "The battlefield is frozen. Take a breath and plan your next move.",
+    "briefing": "Build your network. Send fleets to capture cores. Eliminate both rivals to win.",
+    "stepSelect": "Select a core",
+    "stepSend": "Send a fleet",
+    "stepConquer": "Take control",
+    "launches": "dispatches",
+    "playAgain": "Prepare another mission",
+    "start": "Launch mission",
+    "resume": "Resume mission",
+    "yourFaction": "You command CYAN ◆. The simulation starts when you do.",
+    "dispatch": "SEND ENERGY",
+    "pause": "Pause",
+    "readyToSend": "{count} energy ready · production +{rate}/s · choose a target",
+    "missionControl": "Mission control",
+    "classic": "Classic",
+    "expanse": "Expanse",
+    "difficulty": "AI difficulty",
+    "difficultyNote": "Difficulty changes AI decisions. All factions produce at the same rate.",
+    "personalBest": "BEST TIME · THIS SECTOR & DIFFICULTY",
+    "goldTarget": "Gold ≤ {time} · records saved on this device",
+    "newMission": "Reset & choose a sector",
+    "fieldGuide": "Field guide",
+    "ruleDispatch": "Select a cyan core, then any destination. Send 25%, 50% or 100% of its energy. Friendly arrivals reinforce; hostile arrivals subtract defense and capture on a tie or better.",
+    "ruleNetwork": "Owned cores produce energy. Linked friendly neighbors add up to 30%. Fleets can fly anywhere; longer trips take more time.",
+    "ruleWin": "Eliminate both rivals, including their fleets in flight. Neutral cores can remain. An empty owned core still produces energy.",
+    "keyboard": "1 / 2 / 3: dispatch ratio · P: pause · Esc: deselect",
+    "panHint": "Zoom + for detail. Drag or swipe the map to pan. Switch away to pause automatically.",
+    "origin": "Origin",
+    "credit": "An independent Gamelet single-player adaptation of Pulsefront by",
+    "phases": {
+      "ready": "Standing by",
+      "running": "Live operation",
+      "paused": "Paused",
+      "won": "Victory",
+      "lost": "Defeat"
+    },
+    "headings": {
+      "ready": "Claim the frontier.",
+      "running": "Read the battlefield.",
+      "paused": "Hold position.",
+      "won": "The frontier is yours.",
+      "lost": "Signal lost."
+    },
+    "factions": {
+      "cyan": "Cyan",
+      "magenta": "Magenta",
+      "gold": "Gold",
+      "neutral": "Neutral"
+    },
+    "difficulties": {
+      "cadet": "Cadet · relaxed",
+      "commander": "Commander · balanced",
+      "admiral": "Admiral · relentless"
+    },
+    "medals": {
+      "gold": "GOLD",
+      "silver": "SILVER",
+      "bronze": "BRONZE"
+    },
+    "notices": {
+      "select": "Select one of your cyan cores to begin a transfer.",
+      "target": "Choose any core as your destination.",
+      "sent": "Fleet dispatched. Choose your next source.",
+      "energy": "A fleet needs at least 2 energy. Increase the ratio or wait.",
+      "capacity": "Fleet traffic is full. Wait for a fleet to arrive.",
+      "friendly": "Select a cyan core first, then choose a target."
+    },
+    "maps": {
+      "first-light": {
+        "name": "First Light",
+        "description": "13 cores. Two rings and an open center. A compact first campaign."
+      },
+      "parallax": {
+        "name": "Parallax",
+        "description": "13 cores. Compressed lanes create a fast, tightly contested frontline."
+      },
+      "helix": {
+        "name": "Helix",
+        "description": "19 cores. Staggered rings reward carefully timed reinforcements."
+      },
+      "citadel": {
+        "name": "Citadel",
+        "description": "19 cores. Aligned corridors lead to a heavily defended center."
+      },
+      "far-reach": {
+        "name": "Far Reach",
+        "description": "61 cores. Four orbital regions offer room to build a lasting empire."
+      },
+      "starfall": {
+        "name": "Starfall",
+        "description": "61 cores. Twisted lanes and overlapping fronts demand a wider view."
+      }
+    }
+  },
+  "patches": {
+    "replay": "Replay this puzzle",
+    "title": "Patches",
+    "subtitle": "A little order. A lot of possibilities.",
+    "kicker": "The daily thinking break",
+    "back": "All games",
+    "stamp": "Every piece belongs.",
+    "stampDetail": "Original puzzles · No daily play limit",
+    "metaTitle": "Patches Game — Free Rectangle Puzzles & Practice",
+    "metaDescription": "Play original Patches-style rectangle puzzles free on Gamelet. Practice without a daily limit, learn with logical hints, and return for a daily challenge.",
+    "gameLabel": "Patches game",
+    "boardLabel": "Rectangle puzzle board",
+    "cellLabel": "Row {row}, column {col}: {clue}",
+    "empty": "empty cell",
+    "shapes": {
+      "any": "any rectangle",
+      "square": "square",
+      "wide": "wider than tall",
+      "tall": "taller than wide"
+    },
+    "drawHelp": "Drag a rectangle, or tap its two opposite corners. Tap a patch to remove it.",
+    "chooseCorner": "Now choose the opposite corner. Escape cancels.",
+    "modes": {
+      "practice": "Free practice",
+      "daily": "Daily challenge",
+      "learn": "Learn & train"
+    },
+    "difficulty": "Difficulty",
+    "difficulties": {
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard"
+    },
+    "puzzle": "Puzzle",
+    "filled": "Cells filled",
+    "completed": "Puzzles solved",
+    "streak": "Daily streak",
+    "undo": "↶ Undo",
+    "redo": "↷ Redo",
+    "reset": "Clear board",
+    "pause": "Pause",
+    "paused": "Take your time.",
+    "resume": "Resume",
+    "hint": "A little hint",
+    "next": "Next puzzle →",
+    "continuePractice": "Keep practicing →",
+    "won": "Perfectly placed.",
+    "assisted": "Solved with help",
+    "independent": "Solved independently",
+    "best": "Personal best",
+    "hintTitle": "Follow the clues.",
+    "hintFocus": "Look at the clue in row {row}, column {col}. Check its area, shape and remaining space.",
+    "hintSingle": "With the earlier deductions in place, only one rectangle fits this clue without covering another clue or an occupied cell.",
+    "hintCover": "Row {row}, column {col} must be covered. Exactly one remaining legal rectangle can reach that cell.",
+    "hintConflictTitle": "One patch needs another look.",
+    "hintConflict": "The highlighted patch meets a local rule but cannot be part of this puzzle’s unique solution. Remove it and reconsider the surrounding clues.",
+    "explain": "Explain why",
+    "placeHint": "Place this patch",
+    "removePatch": "Remove this patch",
+    "close": "Close",
+    "share": "Share this puzzle ↗",
+    "reveal": "Show solution",
+    "revealConfirm": "This fills the board and records an assisted completion. Ready to see the solution?",
+    "cancel": "Cancel",
+    "fieldNotes": "Field notes",
+    "ruleArea": "A number is the exact area.",
+    "ruleShape": "The icon sets the shape.",
+    "ruleCover": "One clue per patch. Fill every cell.",
+    "learnRules": "Read the rules",
+    "learningPath": "Learning path",
+    "lesson": "Lesson {number}",
+    "training": "Training",
+    "lessonTips": {
+      "area": "Start by counting squares. A rectangle’s area is its width multiplied by its height.",
+      "shape": "Check the shape symbols. A wide rectangle must be wider than it is tall; a square has equal sides.",
+      "space": "Each patch changes the space around it. Check the cells that only one nearby clue can reach.",
+      "training": "Use the clues together. If you get stuck, ask for an explanation before placing the suggested patch."
+    },
+    "ready": "Every rectangle has one clue. Make the whole board fit.",
+    "placed": "Patch placed. What fits next?",
+    "removed": "Patch removed.",
+    "cleared": "Board cleared. Undo can bring it back.",
+    "loading": "Getting your next puzzle…",
+    "loadError": "Could not load the puzzle. Your current board is still here.",
+    "retry": "Retry",
+    "restored": "Your saved puzzle is back. Resume when you are ready.",
+    "invalidSave": "This saved board could not be restored. The original puzzle is ready.",
+    "unknownPuzzle": "That puzzle link is not valid. You can still practice here.",
+    "storageUnavailable": "Progress cannot be saved in this browser. You can keep playing in this tab.",
+    "dailyUnavailable": "A daily puzzle is not scheduled for this date yet. Free practice is available.",
+    "newDay": "A new UTC day has started. Your current puzzle stays the same.",
+    "packComplete": "You finished this difficulty’s current collection. Enjoy a replay while more puzzles are prepared.",
+    "courseComplete": "You completed the learning path. Try another difficulty in free practice.",
+    "copied": "Puzzle link and result copied.",
+    "copyFailed": "Copy is unavailable. You can copy the link shown above.",
+    "tabConflict": "Another tab saved a newer game. Choose which board to continue.",
+    "useOther": "Load other tab’s save",
+    "keepThis": "Keep this board",
+    "errors": {
+      "bounds": "Keep the rectangle inside the board.",
+      "overlap": "That overlaps another patch. Remove it first or choose another area.",
+      "clue": "Each patch needs exactly one clue.",
+      "area": "Count the cells: the area must match the number.",
+      "shape": "Check the icon: square, wide or tall."
+    },
+    "aboutTitle": "Small rectangles. Satisfying deductions.",
+    "aboutText": "Divide the grid into rectangles, each with exactly one clue. Numbers describe area and symbols describe shape. Every original board has one verified solution and a step-by-step logical explanation.",
+    "practiceTitle": "Play as much as you like.",
+    "practiceText": "Free practice has no daily play limit. Explore 930 practice boards and a 72-step learning path. The collection is finite: after you finish a difficulty, replay your favorites. Your progress stays in this browser.",
+    "dailyText": "Daily challenges use a fixed Gamelet schedule and change at midnight UTC, using your device’s date. A puzzle already in progress stays open. Gamelet challenges are separate from LinkedIn’s daily puzzle.",
+    "disclosure": "An independent Gamelet game with original puzzles. Not affiliated with or endorsed by LinkedIn. No account is needed; scores are personal, and hints count as assistance.",
+    "difficultyTitle": "{difficulty} Patches — Free Rectangle Puzzle Practice",
+    "difficultyDescription": "Practice original {difficulty} rectangle puzzles with clear clues, undo, saved progress and step-by-step hints.",
+    "difficultyIntros": {
+      "easy": "Start with 5×5 grids and explicit area clues. Count the cells, compare the shape symbols and look for a rectangle that has only one possible position. These boards have a smaller initial candidate space.",
+      "medium": "Move to 6×6 grids with missing area information. Use shape clues and the space left by other patches to eliminate alternatives. Every blank clue still belongs to exactly one rectangle.",
+      "hard": "Take on 8×8 grids with a larger candidate space and more incomplete clues. Some deductions start at a cell rather than a clue: which legal rectangle can still cover that square?"
+    },
+    "howTitle": "How to play Patches",
+    "howDescription": "Learn rectangle areas, shape clues, touch controls and keyboard shortcuts with original practice puzzles.",
+    "strategyTitle": "Patches strategy: reason through every rectangle",
+    "strategyDescription": "Learn to enumerate shapes, eliminate overlap and find cells with only one legal covering rectangle.",
+    "howSections": {
+      "oneTitle": "1. Read area and shape together",
+      "one": "A 6 means exactly six cells. With a wide symbol, 3×2 and 6×1 are possible; 2×3 is tall. A square has equal sides. The diamond allows any rectangle. A dot means the area is not given.",
+      "twoTitle": "2. Draw one patch around one clue",
+      "two": "Drag between opposite corners, or tap one corner and then the other. On a keyboard, use arrow keys to move and Enter or Space to choose corners. Escape cancels a selection. Every patch must contain exactly one clue, never two.",
+      "threeTitle": "3. Fill every cell",
+      "three": "Patches cannot overlap, and no cell can be left empty. Tap a placed patch to remove it. Undo and redo let you explore; clearing the board can also be undone. Passing a local check does not mean a patch belongs to the final solution.",
+      "fourTitle": "4. Learn at your own pace",
+      "four": "Open Learn & train for 12 small lessons and 60 selected practice boards. Hints first point you toward a clue, then explain a deduction, then let you place the patch. Revealing the solution records an assisted completion."
+    },
+    "strategySections": {
+      "oneTitle": "List the possible dimensions",
+      "one": "Factor the area before drawing. For area 6, consider 1×6, 2×3, 3×2 and 6×1. Remove dimensions that violate the shape icon, cross a board edge or contain another clue.",
+      "twoTitle": "Use what is already occupied",
+      "two": "A completed patch removes space from neighboring clues. Revisit those neighbors before trying a distant corner. If one clue has only one legal rectangle left, that rectangle is forced.",
+      "threeTitle": "Look for a cell with only one cover",
+      "three": "A clue may have several options while an empty cell can only be reached by one of them. Since every cell must be covered, that rectangle must be chosen. Hard boards deliberately include this kind of deduction.",
+      "fourTitle": "Reconsider mistakes without guessing",
+      "four": "A valid-looking rectangle can still block the unique solution. If a hint flags a conflict, remove that patch and check its neighbors. All stored explanations are verified before publication; assisted and independent results are kept distinct."
+    },
+    "playNow": "Play Patches →",
+    "strategyLink": "Strategy guide",
+    "easyLink": "Easy puzzles",
+    "mediumLink": "Medium puzzles",
+    "hardLink": "Hard puzzles"
   }
 }
