@@ -12,6 +12,40 @@
     }
   },
   "navigation": {
+    "primaryLabel": "主导航",
+    "groups": {
+      "moreGames": "更多游戏",
+      "guides": "玩法指南",
+      "logicGames": "逻辑与数字",
+      "moreToPlay": "文字、空间与策略",
+      "learnPractice": "玩法与练习",
+      "gamelet": "关于本站"
+    },
+    "links": {
+      "allGames": "全部游戏",
+      "patches": "Patches 矩形拼图",
+      "nerdle": "Nerdle",
+      "fibonacci": "Fibonacci 2584",
+      "mirrorMaze": "镜面迷宫",
+      "pulsefront": "Pulsefront 星际指挥",
+      "orbitSum": "Orbit Sum 轨道加法",
+      "logicSwitch": "Logic Switch 逻辑开关",
+      "wordBridge": "Word Bridge 单词桥",
+      "cipher": "Word Cipher Box 文字密码",
+      "glyphGarden": "Glyph Garden 图形花园",
+      "instruments": "不可能仪器合集",
+      "patchesHow": "Patches 玩法说明",
+      "patchesStrategy": "Patches 解题策略",
+      "patchesEasy": "Patches 简单题目",
+      "patchesMedium": "Patches 中等题目",
+      "patchesHard": "Patches 困难题目",
+      "nerdleTips": "Nerdle 解题技巧",
+      "about": "关于 Gamelet",
+      "contact": "联系我们",
+      "garden": "社区花园",
+      "privacy": "隐私政策",
+      "terms": "服务条款"
+    },
     "arcade": "游戏厅",
     "arcadeDescription": "益智小游戏合集",
     "nerdle": "Nerdle",
@@ -192,6 +226,9 @@
     "ogDescription": "在全球创意社区中创作、分享和培育虚拟植物"
   },
   "footer": {
+    "navigationLabel": "探索 Gamelet",
+    "browseDescription": "给好奇心一点空间。挑一款免费的浏览器益智游戏，了解玩法，享受解开谜题的时刻。",
+    "backToTop": "返回顶部",
     "tagline": "为好奇心智提供每日挑战",
     "products": "产品",
     "resources": "资源",

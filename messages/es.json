@@ -12,6 +12,40 @@
     }
   },
   "navigation": {
+    "primaryLabel": "Navegación principal",
+    "groups": {
+      "moreGames": "Más juegos",
+      "guides": "Guías",
+      "logicGames": "Lógica y números",
+      "moreToPlay": "Palabras, espacio y estrategia",
+      "learnPractice": "Aprende y practica",
+      "gamelet": "Gamelet"
+    },
+    "links": {
+      "allGames": "Todos los juegos",
+      "patches": "Patches",
+      "nerdle": "Nerdle",
+      "fibonacci": "Fibonacci 2584",
+      "mirrorMaze": "Laberinto de espejos",
+      "pulsefront": "Pulsefront",
+      "orbitSum": "Orbit Sum",
+      "logicSwitch": "Logic Switch",
+      "wordBridge": "Word Bridge",
+      "cipher": "Word Cipher Box",
+      "glyphGarden": "Glyph Garden",
+      "instruments": "Instrumentos imposibles",
+      "patchesHow": "Cómo jugar a Patches",
+      "patchesStrategy": "Estrategias de Patches",
+      "patchesEasy": "Patches: nivel fácil",
+      "patchesMedium": "Patches: nivel medio",
+      "patchesHard": "Patches: nivel difícil",
+      "nerdleTips": "Consejos para Nerdle",
+      "about": "Acerca de Gamelet",
+      "contact": "Contacto",
+      "garden": "Jardín comunitario",
+      "privacy": "Privacidad",
+      "terms": "Términos de servicio"
+    },
     "arcade": "Juegos",
     "arcadeDescription": "Colección de minijuegos de lógica",
     "nerdle": "Nerdle",
@@ -192,6 +226,9 @@
     "ogDescription": "Crea, comparte y cultiva plantas virtuales en una comunidad creativa global"
   },
   "footer": {
+    "navigationLabel": "Explora Gamelet",
+    "browseDescription": "Puzles gratuitos en el navegador para mentes curiosas. Elige un juego, aprende las reglas y disfruta de un nuevo descubrimiento.",
+    "backToTop": "Volver arriba",
     "tagline": "Desafíos diarios para mentes curiosas",
     "products": "Productos",
     "resources": "Recursos",

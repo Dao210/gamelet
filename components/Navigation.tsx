@@ -1,187 +1,89 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Link, usePathname } from '@/i18n/routing'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { headerGroups, isNavigationSection, primaryLinks, siteLinks, type SiteLink } from '@/lib/site-navigation'
 import LanguageSelector from './LanguageSelector'
 import GameletLogo from './GameletLogo'
+import styles from './site-navigation.module.css'
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const headerRef = useRef<HTMLElement>(null)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
-  const menuRef = useRef<HTMLDivElement>(null)
+  const menuRef = useRef<HTMLElement>(null)
   const pathname = usePathname()
+  const locale = useLocale()
   const t = useTranslations('navigation')
-  const shouldReduceMotion = useReducedMotion()
 
   useEffect(() => {
     setIsMenuOpen(false)
-  }, [pathname])
+    headerRef.current?.querySelectorAll<HTMLDetailsElement>('details[open]').forEach(detail => { detail.open = false })
+  }, [pathname, locale])
 
   useEffect(() => {
-    if (!isMenuOpen) return
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsMenuOpen(false)
-        menuButtonRef.current?.focus()
-      }
+    const closeOutside = (event: PointerEvent) => {
+      if (headerRef.current?.contains(event.target as Node)) return
+      setIsMenuOpen(false)
+      headerRef.current?.querySelectorAll<HTMLDetailsElement>('details[open]').forEach(detail => { detail.open = false })
     }
+    document.addEventListener('pointerdown', closeOutside)
+    return () => document.removeEventListener('pointerdown', closeOutside)
+  }, [])
 
-    const handlePointerDown = (event: PointerEvent) => {
-      const target = event.target as Node
-      if (!menuRef.current?.contains(target) && !menuButtonRef.current?.contains(target)) {
-        setIsMenuOpen(false)
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown)
-    document.addEventListener('pointerdown', handlePointerDown)
-    menuRef.current?.querySelector<HTMLAnchorElement>('a')?.focus()
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-      document.removeEventListener('pointerdown', handlePointerDown)
-    }
+  useEffect(() => {
+    if (isMenuOpen) menuRef.current?.querySelector<HTMLAnchorElement>('a')?.focus()
   }, [isMenuOpen])
 
-  // Main navigation with icons and descriptions (displayed prominently)
-  const mainNavigation = [
-    { name: t('arcade'), href: '/', icon: '◆', description: t('arcadeDescription') },
-    { name: t('nerdle'), href: '/nerd', icon: '🧮', description: t('nerdleDescription') },
-    { name: 'Fibonacci 2584', href: '/2584', icon: '🐚', description: t('fibonacciDescription') },
-    { name: t('mirrorMaze'), href: '/mirror-maze', icon: '◩', description: t('mirrorMazeDescription') },
-
-  ]
-
-  const isActive = (href: string) => {
-    if (href === '/') {
-      return pathname === '/'
-    }
-    return pathname.startsWith(href)
+  const closeMenu = () => {
+    setIsMenuOpen(false)
+    headerRef.current?.querySelectorAll<HTMLDetailsElement>('details[open]').forEach(detail => { detail.open = false })
+  }
+  const link = (key: SiteLink, primary = false) => {
+    const href = siteLinks[key]
+    return <Link href={href} prefetch={false} onClick={closeMenu}
+      aria-current={pathname === href ? 'page' : undefined}
+      className={`${primary ? styles.primaryLink : ''} ${isNavigationSection(pathname, href) ? styles.active : ''}`}>
+      {t(`links.${key}`)}
+    </Link>
   }
 
-  return (
-    <nav className="bg-white dark:bg-gray-800 shadow-lg sticky top-0 z-50">
-      <div className="container mx-auto px-4">
-        <div className="grid h-16 grid-cols-[1fr_auto] items-center md:grid-cols-[1fr_auto_1fr]">
-          {/* Logo */}
-          <GameletLogo
-            width={40}
-            height={40}
-            className="transition-opacity hover:opacity-80 w-8 h-8 md:w-10 md:h-10"
-            linkClassName="flex items-center"
-            showBrandName={true}
-            brandNameClassName="text-lg font-semibold text-gray-900 dark:text-white hidden sm:block"
-          />
-
-          {/* Desktop Navigation */}
-          <div className="hidden items-center justify-center gap-3 md:flex lg:gap-6">
-            {mainNavigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`
-                  relative whitespace-nowrap px-2 py-2 text-sm font-medium rounded-lg transition-colors lg:px-3
-                  ${isActive(item.href)
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'
-                  }
-                `}
-              >
-                <span className="mr-2">{item.icon}</span>
-                {item.name}
-                {isActive(item.href) && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400 rounded-full"
-                    initial={false}
-                  />
-                )}
-              </Link>
-            ))}
-          </div>
-
-          {/* Desktop Language Selector */}
-          <div className="hidden justify-self-end md:block">
-            <LanguageSelector />
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="flex items-center gap-2 justify-self-end md:hidden">
-            <LanguageSelector />
-            <button
-              ref={menuButtonRef}
-              type="button"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="flex min-h-11 min-w-11 items-center justify-center rounded-lg p-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
-              aria-label={t('toggleMenu')}
-              aria-expanded={isMenuOpen}
-              aria-controls="mobile-navigation-menu"
-            >
-              <div className="w-6 h-6 flex flex-col justify-center items-center">
-                <div
-                  className={`w-5 h-0.5 bg-current transition-all duration-300 ${
-                    isMenuOpen ? 'rotate-45 translate-y-1.5' : ''
-                  }`}
-                />
-                <div
-                  className={`w-5 h-0.5 bg-current transition-all duration-300 mt-1 ${
-                    isMenuOpen ? 'opacity-0' : ''
-                  }`}
-                />
-                <div
-                  className={`w-5 h-0.5 bg-current transition-all duration-300 mt-1 ${
-                    isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''
-                  }`}
-                />
-              </div>
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        <AnimatePresence initial={false}>
-          {isMenuOpen && (
-            <motion.div
-              ref={menuRef}
-              id="mobile-navigation-menu"
-              initial={shouldReduceMotion ? false : { opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
-              transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
-              className="safe-bottom border-t border-gray-200 md:hidden dark:border-gray-700"
-            >
-            {/* Main navigation items */}
-            <div className="py-4 space-y-2">
-              {mainNavigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`
-                    block px-3 py-3 rounded-lg transition-colors
-                    ${isActive(item.href)
-                      ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-700'
-                    }
-                  `}
-                >
-                  <div className="flex items-center space-x-3">
-                    <span className="text-xl">{item.icon}</span>
-                    <div>
-                      <div className="font-medium">{item.name}</div>
-                      <div className="text-xs opacity-75">{item.description}</div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+  return <header ref={headerRef} className={styles.header} onKeyDown={event => {
+    if (event.key !== 'Escape') return
+    const detail = (event.target as HTMLElement).closest<HTMLDetailsElement>('details[open]')
+    if (detail) {
+      detail.open = false
+      detail.querySelector<HTMLElement>('summary')?.focus()
+    } else if (isMenuOpen) { closeMenu(); menuButtonRef.current?.focus() }
+  }}>
+    <div className={styles.bar}>
+      <GameletLogo width={36} height={36} linkClassName={styles.brand} showBrandName brandNameClassName={styles.brandName} />
+      {/* Keep the same crawlable link tree in the initial HTML at every width. */}
+      <nav ref={menuRef} id="primary-navigation" aria-label={t('primaryLabel')} className={`${styles.primary} ${isMenuOpen ? styles.primaryOpen : ''}`}>
+        <ul className={styles.primaryList}>
+          {primaryLinks.map(key => <li key={key}>{link(key, true)}</li>)}
+          {headerGroups.map(group => <li key={group.id}>
+            <details className={styles.disclosure} name="gamelet-navigation" onBlur={event => {
+              if (!event.currentTarget.contains(event.relatedTarget)) event.currentTarget.open = false
+            }}>
+              <summary className={`${styles.summary} ${group.links.some(key => isNavigationSection(pathname, siteLinks[key])) ? styles.active : ''}`}>
+                {t(`groups.${group.id}`)}<span className={styles.chevron} aria-hidden="true" />
+              </summary>
+              <ul className={styles.dropdown}>{group.links.map(key => <li key={key}>{link(key)}</li>)}</ul>
+            </details>
+          </li>)}
+        </ul>
+      </nav>
+      <div className={styles.controls}>
+        <LanguageSelector />
+        <button ref={menuButtonRef} type="button" className={styles.menuButton} onClick={() => setIsMenuOpen(open => !open)}
+          aria-label={t('toggleMenu')} aria-expanded={isMenuOpen} aria-controls="primary-navigation">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
+            <path d={isMenuOpen ? 'M6 6l12 12M6 18L18 6' : 'M4 6h16M4 12h16M4 18h16'} />
+          </svg>
+        </button>
       </div>
-    </nav>
-  )
+    </div>
+  </header>
 }

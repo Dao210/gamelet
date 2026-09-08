@@ -12,6 +12,40 @@
     }
   },
   "navigation": {
+    "primaryLabel": "Main navigation",
+    "groups": {
+      "moreGames": "More games",
+      "guides": "Guides",
+      "logicGames": "Logic & numbers",
+      "moreToPlay": "Words, space & strategy",
+      "learnPractice": "Learn & practice",
+      "gamelet": "Gamelet"
+    },
+    "links": {
+      "allGames": "All games",
+      "patches": "Patches",
+      "nerdle": "Nerdle",
+      "fibonacci": "Fibonacci 2584",
+      "mirrorMaze": "Mirror Maze",
+      "pulsefront": "Pulsefront",
+      "orbitSum": "Orbit Sum",
+      "logicSwitch": "Logic Switch",
+      "wordBridge": "Word Bridge",
+      "cipher": "Word Cipher Box",
+      "glyphGarden": "Glyph Garden",
+      "instruments": "Impossible Instruments",
+      "patchesHow": "How to play Patches",
+      "patchesStrategy": "Patches strategies",
+      "patchesEasy": "Easy Patches puzzles",
+      "patchesMedium": "Medium Patches puzzles",
+      "patchesHard": "Hard Patches puzzles",
+      "nerdleTips": "Nerdle solving tips",
+      "about": "About Gamelet",
+      "contact": "Contact us",
+      "garden": "Community garden",
+      "privacy": "Privacy policy",
+      "terms": "Terms of service"
+    },
     "arcade": "Arcade",
     "arcadeDescription": "Puzzle mini-game collection",
     "nerdle": "Nerdle",
@@ -192,6 +226,9 @@
     "ogDescription": "Create, share, and nurture virtual plants in a global creative community"
   },
   "footer": {
+    "navigationLabel": "Explore Gamelet",
+    "browseDescription": "Free browser puzzles for curious minds. Find a game, learn the rules, and make time for a little discovery.",
+    "backToTop": "Back to top",
     "tagline": "Daily challenges for curious minds",
     "products": "Products",
     "resources": "Resources",

@@ -12,6 +12,40 @@
     }
   },
   "navigation": {
+    "primaryLabel": "メインナビゲーション",
+    "groups": {
+      "moreGames": "ほかのゲーム",
+      "guides": "遊び方",
+      "logicGames": "論理と数字",
+      "moreToPlay": "言葉・空間・戦略",
+      "learnPractice": "学習と練習",
+      "gamelet": "Gamelet"
+    },
+    "links": {
+      "allGames": "すべてのゲーム",
+      "patches": "Patches",
+      "nerdle": "Nerdle",
+      "fibonacci": "Fibonacci 2584",
+      "mirrorMaze": "ミラー迷路",
+      "pulsefront": "Pulsefront",
+      "orbitSum": "Orbit Sum",
+      "logicSwitch": "Logic Switch",
+      "wordBridge": "Word Bridge",
+      "cipher": "Word Cipher Box",
+      "glyphGarden": "Glyph Garden",
+      "instruments": "不思議な装置",
+      "patchesHow": "Patches の遊び方",
+      "patchesStrategy": "Patches の攻略法",
+      "patchesEasy": "Patches 初級問題",
+      "patchesMedium": "Patches 中級問題",
+      "patchesHard": "Patches 上級問題",
+      "nerdleTips": "Nerdle の解き方",
+      "about": "Gamelet について",
+      "contact": "お問い合わせ",
+      "garden": "コミュニティガーデン",
+      "privacy": "プライバシーポリシー",
+      "terms": "利用規約"
+    },
     "arcade": "ゲーム",
     "arcadeDescription": "ひらめき系ミニゲーム集",
     "nerdle": "Nerdle",
@@ -192,6 +226,9 @@
     "ogDescription": "グローバルクリエイティブコミュニティで仮想植物を作成、共有、育成"
   },
   "footer": {
+    "navigationLabel": "Gamelet を探す",
+    "browseDescription": "好奇心をくすぐる無料のブラウザパズル。ゲームを選び、ルールを覚えて、小さな発見を楽しみましょう。",
+    "backToTop": "ページの先頭へ",
     "tagline": "好奇心旺盛な人のための毎日のチャレンジ",
     "products": "製品",
     "resources": "リソース",

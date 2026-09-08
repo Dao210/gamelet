@@ -12,6 +12,40 @@
     "backToNerdle": "Zurück zu Nerdle"
   },
   "navigation": {
+    "primaryLabel": "Hauptnavigation",
+    "groups": {
+      "moreGames": "Weitere Spiele",
+      "guides": "Anleitungen",
+      "logicGames": "Logik & Zahlen",
+      "moreToPlay": "Wörter, Raum & Strategie",
+      "learnPractice": "Lernen & üben",
+      "gamelet": "Gamelet"
+    },
+    "links": {
+      "allGames": "Alle Spiele",
+      "patches": "Patches",
+      "nerdle": "Nerdle",
+      "fibonacci": "Fibonacci 2584",
+      "mirrorMaze": "Spiegellabyrinth",
+      "pulsefront": "Pulsefront",
+      "orbitSum": "Orbit Sum",
+      "logicSwitch": "Logic Switch",
+      "wordBridge": "Word Bridge",
+      "cipher": "Word Cipher Box",
+      "glyphGarden": "Glyph Garden",
+      "instruments": "Unmögliche Instrumente",
+      "patchesHow": "Patches-Spielregeln",
+      "patchesStrategy": "Patches-Strategien",
+      "patchesEasy": "Leichte Patches-Rätsel",
+      "patchesMedium": "Mittlere Patches-Rätsel",
+      "patchesHard": "Schwere Patches-Rätsel",
+      "nerdleTips": "Nerdle-Lösungstipps",
+      "about": "Über Gamelet",
+      "contact": "Kontakt",
+      "garden": "Gemeinschaftsgarten",
+      "privacy": "Datenschutz",
+      "terms": "Nutzungsbedingungen"
+    },
     "nerdle": "Nerdle",
     "nerdleDescription": "Mathe-Gleichungs-Ratespiel",
     "fibonacciDescription": "Fibonacci-Sequenz-Puzzlespiel",
@@ -193,6 +227,9 @@
     "ogTitle": "Global Trellis – Kreative soziale Plattform für Pflanzen"
   },
   "footer": {
+    "navigationLabel": "Gamelet entdecken",
+    "browseDescription": "Kostenlose Browserrätsel für neugierige Köpfe. Finde ein Spiel, lerne die Regeln und entdecke etwas Neues.",
+    "backToTop": "Nach oben",
     "products": "Produkte",
     "nerdle": "Nerdle",
     "community": "Gemeinschaft",
